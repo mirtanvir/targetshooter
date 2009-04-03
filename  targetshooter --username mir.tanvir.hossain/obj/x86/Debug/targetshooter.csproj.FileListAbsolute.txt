@@ -1,0 +1,11 @@
+C:\Tanvir\Education\spring 09\SoftEng\project\targetshooter\targetshooter\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Tanvir\Education\spring 09\SoftEng\project\targetshooter\targetshooter\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Tanvir\Education\spring 09\SoftEng\project\targetshooter\targetshooter\bin\x86\Debug\Content\images\bullet.xnb
+C:\Tanvir\Education\spring 09\SoftEng\project\targetshooter\targetshooter\bin\x86\Debug\Content\images\enemy.xnb
+C:\Tanvir\Education\spring 09\SoftEng\project\targetshooter\targetshooter\bin\x86\Debug\targetshooter.exe
+C:\Tanvir\Education\spring 09\SoftEng\project\targetshooter\targetshooter\bin\x86\Debug\targetshooter.pdb
+C:\Tanvir\Education\spring 09\SoftEng\project\targetshooter\targetshooter\obj\x86\Debug\targetshooter.exe
+C:\Tanvir\Education\spring 09\SoftEng\project\targetshooter\targetshooter\obj\x86\Debug\targetshooter.pdb
+C:\Tanvir\Education\spring 09\SoftEng\project\targetshooter\targetshooter\bin\x86\Debug\Content\images\rect.xnb
+C:\Tanvir\Education\spring 09\SoftEng\project\targetshooter\targetshooter\bin\x86\Debug\Content\fonts\font.xnb
+C:\Tanvir\Education\spring 09\SoftEng\project\targetshooter\targetshooter\bin\x86\Debug\Content\fonts\gameOver.xnb

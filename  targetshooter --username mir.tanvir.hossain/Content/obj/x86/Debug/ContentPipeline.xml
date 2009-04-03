@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
+  <Asset Type="Pipeline:BuildItemCollection">
+    <Item>
+      <Source>images\bullet.png</Source>
+      <Name>images\bullet</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Tanvir\Education\spring 09\SoftEng\project\targetshooter\targetshooter\bin\x86\Debug\Content\images\bullet.xnb</Output>
+      <Time>2009-04-03T12:57:05.5495455-07:00</Time>
+    </Item>
+    <Item>
+      <Source>images\enemy.png</Source>
+      <Name>images\enemy</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Tanvir\Education\spring 09\SoftEng\project\targetshooter\targetshooter\bin\x86\Debug\Content\images\enemy.xnb</Output>
+      <Time>2009-04-03T12:57:05.5495455-07:00</Time>
+    </Item>
+    <Item>
+      <Source>images\rect.png</Source>
+      <Name>images\rect</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Tanvir\Education\spring 09\SoftEng\project\targetshooter\targetshooter\bin\x86\Debug\Content\images\rect.xnb</Output>
+      <Time>2009-04-02T19:10:19.8292545-07:00</Time>
+    </Item>
+    <Item>
+      <Source>fonts\font.spritefont</Source>
+      <Name>fonts\font</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Tanvir\Education\spring 09\SoftEng\project\targetshooter\targetshooter\bin\x86\Debug\Content\fonts\font.xnb</Output>
+      <Time>2009-04-03T12:03:15.9502495-07:00</Time>
+    </Item>
+    <Item>
+      <Source>fonts\gameOver.spritefont</Source>
+      <Name>fonts\gameOver</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Tanvir\Education\spring 09\SoftEng\project\targetshooter\targetshooter\bin\x86\Debug\Content\fonts\gameOver.xnb</Output>
+      <Time>2009-04-03T12:03:48.1569205-07:00</Time>
+    </Item>
+    <BuildSuccessful>true</BuildSuccessful>
+    <Settings>
+      <TargetPlatform>Windows</TargetPlatform>
+      <BuildConfiguration>Debug</BuildConfiguration>
+      <CompressContent>false</CompressContent>
+      <RootDirectory>C:\Tanvir\Education\spring 09\SoftEng\project\targetshooter\targetshooter\Content\</RootDirectory>
+      <LoggerRootDirectory>C:\Tanvir\Education\spring 09\SoftEng\project\targetshooter\targetshooter\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Tanvir\Education\spring 09\SoftEng\project\targetshooter\targetshooter\Content\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Tanvir\Education\spring 09\SoftEng\project\targetshooter\targetshooter\bin\x86\Debug\Content\</OutputDirectory>
+    </Settings>
+    <Assemblies>
+      <Assembly>
+        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
+        <Value>2008-10-10T17:42:32-07:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Value>2008-10-10T17:43:28-07:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Value>2008-10-10T17:43:18-07:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Value>2008-10-10T17:48:18-07:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v3.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
+        <Value>2008-10-10T17:48:50-07:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Windows\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\3.0.0.0__6d5c3888ef60e27d\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2009-03-30T21:16:01.9780619-07:00</Value>
+      </Assembly>
+    </Assemblies>
+  </Asset>
+</XnaContent>
