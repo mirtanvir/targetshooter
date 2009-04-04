@@ -72,7 +72,7 @@ namespace targetshooter
 
         SpriteFont enemyLife;
         SpriteFont gameO;
-
+        SpriteFont debug;
 
 
         List<bullet> bulletList = new List<bullet>();
@@ -85,7 +85,7 @@ namespace targetshooter
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            debug = Content.Load<SpriteFont>(@"fonts/debugInformation");
             enemy = Content.Load<Texture2D>(@"images/enemy");
             texture = Content.Load<Texture2D>(@"images/rect");
             bulletTexture = Content.Load<Texture2D>(@"images/bullet");
@@ -265,6 +265,9 @@ namespace targetshooter
     new Vector2(10, 10), Color.DarkBlue, 0, Vector2.Zero,
     1, SpriteEffects.None, 1);
 
+                spriteBatch.DrawString(debug,"Debug: # of bullet= " + bulletList.Count().ToString(),
+                    new Vector2(10, 40), Color.DarkBlue, 0, Vector2.Zero,
+                    1, SpriteEffects.None, 1);
 
                 //  Drawing the player
                 spriteBatch.Draw(texture, pos, Color.White);
