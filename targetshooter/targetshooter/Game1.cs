@@ -251,17 +251,79 @@ namespace targetshooter
             if (enemyPos.X < 0)
                 enemyPos.X = Window.ClientBounds.Width;
 
-            if ((Keyboard.GetState().IsKeyDown(Keys.Right)) && (pos.X < Window.ClientBounds.Width - texture.Width))
-                pos.X++;
+            //if ((Keyboard.GetState().IsKeyDown(Keys.Right)) && (pos.X < Window.ClientBounds.Width - texture.Width))
+            //    pos.X++;
 
-            if ((Keyboard.GetState().IsKeyDown(Keys.Left)) && (pos.X != 0))
-                pos.X--;
+            //if ((Keyboard.GetState().IsKeyDown(Keys.Left)) && (pos.X != 0))
+            //    pos.X--;
             if ((Keyboard.GetState().IsKeyDown(Keys.Down)) && (pos.Y <= Window.ClientBounds.Height - texture.Height))
-                pos.Y++;
+            // pos.Y++;
+            {
+                float slope = (float)Math.Tan(Convert.ToDouble(MathHelper.ToRadians(90) - MathHelper.ToRadians(tankRotationAngle)));
+                float speed = 1;
+                if ((tankRotationAngle > 270) || (tankRotationAngle < 90))
+                {
+                    pos.Y = pos.Y + speed;
+                    //_position.X++;
+                    float x;
+
+                    if (slope == 0)
+                        x = 0;
+                    else x = (speed / slope);
+
+                    pos.X = pos.X - x;
+                }
+                else if ((tankRotationAngle < 270) && (tankRotationAngle > 90))
+                {
+
+                    pos.Y = pos.Y - speed;
+                    //_position.X++;
+                    float x;
+                    if (slope == 0)
+                        x = 0;
+                    else x = (speed / slope);
+
+                    pos.X = pos.X + x;
+
+                }
+
+            
+            }
+
+
             //trying to make the player go up
             if ((Keyboard.GetState().IsKeyDown(Keys.Up)))// && (pos.Y <= 0))
-                pos.Y--;
+            {
+                float slope = (float)Math.Tan(Convert.ToDouble(MathHelper.ToRadians(90) - MathHelper.ToRadians( tankRotationAngle)));
+                float speed = 1;
+                if ((tankRotationAngle > 270) || (tankRotationAngle < 90))
+                {
+                    pos.Y = pos.Y - speed;
+                    //_position.X++;
+                    float x;
+                   
+                    if (slope == 0)
+                        x = 0;
+                    else x = (speed / slope);
 
+                    pos.X = pos.X + x;
+                }
+                else if ((tankRotationAngle < 270) && (tankRotationAngle > 90))
+                {
+
+                    pos.Y = pos.Y + speed;
+                    //_position.X++;
+                    float x;
+                    if (slope == 0)
+                        x = 0;
+                    else x = (speed / slope);
+
+                    pos.X = pos.X - x;
+
+                }
+
+                //pos.Y--;
+            }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
@@ -325,7 +387,7 @@ namespace targetshooter
                 turretAngleInDegree -= 1;
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.X))
+            if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
                 if (turretRotationDelayInMilliSec <= 0)
                 {
@@ -335,7 +397,7 @@ namespace targetshooter
                 }
                 else turretRotationDelayInMilliSec -= gameTime.ElapsedGameTime.Milliseconds;
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Z))
+            if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
                 turretAngleInDegree -= 1; 
                 tankRotationAngle -= 1;
