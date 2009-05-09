@@ -25,6 +25,7 @@ namespace targetshooter
 
           float slope = (float)Math.Tan(Convert.ToDouble(MathHelper.ToRadians(90) - MathHelper.ToRadians(objectAngelInDegree)));
           return slope;//returning the slope
+          //test2
       }
 
 
