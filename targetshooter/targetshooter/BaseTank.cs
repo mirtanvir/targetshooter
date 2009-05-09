@@ -84,43 +84,7 @@ namespace targetshooter
         private int turretAngleInDegree;
         private float firingRate;
 
-        protected void MoveTankUp()
-        {
-
-            float slope = (float)Math.Tan(Convert.ToDouble(MathHelper.ToRadians(90) - MathHelper.ToRadians(tankAngleInDegree)));
-            
-            if ((tankAngleInDegree > 270) || (tankAngleInDegree < 90))
-            {
-                position.Y = position.Y + tankSpeed;
-                //_position.X++;
-                float x;
-
-                if (slope == 0)
-                    x = 0;
-                else x = (tankSpeed / slope);
-
-                position.X = position.X - x;
-            }
-            else if ((tankAngleInDegree < 270) && (tankAngleInDegree > 90))
-            {
-
-                position.Y = position.Y - tankSpeed;
-                //_position.X++;
-                float x;
-                if (slope == 0)
-                    x = 0;
-                else x = (tankSpeed / slope);
-
-                position.X = position.X + x;
-
-            }
-
-
-
-
-          
         
-        }
 
 
         protected void MoveTankDown()
