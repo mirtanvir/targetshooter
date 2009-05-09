@@ -20,7 +20,7 @@ namespace targetshooter
   static  class  updateClass
     {
 
-      protected static float calculateSlope(int objectAngelInDegree)
+      public static float calculateSlope(int objectAngelInDegree)
       {
 
           float slope = (float)Math.Tan(Convert.ToDouble(MathHelper.ToRadians(90) - MathHelper.ToRadians(objectAngelInDegree)));
@@ -30,7 +30,7 @@ namespace targetshooter
 
 
 
-      protected static void UpdateTankPositionUp(int tankAngleInDegree, Vector2 position, int tankSpeed)
+      public static void UpdateTankPositionUp(int tankAngleInDegree, Vector2 position, int tankSpeed)
       {
 
           float slope = calculateSlope(tankAngleInDegree);// (float)Math.Tan(Convert.ToDouble(MathHelper.ToRadians(90) - MathHelper.ToRadians(tankAngleInDegree)));
@@ -70,7 +70,7 @@ namespace targetshooter
 
 
 
-      public Vector2 updateBulletPosition(int _turretAngleInDegree, Vector2 _position, float speed) //Vector2 currentPlayerTankPosition,float currentTankAngle, float currentTankTurretAngleInDegree)
+      public static Vector2 updateBulletPosition(int _turretAngleInDegree, Vector2 _position, float speed) //Vector2 currentPlayerTankPosition,float currentTankAngle, float currentTankTurretAngleInDegree)
       {
           float _slope = calculateSlope(_turretAngleInDegree);
           //float speed = 10;
