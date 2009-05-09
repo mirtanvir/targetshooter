@@ -29,7 +29,7 @@ namespace targetshooter
          *  move the bullet
          * 
          * @param bulletPosition -- Vector2
-         * @return 
+         * @return just adding something
         */
         protected void move(Vector2 bulletPositon)
         {
