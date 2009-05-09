@@ -84,6 +84,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="baseBullet.cs" />
     <Compile Include="BaseTank1.cs" />
     <Compile Include="updateClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
