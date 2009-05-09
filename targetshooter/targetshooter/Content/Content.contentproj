@@ -92,11 +92,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="images\Sand.jpg">
-      <Name>Sand</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="images\stone1.jpg">
       <Name>stone1</Name>
       <Importer>TextureImporter</Importer>
