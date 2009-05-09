@@ -31,7 +31,7 @@ namespace targetshooter
         {
             isInScreen = true;
             _slope = slope;
-           
+
             _position = position;
 
             _bulletSprite = bulletSprite;
@@ -41,17 +41,17 @@ namespace targetshooter
         {
 
             return _bulletSprite;
-        
+
         }
         public Vector2 getBulletPosition()
         {
 
             return _position;
-        
+
         }
-    public void updateBulletPosition() //Vector2 currentPlayerTankPosition,float currentTankAngle, float currentTankTurretAngleInDegree)
+        public void updateBulletPosition() //Vector2 currentPlayerTankPosition,float currentTankAngle, float currentTankTurretAngleInDegree)
         {
-           
+
             float speed = 10;
             if ((_turretAngleInDegree > 270) || (_turretAngleInDegree < 90))
             {
@@ -65,9 +65,9 @@ namespace targetshooter
                 _position.X = _position.X + x;
             }
             else if ((_turretAngleInDegree < 270) && (_turretAngleInDegree > 90))
-               { 
+            {
 
-                 _position.Y = _position.Y + speed;
+                _position.Y = _position.Y + speed;
                 //_position.X++;
                 float x;
                 if (_slope == 0)
@@ -75,16 +75,16 @@ namespace targetshooter
                 else x = (speed / _slope);
 
                 _position.X = _position.X - x;
-            
+
             }
-    }
+        }
         public bool isBulletInScreen(Vector2 maxWindowPosition)
         {
 
             if ((_position.X < 0) || (_position.X > maxWindowPosition.X) || (_position.Y < 0) || (_position.Y > maxWindowPosition.Y))
                 return false;
             else return true;
-                
+
 
 
         }
@@ -128,10 +128,10 @@ namespace targetshooter
         int shotCountDown = 100;
         int turretRotationDelayInMilliSec = 400;
         static Random rnd = new Random();
-        float enemySpeed = 2f;
+        float enemySpeed = 5f;
         bool isRight = true;
         int enemyDirectionCheckDelay = 1000;
-        float turretRotationAngle=0f;
+        float turretRotationAngle = 0f;
         float tankRotationAngle = 0f;
         float turretAngleInDegree = 0f;
         SpriteFont enemyLife;
@@ -148,7 +148,7 @@ namespace targetshooter
         /// all of your content.
         /// </summary>
 
-        
+
 
         protected override void LoadContent()
         {
@@ -170,7 +170,7 @@ namespace targetshooter
 
             Rectangle enemyRect = new Rectangle((int)enemyPos.X, (int)enemyPos.Y, enemy.Width, enemy.Height);
             Rectangle bulletRect = new Rectangle((int)bullPos.X, (int)bullPos.Y, bulletTexture.Width, bulletTexture.Height);
-           
+
             return enemyRect.Intersects(bulletRect);
         }
 
@@ -179,8 +179,8 @@ namespace targetshooter
 
             Rectangle turretRect = new Rectangle((int)tankTurretPos.X - 60, (int)tankTurretPos.Y - 70, tankTurret.Width, tankTurret.Height);
             Rectangle bulletRect = new Rectangle((int)bullPos.X, (int)bullPos.Y, bulletTexture.Width, bulletTexture.Height);
-                 bool tr = bulletRect.Intersects(turretRect);
-                return tr;
+            bool tr = bulletRect.Intersects(turretRect);
+            return tr;
         }
 
 
@@ -196,22 +196,22 @@ namespace targetshooter
 
 
         protected Vector2 calculateBulletFiringPos()
-        { 
-         
-           // Rectangle turretRect = new Rectangle((int)tankTurretPos.X, (int)tankTurretPos.Y, tankTurret.Width, tankTurret.Height);
+        {
+
+            // Rectangle turretRect = new Rectangle((int)tankTurretPos.X, (int)tankTurretPos.Y, tankTurret.Width, tankTurret.Height);
             float factor = 140.0f;
-            return new Vector2(tankTurretPos.X-60, tankTurretPos.Y-60);
-           // return new Vector2((tankTurretPos.X-60)+ (factor*(float)Math.Cos(Convert.ToDouble(MathHelper.ToRadians(90) - turretRotationAngle))), (tankTurretPos.Y-30) -factor*(float)Math.Sin(Convert.ToDouble(MathHelper.ToRadians(90) - turretRotationAngle)) );
-         
+            return new Vector2(tankTurretPos.X - 60, tankTurretPos.Y - 60);
+            // return new Vector2((tankTurretPos.X-60)+ (factor*(float)Math.Cos(Convert.ToDouble(MathHelper.ToRadians(90) - turretRotationAngle))), (tankTurretPos.Y-30) -factor*(float)Math.Sin(Convert.ToDouble(MathHelper.ToRadians(90) - turretRotationAngle)) );
+
         }
 
 
-      
+
         float calculateTurretSlope()
         {
 
-            return (float)  Math.Tan(Convert.ToDouble(MathHelper.ToRadians(90)- turretRotationAngle));
-        
+            return (float)Math.Tan(Convert.ToDouble(MathHelper.ToRadians(90) - turretRotationAngle));
+
         }
 
         /// <summary>
@@ -222,7 +222,7 @@ namespace targetshooter
         protected override void Update(GameTime gameTime)
         {
             //turretAngleInDegree =turretRotationAngle- tankRotationAngle;
-            tankTurretPos= pos + new Vector2(60, 60);
+            tankTurretPos = pos + new Vector2(60, 60);
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
@@ -287,21 +287,21 @@ namespace targetshooter
 
                 }
 
-            
+
             }
 
 
             //trying to make the player go up
             if ((Keyboard.GetState().IsKeyDown(Keys.Up)))// && (pos.Y <= 0))
             {
-                float slope = (float)Math.Tan(Convert.ToDouble(MathHelper.ToRadians(90) - MathHelper.ToRadians( tankRotationAngle)));
+                float slope = (float)Math.Tan(Convert.ToDouble(MathHelper.ToRadians(90) - MathHelper.ToRadians(tankRotationAngle)));
                 float speed = 1;
                 if ((tankRotationAngle > 270) || (tankRotationAngle < 90))
                 {
                     pos.Y = pos.Y - speed;
                     //_position.X++;
                     float x;
-                   
+
                     if (slope == 0)
                         x = 0;
                     else x = (speed / slope);
@@ -330,8 +330,8 @@ namespace targetshooter
                 if (shotCountDown <= 0)
                 {
                     Vector2 bulletFiringPos = calculateBulletFiringPos(); //(tankTurretPos - new Vector2(5, 58));
-                   
-                    bullet b = new bullet(bulletFiringPos, bulletTexture,calculateTurretSlope(),turretAngleInDegree);
+
+                    bullet b = new bullet(bulletFiringPos, bulletTexture, calculateTurretSlope(), turretAngleInDegree);
 
 
                     shotCountDown = 100;
@@ -345,11 +345,11 @@ namespace targetshooter
             for (int i = 0; i < bulletList.Count(); i++)
             {
                 bullet b = bulletList[i];
-              
+
 
                 b.updateBulletPosition();
 
-                if (!b.isBulletInScreen( new Vector2( Window.ClientBounds.Height, Window.ClientBounds.Width)))
+                if (!b.isBulletInScreen(new Vector2(Window.ClientBounds.Height, Window.ClientBounds.Width)))
                 {
                     bulletList.RemoveAt(i);
 
@@ -370,7 +370,7 @@ namespace targetshooter
 
 
 
-           
+
             //Turrent rotation angle
 
             if (Keyboard.GetState().IsKeyDown(Keys.S))
@@ -378,7 +378,7 @@ namespace targetshooter
                 if (turretRotationDelayInMilliSec <= 0)
                 {
                     turretAngleInDegree += 1;
-                    turretRotationDelayInMilliSec =0;
+                    turretRotationDelayInMilliSec = 0;
                 }
                 else turretRotationDelayInMilliSec -= gameTime.ElapsedGameTime.Milliseconds;
             }
@@ -391,7 +391,7 @@ namespace targetshooter
             {
                 if (turretRotationDelayInMilliSec <= 0)
                 {
-                    turretAngleInDegree += 1; 
+                    turretAngleInDegree += 1;
                     tankRotationAngle += 1;
                     turretRotationDelayInMilliSec = 0;
                 }
@@ -399,7 +399,7 @@ namespace targetshooter
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
-                turretAngleInDegree -= 1; 
+                turretAngleInDegree -= 1;
                 tankRotationAngle -= 1;
             }
 
@@ -411,13 +411,13 @@ namespace targetshooter
                 turretAngleInDegree = 0;
             else if (turretAngleInDegree < 0)
                 turretAngleInDegree = 360 - turretAngleInDegree;
-                
+
 
             //float c = MathHelper.Pi * 2;
 
             turretRotationAngle = MathHelper.ToRadians(turretAngleInDegree);
-            
-            
+
+
 
 
             base.Update(gameTime);
@@ -471,17 +471,17 @@ namespace targetshooter
             }
             else
             {
-                 debugString="Debug: # of bullet= " + bulletList.Count().ToString() + "Turret Angle= " + turretAngleInDegree.ToString()
-                   + "Turret Slope: " + calculateTurretSlope().ToString() + "Turret Position= " + tankTurretPos.ToString() +"\n Turret Origin Rotation= "+ new Vector2((texture.Width / 2)-3,(texture.Height / 2)-2).ToString();
+                debugString = "Debug: # of bullet= " + bulletList.Count().ToString() + "Turret Angle= " + turretAngleInDegree.ToString()
+                  + "Turret Slope: " + calculateTurretSlope().ToString() + "Turret Position= " + tankTurretPos.ToString() + "\n Turret Origin Rotation= " + new Vector2((texture.Width / 2) - 3, (texture.Height / 2) - 2).ToString();
 
-                 debugString += "Firing position: " + calculateBulletFiringPos().ToString();
+                debugString += "Firing position: " + calculateBulletFiringPos().ToString();
                 spriteBatch.Begin();
 
                 spriteBatch.DrawString(enemyLife, getEnemyLifeString(),
     new Vector2(10, 10), Color.DarkBlue, 0, Vector2.Zero,
     1, SpriteEffects.None, 1);
 
-                spriteBatch.DrawString(debug,debugString ,
+                spriteBatch.DrawString(debug, debugString,
                     new Vector2(10, 40), Color.DarkBlue, 0, Vector2.Zero,
                     1, SpriteEffects.None, 1);
 
@@ -489,10 +489,10 @@ namespace targetshooter
                 spriteBatch.Draw(texture, pos, null, Color.White, MathHelper.ToRadians(tankRotationAngle), new Vector2(40, 70), 1.0f, SpriteEffects.None, 0f);
 
                 //spriteBatch.Draw(tankTurret, pos+ new Vector2(1,0), Color.White);
-               // spriteBatch.Draw(tankTurret,tankTurretPos, null, Color.White, turretRotationAngle,
-        //new Vector2(((texture.Width/2)+3), (texture.Width/2)+3), 1.0f, SpriteEffects.None, 0f);
+                // spriteBatch.Draw(tankTurret,tankTurretPos, null, Color.White, turretRotationAngle,
+                //new Vector2(((texture.Width/2)+3), (texture.Width/2)+3), 1.0f, SpriteEffects.None, 0f);
 
-                spriteBatch.Draw(tankTurret, new Vector2(tankTurretPos.X-55,tankTurretPos.Y-55), null, Color.White, turretRotationAngle,
+                spriteBatch.Draw(tankTurret, new Vector2(tankTurretPos.X - 55, tankTurretPos.Y - 55), null, Color.White, turretRotationAngle,
         new Vector2(25, 70), 1.0f, SpriteEffects.None, 0f);
 
                 //  Drawing the enemy
