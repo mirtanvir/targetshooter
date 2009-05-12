@@ -84,6 +84,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="backupGame.cs" />
     <Compile Include="baseBullet.cs" />
     <Compile Include="BaseTank.cs" />
     <Compile Include="updateClass.cs" />

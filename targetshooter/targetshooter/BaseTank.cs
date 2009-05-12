@@ -73,7 +73,7 @@ namespace targetshooter
         
        
          */
-        private Vector2 position;
+        private Microsoft.Xna.Framework.Vector2 position = new Microsoft.Xna.Framework.Vector2(0, 0);
 
         private Texture2D imageOfTank;
         private Texture2D tankTurret;
@@ -84,13 +84,18 @@ namespace targetshooter
         private int turretAngleInDegree;
         private float firingRate;
 
-        
+       // updateClass update;
 
+        protected void MoveTankUp()
+        {
+
+            position = updateClass.UpdateTankPositionUp(tankAngleInDegree, position, tankSpeed);
+        }
 
         protected void MoveTankDown()
         {
-
-
+            position = updateClass.updateTankPositionDown(tankAngleInDegree, position, tankSpeed);
+            
         }
 
         protected Vector2 GetPosition() {

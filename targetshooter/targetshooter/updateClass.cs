@@ -30,7 +30,7 @@ namespace targetshooter
 
 
 
-      public static void UpdateTankPositionUp(int tankAngleInDegree, Vector2 position, int tankSpeed)
+      public static Vector2 UpdateTankPositionUp(int tankAngleInDegree, Vector2 position, float tankSpeed)
       {
 
           float slope = calculateSlope(tankAngleInDegree);// (float)Math.Tan(Convert.ToDouble(MathHelper.ToRadians(90) - MathHelper.ToRadians(tankAngleInDegree)));
@@ -63,14 +63,48 @@ namespace targetshooter
 
 
 
-
+          return position;
 
 
       }
 
 
 
-      public static Vector2 updateBulletPosition(int _turretAngleInDegree, Vector2 _position, float speed) //Vector2 currentPlayerTankPosition,float currentTankAngle, float currentTankTurretAngleInDegree)
+      public static Vector2 updateTankPositionDown(int tankAngleInDegree, Vector2 position, float tankSpeed)
+      {
+          float slope = calculateSlope(tankAngleInDegree);// (float)Math.Tan(Convert.ToDouble(MathHelper.ToRadians(90) - MathHelper.ToRadians(tankAngleInDegree)));
+          if ((tankAngleInDegree > 270) || (tankAngleInDegree < 90))
+          {
+              position.Y = position.Y + tankSpeed;
+              //_position.X++;
+              float x;
+
+              if (slope == 0)
+                  x = 0;
+              else x = (tankSpeed / slope);
+
+              position.X = position.X - x;
+          }
+          else if ((tankAngleInDegree < 270) && (tankAngleInDegree > 90))
+          {
+
+              position.Y = position.Y - tankSpeed;
+              //_position.X++;
+              float x;
+              if (slope == 0)
+                  x = 0;
+              else x = (tankSpeed / slope);
+
+              position.X = position.X + x;
+
+          }
+
+          return position;
+      
+      }
+
+
+      public static Vector2 updateBulletPosition(int _turretAngleInDegree, Vector2 _position, int speed) //Vector2 currentPlayerTankPosition,float currentTankAngle, float currentTankTurretAngleInDegree)
       {
           float _slope = calculateSlope(_turretAngleInDegree);
           //float speed = 10;
