@@ -19,7 +19,7 @@ namespace targetshooter
     {
             /*
 
-      Has 2D position
+      Has 2D tanKposition
     *
 
       Image for the tank
@@ -73,35 +73,174 @@ namespace targetshooter
         
        
          */
-        private Microsoft.Xna.Framework.Vector2 position = new Microsoft.Xna.Framework.Vector2(0, 0);
-
+        private Vector2 tanKposition;
+        private Vector2 turretPosition;
         private Texture2D imageOfTank;
-        private Texture2D tankTurret;
+        private Texture2D imageOfTankTurret;
         private int numberOfLives;
         private int healthPercentage;
         private float tankSpeed;
         private int tankAngleInDegree;
         private int turretAngleInDegree;
         private float firingRate;
-
+        
        // updateClass update;
 
-        protected void MoveTankUp()
-        {
 
-            position = updateClass.UpdateTankPositionUp(tankAngleInDegree, position, tankSpeed);
+        public Vector2 TurretPosition{
+        
+            get{
+            
+            
+                return turretPosition;
+            }
+            set{
+            
+                turretPosition=value;
+            }
+        
         }
 
-        protected void MoveTankDown()
+
+        protected int tankAngle {
+
+            get {
+
+                return tankAngleInDegree;
+
+            }
+            set{
+            tankAngleInDegree=value;
+            }
+        
+        }
+
+        protected int turretAngle {
+
+            get {
+                return turretAngleInDegree;
+            }
+            set {
+
+                turretAngleInDegree = value;
+            }
+        
+        }
+
+
+        public BaseTank(Texture2D imgOfTank, Texture2D imgOfTankTurret ,Vector2 firstPosition, Vector2 turretPos)
         {
-            position = updateClass.updateTankPositionDown(tankAngleInDegree, position, tankSpeed);
+
+            this.imageOfTank = imgOfTank;
+            this.imageOfTankTurret = imgOfTankTurret;
+            this.tanKposition = firstPosition;
+            this.turretPosition=turretPos;
+            this.turretAngleInDegree = 0;
+            this.tankAngleInDegree = 0;
+            this.tankSpeed = 1;
+        
+        }
+
+
+        public Texture2D imageOfTurret{
+    
+        get
+        {
+            return imageOfTankTurret;
+    
+        }
+            set {
+
+                imageOfTankTurret = value;
+            
+            }
+    
+    }
+
+
+        protected float RateOfFire
+        {
+
+            get{
+            
+                return firingRate;
+            }
+            set{
+
+                firingRate=value;
+            
+            }
+            
+
+
+        }
+        public int numberOflives
+        
+        {
+
+            get {
+
+                return numberOfLives;
+            }
+            set {
+
+                numberOfLives=value;
+            
+            }
+
+        }
+
+        public Texture2D tankImage {
+
+            get {
+
+                return imageOfTank;
+            }
+            set {
+                imageOfTank=value;
+            
+            }
+        
+        }
+
+
+        protected void MoveTank(Vector2 newPos)
+        {
+
+            tanKposition = newPos; 
             
         }
 
-        protected Vector2 GetPosition() {
+        protected float TankSpeed
+        {
 
-            return position;
+            get {
 
+
+                return tankSpeed;
+            }
+            set {
+
+                tankSpeed = value;
+            }
+
+
+        }
+
+        public Vector2 Position {
+
+            get
+            {
+                return tanKposition;
+            }
+
+            set {
+
+
+                tanKposition=value;
+
+
+            }
         }
 
 

@@ -33,31 +33,38 @@ namespace targetshooter
       public static Vector2 UpdateTankPositionUp(int tankAngleInDegree, Vector2 position, float tankSpeed)
       {
 
+          float speed = tankSpeed;
+
           float slope = calculateSlope(tankAngleInDegree);// (float)Math.Tan(Convert.ToDouble(MathHelper.ToRadians(90) - MathHelper.ToRadians(tankAngleInDegree)));
+
+
+
+          
+
 
           if ((tankAngleInDegree > 270) || (tankAngleInDegree < 90))
           {
-              position.Y = position.Y + tankSpeed;
-              //_position.X++;
+              position.Y = position.Y - speed;
+              //_positionition.X++;
               float x;
 
               if (slope == 0)
                   x = 0;
-              else x = (tankSpeed / slope);
+              else x = (speed / slope);
 
-              position.X = position.X - x;
+              position.X = position.X + x;
           }
           else if ((tankAngleInDegree < 270) && (tankAngleInDegree > 90))
           {
 
-              position.Y = position.Y - tankSpeed;
+              position.Y = position.Y + speed;
               //_position.X++;
               float x;
               if (slope == 0)
                   x = 0;
-              else x = (tankSpeed / slope);
+              else x = (speed / slope);
 
-              position.X = position.X + x;
+              position.X = position.X - x;
 
           }
 

@@ -148,21 +148,27 @@ namespace targetshooter
         /// all of your content.
         /// </summary>
 
-
+        playerTank player;
 
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
+            
+            
+            
             spriteBatch = new SpriteBatch(GraphicsDevice);
             debug = Content.Load<SpriteFont>(@"fonts/debugInformation");
             enemy = Content.Load<Texture2D>(@"images/enemy");
-            texture = Content.Load<Texture2D>(@"images/tank_body");
-            tankTurret = Content.Load<Texture2D>(@"images/tank_turret");
+            //texture = Content.Load<Texture2D>(@"images/tank_body");
+            //tankTurret = Content.Load<Texture2D>(@"images/tank_turret");
             bulletTexture = Content.Load<Texture2D>(@"images/bullet");
             gameO = Content.Load<SpriteFont>(@"fonts/gameOver");
             enemyLife = Content.Load<SpriteFont>(@"fonts/font");
-            pos.Y = Window.ClientBounds.Height - texture.Height;
+            //pos.Y = Window.ClientBounds.Height - texture.Height;
             // TODO: use this.Content to load your game content here
+
+             player = new playerTank(Content.Load<Texture2D>(@"images/tank_body"),Content.Load<Texture2D>(@"images/tank_turret"), new Vector2(10, 10),new Vector2(10,10) + new Vector2(60, 60));
+        
         }
 
         bool collide(Vector2 bullPos)
@@ -256,36 +262,15 @@ namespace targetshooter
 
             //if ((Keyboard.GetState().IsKeyDown(Keys.Left)) && (pos.X != 0))
             //    pos.X--;
-            if ((Keyboard.GetState().IsKeyDown(Keys.Down)) && (pos.Y <= Window.ClientBounds.Height - texture.Height))
+            
+            
+            if ((Keyboard.GetState().IsKeyDown(Keys.Down)))// && (player.Position.Y <= Window.ClientBounds.Height - texture.Height))
             // pos.Y++;
             {
-                float slope = (float)Math.Tan(Convert.ToDouble(MathHelper.ToRadians(90) - MathHelper.ToRadians(tankRotationAngle)));
-                float speed = 1;
-                if ((tankRotationAngle > 270) || (tankRotationAngle < 90))
-                {
-                    pos.Y = pos.Y + speed;
-                    //_position.X++;
-                    float x;
 
-                    if (slope == 0)
-                        x = 0;
-                    else x = (speed / slope);
+                player.MovePlayerTankDown();
 
-                    pos.X = pos.X - x;
-                }
-                else if ((tankRotationAngle < 270) && (tankRotationAngle > 90))
-                {
-
-                    pos.Y = pos.Y - speed;
-                    //_position.X++;
-                    float x;
-                    if (slope == 0)
-                        x = 0;
-                    else x = (speed / slope);
-
-                    pos.X = pos.X + x;
-
-                }
+             
 
 
             }
@@ -294,35 +279,10 @@ namespace targetshooter
             //trying to make the player go up
             if ((Keyboard.GetState().IsKeyDown(Keys.Up)))// && (pos.Y <= 0))
             {
-                float slope = (float)Math.Tan(Convert.ToDouble(MathHelper.ToRadians(90) - MathHelper.ToRadians(tankRotationAngle)));
-                float speed = 1;
-                if ((tankRotationAngle > 270) || (tankRotationAngle < 90))
-                {
-                    pos.Y = pos.Y - speed;
-                    //_position.X++;
-                    float x;
 
-                    if (slope == 0)
-                        x = 0;
-                    else x = (speed / slope);
-
-                    pos.X = pos.X + x;
-                }
-                else if ((tankRotationAngle < 270) && (tankRotationAngle > 90))
-                {
-
-                    pos.Y = pos.Y + speed;
-                    //_position.X++;
-                    float x;
-                    if (slope == 0)
-                        x = 0;
-                    else x = (speed / slope);
-
-                    pos.X = pos.X - x;
-
-                }
-
-                //pos.Y--;
+                player.movePlayerTankUp();
+                
+              
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
@@ -382,40 +342,40 @@ namespace targetshooter
                 }
                 else turretRotationDelayInMilliSec -= gameTime.ElapsedGameTime.Milliseconds;
             }
+
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
                 turretAngleInDegree -= 1;
             }
 
+
+            
+            
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
                 if (turretRotationDelayInMilliSec <= 0)
                 {
-                    turretAngleInDegree += 1;
-                    tankRotationAngle += 1;
+                    
+                    player.rotateTankClockwise();
+
                     turretRotationDelayInMilliSec = 0;
                 }
                 else turretRotationDelayInMilliSec -= gameTime.ElapsedGameTime.Milliseconds;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
-                turretAngleInDegree -= 1;
-                tankRotationAngle -= 1;
+                
+
+                player.rotateTankCounterClockwise();
             }
 
 
 
 
 
-            if (turretAngleInDegree > 360)
-                turretAngleInDegree = 0;
-            else if (turretAngleInDegree < 0)
-                turretAngleInDegree = 360 - turretAngleInDegree;
+            
 
-
-            //float c = MathHelper.Pi * 2;
-
-            turretRotationAngle = MathHelper.ToRadians(turretAngleInDegree);
+           // turretRotationAngle = MathHelper.ToRadians(turretAngleInDegree);
 
 
 
@@ -454,65 +414,78 @@ namespace targetshooter
 
 
             GraphicsDevice.Clear(Color.Red);
+            spriteBatch.Begin();
 
-            if (numberOfEnemyLife == 10)
-            {
-                spriteBatch.Begin();
+            spriteBatch.Draw(player.tankImage, player.Position, null, Color.White, MathHelper.ToRadians(player.getTankAngle()), new Vector2(40, 70), 1.0f, SpriteEffects.None, 0f);
 
-                spriteBatch.DrawString(enemyLife, "Congratulation you won",
-    new Vector2(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2), Color.DarkBlue, 0, Vector2.Zero,
-    1, SpriteEffects.None, 1);
-
-
-
-                spriteBatch.End();
-
-
-            }
-            else
-            {
-                debugString = "Debug: # of bullet= " + bulletList.Count().ToString() + "Turret Angle= " + turretAngleInDegree.ToString()
-                  + "Turret Slope: " + calculateTurretSlope().ToString() + "Turret Position= " + tankTurretPos.ToString() + "\n Turret Origin Rotation= " + new Vector2((texture.Width / 2) - 3, (texture.Height / 2) - 2).ToString();
-
-                debugString += "Firing position: " + calculateBulletFiringPos().ToString();
-                spriteBatch.Begin();
-
-                spriteBatch.DrawString(enemyLife, getEnemyLifeString(),
-    new Vector2(10, 10), Color.DarkBlue, 0, Vector2.Zero,
-    1, SpriteEffects.None, 1);
-
-                spriteBatch.DrawString(debug, debugString,
-                    new Vector2(10, 40), Color.DarkBlue, 0, Vector2.Zero,
-                    1, SpriteEffects.None, 1);
-
-                //  Drawing the player
-                spriteBatch.Draw(texture, pos, null, Color.White, MathHelper.ToRadians(tankRotationAngle), new Vector2(40, 70), 1.0f, SpriteEffects.None, 0f);
-
-                //spriteBatch.Draw(tankTurret, pos+ new Vector2(1,0), Color.White);
-                // spriteBatch.Draw(tankTurret,tankTurretPos, null, Color.White, turretRotationAngle,
-                //new Vector2(((texture.Width/2)+3), (texture.Width/2)+3), 1.0f, SpriteEffects.None, 0f);
-
-                spriteBatch.Draw(tankTurret, new Vector2(tankTurretPos.X - 55, tankTurretPos.Y - 55), null, Color.White, turretRotationAngle,
+            spriteBatch.Draw(player.imageOfTurret, new Vector2(player.TurretPosition.X - 55, player.TurretPosition.Y - 55), null, Color.White, turretRotationAngle,
         new Vector2(25, 70), 1.0f, SpriteEffects.None, 0f);
 
-                //  Drawing the enemy
-                spriteBatch.Draw(enemy, enemyPos, Color.White);
-
-                foreach (bullet bull in bulletList)
-                {
-                    if (!(collisionCheckWithTurret(bull.getBulletPosition())))
-                        spriteBatch.Draw(bull.getBulletTexture(), bull.getBulletPosition(), Color.White);
-                    else ;
-                }
-
-                spriteBatch.End();
 
 
+            //spriteBatch.Draw(player.tankImage, player.Position, Color.White, MathHelper.ToRadians(player.getTankAngle()), new Vector2(40, 70), 1.0f, SpriteEffects.None, 0f);
 
-                // TODO: Add your drawing code here
+            spriteBatch.End();
 
 
-            }
+    //        if (numberOfEnemyLife == 10)
+    //        {
+    //            spriteBatch.Begin();
+
+    //            spriteBatch.DrawString(enemyLife, "Congratulation you won",
+    //new Vector2(Window.ClientBounds.Width / 2, Window.ClientBounds.Height / 2), Color.DarkBlue, 0, Vector2.Zero,
+    //1, SpriteEffects.None, 1);
+
+
+
+    //            spriteBatch.End();
+
+
+    //        }
+    //        else
+    //        {
+    //            debugString = "Debug: # of bullet= " + bulletList.Count().ToString() + "Turret Angle= " + turretAngleInDegree.ToString()
+    //              + "Turret Slope: " + calculateTurretSlope().ToString() + "Turret Position= " + tankTurretPos.ToString() + "\n Turret Origin Rotation= " + new Vector2((texture.Width / 2) - 3, (texture.Height / 2) - 2).ToString();
+
+    //            debugString += "Firing position: " + calculateBulletFiringPos().ToString();
+    //            spriteBatch.Begin();
+
+    //            spriteBatch.DrawString(enemyLife, getEnemyLifeString(),
+    //new Vector2(10, 10), Color.DarkBlue, 0, Vector2.Zero,
+    //1, SpriteEffects.None, 1);
+
+    //            spriteBatch.DrawString(debug, debugString,
+    //                new Vector2(10, 40), Color.DarkBlue, 0, Vector2.Zero,
+    //                1, SpriteEffects.None, 1);
+
+    //            //  Drawing the player
+    //            spriteBatch.Draw(texture, pos, null, Color.White, MathHelper.ToRadians(tankRotationAngle), new Vector2(40, 70), 1.0f, SpriteEffects.None, 0f);
+
+    //            //spriteBatch.Draw(tankTurret, pos+ new Vector2(1,0), Color.White);
+    //            // spriteBatch.Draw(tankTurret,tankTurretPos, null, Color.White, turretRotationAngle,
+    //            //new Vector2(((texture.Width/2)+3), (texture.Width/2)+3), 1.0f, SpriteEffects.None, 0f);
+
+    //            spriteBatch.Draw(tankTurret, new Vector2(tankTurretPos.X - 55, tankTurretPos.Y - 55), null, Color.White, turretRotationAngle,
+    //    new Vector2(25, 70), 1.0f, SpriteEffects.None, 0f);
+
+    //            //  Drawing the enemy
+    //            spriteBatch.Draw(enemy, enemyPos, Color.White);
+
+    //            foreach (bullet bull in bulletList)
+    //            {
+    //                if (!(collisionCheckWithTurret(bull.getBulletPosition())))
+    //                    spriteBatch.Draw(bull.getBulletTexture(), bull.getBulletPosition(), Color.White);
+    //                else ;
+    //            }
+
+    //            spriteBatch.End();
+
+
+
+    //            // TODO: Add your drawing code here
+
+
+    //        }
             base.Draw(gameTime);
         }
 
