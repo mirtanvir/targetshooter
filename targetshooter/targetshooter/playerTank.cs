@@ -24,11 +24,17 @@ namespace targetshooter
 
         }
 
-        public int getTankAngle()
+        public float getTankAngle()
         {
 
-            return base.tankAngle;
+            return MathHelper.ToRadians((float)base.tankAngle);
 
+        }
+        public float getTurretAngle()
+        {
+
+            return MathHelper.ToRadians((float)base.turretAngle);
+        
         }
 
         public void rotateTankClockwise()
@@ -44,7 +50,25 @@ namespace targetshooter
 
 
         }
+        public void rotateTurretClockwise()
+        {
 
+            int currentTurretAngle = turretAngle;
+
+            base.turretAngle = currentTurretAngle + 1;
+            fixTankandTurret();
+        
+        }
+
+        public void rotateTurretCounterClockwise()
+        {
+            int currentTurretAngle = turretAngle;
+
+            base.turretAngle = currentTurretAngle - 1;
+            fixTankandTurret();
+            
+        
+        }
         public void rotateTankCounterClockwise()
         {
 

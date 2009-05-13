@@ -227,10 +227,8 @@ namespace targetshooter
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            //turretAngleInDegree =turretRotationAngle- tankRotationAngle;
-            tankTurretPos = pos + new Vector2(60, 60);
-            // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+
+            if ((Keyboard.GetState().IsKeyDown(Keys.Escape)))
                 this.Exit();
             //Putting the player on the bottom of the screen.
 
@@ -335,17 +333,15 @@ namespace targetshooter
 
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                if (turretRotationDelayInMilliSec <= 0)
-                {
-                    turretAngleInDegree += 1;
-                    turretRotationDelayInMilliSec = 0;
-                }
-                else turretRotationDelayInMilliSec -= gameTime.ElapsedGameTime.Milliseconds;
+                
+
+                    player.rotateTurretClockwise();
+                
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                turretAngleInDegree -= 1;
+                player.rotateTurretCounterClockwise();
             }
 
 
@@ -353,14 +349,9 @@ namespace targetshooter
             
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
-                if (turretRotationDelayInMilliSec <= 0)
-                {
                     
                     player.rotateTankClockwise();
 
-                    turretRotationDelayInMilliSec = 0;
-                }
-                else turretRotationDelayInMilliSec -= gameTime.ElapsedGameTime.Milliseconds;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
@@ -416,9 +407,9 @@ namespace targetshooter
             GraphicsDevice.Clear(Color.Red);
             spriteBatch.Begin();
 
-            spriteBatch.Draw(player.tankImage, player.Position, null, Color.White, MathHelper.ToRadians(player.getTankAngle()), new Vector2(40, 70), 1.0f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(player.tankImage, player.Position, null, Color.White, player.getTankAngle(), new Vector2(40, 70), 1.0f, SpriteEffects.None, 0f);
 
-            spriteBatch.Draw(player.imageOfTurret, new Vector2(player.TurretPosition.X - 55, player.TurretPosition.Y - 55), null, Color.White, turretRotationAngle,
+            spriteBatch.Draw(player.imageOfTurret, new Vector2(player.TurretPosition.X - 55, player.TurretPosition.Y - 55), null, Color.White, player.getTurretAngle(),
         new Vector2(25, 70), 1.0f, SpriteEffects.None, 0f);
 
 
