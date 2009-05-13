@@ -43,7 +43,6 @@ namespace targetshooter
 
             int currentTankAngle = tankAngle;
             int currentTurretAngle = turretAngle;
-
             base.turretAngle = currentTurretAngle + 1;
             base.tankAngle = currentTankAngle + 1;
             fixTankandTurret();
