@@ -89,19 +89,19 @@ namespace targetshooter
                 base.tankAngle = 360 - tankAngle;
         }
 
-        public void movePlayerTankUp()
+        public void movePlayerTankUp(float timeChangedSinceLastUpdate)
         {
         
-            Vector2 newPos= updateClass.UpdateTankPositionUp(tankAngle, Position,TankSpeed);
+            Vector2 newPos= updateClass.UpdateTankPositionUp(tankAngle, Position,TankSpeed,timeChangedSinceLastUpdate);
             base.MoveTank(newPos);
                 base.TurretPosition = Position + new Vector2(60,60);
         
         }
 
-        public void MovePlayerTankDown()
+        public void MovePlayerTankDown(float timeChangedSinceLastUpdate)
         {
 
-            Vector2 newPos = updateClass.updateTankPositionDown(tankAngle, Position, TankSpeed);
+            Vector2 newPos = updateClass.updateTankPositionDown(tankAngle, Position, TankSpeed, timeChangedSinceLastUpdate);
             base.MoveTank(newPos);
             base.TurretPosition = Position + new Vector2(60, 60);
         

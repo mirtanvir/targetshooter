@@ -30,7 +30,7 @@ namespace targetshooter
 
 
 
-      public static Vector2 UpdateTankPositionUp(int tankAngleInDegree, Vector2 position, float tankSpeed)
+      public static Vector2 UpdateTankPositionUp(int tankAngleInDegree, Vector2 position, float tankSpeed,float gameTimeChanged)
       {
 
           float speed = tankSpeed;
@@ -39,32 +39,32 @@ namespace targetshooter
 
 
 
-          
 
+         
 
           if ((tankAngleInDegree > 270) || (tankAngleInDegree < 90))
           {
-              position.Y = position.Y - speed;
+              position.Y = position.Y - speed*gameTimeChanged;
               //_positionition.X++;
               float x;
 
               if (slope == 0)
                   x = 0;
-              else x = (speed / slope);
+              else x = ((speed* gameTimeChanged) / slope );
 
-              position.X = position.X + x;
+              position.X = position.X + x ;
           }
           else if ((tankAngleInDegree < 270) && (tankAngleInDegree > 90))
           {
 
-              position.Y = position.Y + speed;
+              position.Y = position.Y + speed * gameTimeChanged;
               //_position.X++;
               float x;
               if (slope == 0)
                   x = 0;
-              else x = (speed / slope);
+              else x = ((speed * gameTimeChanged) / slope);
 
-              position.X = position.X - x;
+              position.X = position.X - x * gameTimeChanged;
 
           }
 
@@ -77,32 +77,32 @@ namespace targetshooter
 
 
 
-      public static Vector2 updateTankPositionDown(int tankAngleInDegree, Vector2 position, float tankSpeed)
+      public static Vector2 updateTankPositionDown(int tankAngleInDegree, Vector2 position, float tankSpeed, float gameTimeChanged)
       {
           float slope = calculateSlope(tankAngleInDegree);// (float)Math.Tan(Convert.ToDouble(MathHelper.ToRadians(90) - MathHelper.ToRadians(tankAngleInDegree)));
           if ((tankAngleInDegree > 270) || (tankAngleInDegree < 90))
           {
-              position.Y = position.Y + tankSpeed;
+              position.Y = position.Y + tankSpeed * gameTimeChanged;
               //_position.X++;
               float x;
 
               if (slope == 0)
                   x = 0;
-              else x = (tankSpeed / slope);
+              else x = (tankSpeed  / slope);
 
-              position.X = position.X - x;
+              position.X = position.X - x * gameTimeChanged;
           }
           else if ((tankAngleInDegree < 270) && (tankAngleInDegree > 90))
           {
 
-              position.Y = position.Y - tankSpeed;
+              position.Y = position.Y - tankSpeed * gameTimeChanged;
               //_position.X++;
               float x;
               if (slope == 0)
                   x = 0;
-              else x = (tankSpeed / slope);
+              else x = (tankSpeed  / slope);
 
-              position.X = position.X + x;
+              position.X = position.X + x * gameTimeChanged;
 
           }
 

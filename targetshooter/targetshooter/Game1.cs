@@ -254,19 +254,15 @@ namespace targetshooter
                 enemyPos.X = 0;
             if (enemyPos.X < 0)
                 enemyPos.X = Window.ClientBounds.Width;
-
-            //if ((Keyboard.GetState().IsKeyDown(Keys.Right)) && (pos.X < Window.ClientBounds.Width - texture.Width))
-            //    pos.X++;
-
-            //if ((Keyboard.GetState().IsKeyDown(Keys.Left)) && (pos.X != 0))
-            //    pos.X--;
+           float t = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            
             
             
             if ((Keyboard.GetState().IsKeyDown(Keys.Down)))// && (player.Position.Y <= Window.ClientBounds.Height - texture.Height))
-            // pos.Y++;
+            
             {
 
-                player.MovePlayerTankDown();
+                player.MovePlayerTankDown(t);
 
              
 
@@ -278,7 +274,7 @@ namespace targetshooter
             if ((Keyboard.GetState().IsKeyDown(Keys.Up)))// && (pos.Y <= 0))
             {
 
-                player.movePlayerTankUp();
+                player.movePlayerTankUp(t);
                 
               
             }
@@ -366,7 +362,7 @@ namespace targetshooter
 
             
 
-           // turretRotationAngle = MathHelper.ToRadians(turretAngleInDegree);
+           
 
 
 

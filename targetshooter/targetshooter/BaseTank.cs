@@ -137,7 +137,7 @@ namespace targetshooter
             this.turretPosition=turretPos;
             this.turretAngleInDegree = 0;
             this.tankAngleInDegree = 0;
-            this.tankSpeed = 1;
+            this.tankSpeed = 200f;
         
         }
 
