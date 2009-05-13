@@ -308,9 +308,7 @@ namespace targetshooter
                     bulletList.RemoveAt(i);
 
                 }
-
-
-
+                
                 if (collide(b.getBulletPosition()))
                 {
                     float x = rnd.Next(0, Window.ClientBounds.Width - texture.Width);
