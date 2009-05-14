@@ -102,7 +102,7 @@ namespace targetshooter
             Content.RootDirectory = "Content";
             this.graphics.PreferredBackBufferWidth = 1280;
             this.graphics.PreferredBackBufferHeight = 800;
-            this.graphics.IsFullScreen = true;
+            //this.graphics.IsFullScreen = true;
 
 
         }
@@ -172,7 +172,7 @@ namespace targetshooter
             //pos.Y = Window.ClientBounds.Height - texture.Height;
             // TODO: use this.Content to load your game content here
 
-             player = new playerTank(Content.Load<Texture2D>(@"images/tank_body"),Content.Load<Texture2D>(@"images/tank_turret"), Content.Load<Texture2D>(@"images/bullet"),4.0f,new Vector2(10, 10),new Vector2(10,10) + new Vector2(60, 60));
+             player = new playerTank(Content.Load<Texture2D>(@"images/tank_body"),Content.Load<Texture2D>(@"images/tank_turret"), Content.Load<Texture2D>(@"images/bullet"),10.0f,new Vector2(10, 10),new Vector2(10,10) + new Vector2(60, 60));
         
         }
 
@@ -292,13 +292,14 @@ namespace targetshooter
             {
                 if (shotCountDown <= 0)
                 {
-                    Vector2 bulletFiringPos = calculateBulletFiringPos(); //(tankTurretPos - new Vector2(5, 58));
+                    //Vector2 bulletFiringPos = calculateBulletFiringPos(); //(tankTurretPos - new Vector2(5, 58));
 
-                    bullet b = new bullet(bulletFiringPos, bulletTexture, calculateTurretSlope(), turretAngleInDegree);
+                  //  bullet b = new bullet(bulletFiringPos, bulletTexture, calculateTurretSlope(), turretAngleInDegree);
 
+                    player.fireShell();
 
                     shotCountDown = 100;
-                    bulletList.Add(b);
+                    //bulletList.Add(b);
 
                 }
                 else shotCountDown = shotCountDown - gameTime.ElapsedGameTime.Milliseconds;

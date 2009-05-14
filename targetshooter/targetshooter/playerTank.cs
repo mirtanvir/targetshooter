@@ -26,6 +26,9 @@ namespace targetshooter
         {
             bulletImage = imgOfTheShell;
             //shellList  = new playerTankShell(imgOfTheShell,
+
+
+            tankShellSpeed = shellSpeed;
         }
 
         public float getTankAngle()
@@ -44,7 +47,7 @@ namespace targetshooter
         public void fireShell()
         {
 
-            playerTankShell shell = new playerTankShell(bulletImage, base.TurretPosition, tankShellSpeed, base.turretAngle);
+            playerTankShell shell = new playerTankShell(bulletImage, this.calculateBulletFiringPos(base.TurretPosition), tankShellSpeed, base.turretAngle);
             shellList.Add(shell);
 
         }
@@ -61,6 +64,18 @@ namespace targetshooter
 
 
         }
+        protected Vector2 calculateBulletFiringPos(Vector2 tankTurretPos)
+        {
+
+            // Rectangle turretRect = new Rectangle((int)tankTurretPos.X, (int)tankTurretPos.Y, tankTurret.Width, tankTurret.Height);
+            float factor = 140.0f;
+            return new Vector2(tankTurretPos.X - 60, tankTurretPos.Y - 60);
+            // return new Vector2((tankTurretPos.X-60)+ (factor*(float)Math.Cos(Convert.ToDouble(MathHelper.ToRadians(90) - turretRotationAngle))), (tankTurretPos.Y-30) -factor*(float)Math.Sin(Convert.ToDouble(MathHelper.ToRadians(90) - turretRotationAngle)) );
+
+        }
+
+
+
         public void rotateTurretClockwise()
         {
 

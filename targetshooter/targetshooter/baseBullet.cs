@@ -53,7 +53,7 @@ namespace targetshooter
         protected void update()
         {
 
-            position= updateClass.updateBulletPosition(angleInDegree ,position , speed );
+             position= updateClass.updateBulletPosition(angleInDegree ,position , speed );
         
         }
 
