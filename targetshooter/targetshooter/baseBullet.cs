@@ -36,6 +36,13 @@ namespace targetshooter
             position = bulletPositon;
         }
 
+        protected void update()
+        {
+
+            position= updateClass.updateBulletPosition(angleInDegree , base.getBulletPosition(), base.getSpeed());
+        
+        }
+
         /*
          * return the speed of the bullet
          * 

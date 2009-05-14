@@ -16,12 +16,13 @@ namespace targetshooter
 {
     class playerTank : BaseTank
     {
+        private playerTankShell shell; 
 
-        public playerTank(Texture2D imgOfTank, Texture2D imgOfTankTurret, Vector2 firstPosition, Vector2 turretPos)
+        public playerTank(Texture2D imgOfTank, Texture2D imgOfTankTurret, Texture2D imgOfTheShell, Vector2 firstPosition, Vector2 turretPos)
             : base(imgOfTank, imgOfTankTurret, firstPosition, turretPos)
         {
 
-
+            shell  = new playerTankShell(imgOfTheShell,
         }
 
         public float getTankAngle()

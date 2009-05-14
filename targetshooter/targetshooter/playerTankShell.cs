@@ -16,6 +16,10 @@ namespace targetshooter
 {
     class playerTankShell: baseBullet
     {
+
+
+
+
         public playerTankShell(Texture2D playerTankShellImage, Vector2 firingPosition,float speed,int turretAngle)
             : base(playerTankShellImage, firingPosition,speed, turretAngle)
         { 
@@ -44,10 +48,10 @@ namespace targetshooter
         
         }
 
-        public void updateBulletPosition(int playerTankTurretAngle)
+        public void updateBulletPosition()
         {
 
-            base.setBulletPosition(updateClass.updateBulletPosition(playerTankTurretAngle, base.getBulletPosition(), base.getSpeed()));
+            base.update();
 
         
         }
