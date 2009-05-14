@@ -11,18 +11,21 @@ using System.Net.Sockets;
 using System.Net;
 using System.IO;
 using System.Threading;
-
+using System;
+using System.Collections.Generic;
+using System.Linq;
 namespace targetshooter
 {
     class playerTank : BaseTank
     {
-        private playerTankShell shell; 
-
-        public playerTank(Texture2D imgOfTank, Texture2D imgOfTankTurret, Texture2D imgOfTheShell, Vector2 firstPosition, Vector2 turretPos)
+        private List<playerTankShell> shellList = new List<playerTankShell>();
+        private Texture2D bulletImage;
+        private float tankShellSpeed;
+        public playerTank(Texture2D imgOfTank, Texture2D imgOfTankTurret, Texture2D imgOfTheShell,float shellSpeed, Vector2 firstPosition, Vector2 turretPos)
             : base(imgOfTank, imgOfTankTurret, firstPosition, turretPos)
         {
-
-            shell  = new playerTankShell(imgOfTheShell,
+            bulletImage = imgOfTheShell;
+            //shellList  = new playerTankShell(imgOfTheShell,
         }
 
         public float getTankAngle()
@@ -35,6 +38,14 @@ namespace targetshooter
         {
 
             return MathHelper.ToRadians((float)base.turretAngle);
+        
+        }
+
+        public void fireShell()
+        {
+
+            playerTankShell shell = new playerTankShell(bulletImage, base.TurretPosition, tankShellSpeed, base.turretAngle);
+            shellList.Add(shell);
         
         }
 
@@ -104,6 +115,35 @@ namespace targetshooter
             Vector2 newPos = updateClass.updateTankPositionDown(tankAngle, Position, TankSpeed, timeChangedSinceLastUpdate);
             base.MoveTank(newPos);
             base.TurretPosition = Position + new Vector2(60, 60);
+        
+        }
+        public void update(Vector2 MaxWindow )
+        {
+
+            for (int i = 0; i < shellList.Count(); i++)
+            {
+                bullet b = shellList[i];
+
+
+                b.updateBulletPosition();
+
+                if (!b.isBulletInScreen(MaxWindow))
+                {
+                    shellList.RemoveAt(i);
+
+                }
+
+            //    if (collide(b.getBulletPosition()))
+            //    {
+            //        float x = rnd.Next(0, Window.ClientBounds.Width - texture.Width);
+            //        enemyPos.X = x;
+            //        bulletList.RemoveAt(i);
+            //        numberOfEnemyLife--;
+            //    }
+
+            //}
+
+
         
         }
         

@@ -17,7 +17,7 @@ namespace targetshooter
     class playerTankShell: baseBullet
     {
 
-
+      
 
 
         public playerTankShell(Texture2D playerTankShellImage, Vector2 firingPosition,float speed,int turretAngle)

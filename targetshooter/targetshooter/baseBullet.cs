@@ -31,6 +31,20 @@ namespace targetshooter
          * @param bulletPosition -- Vector2
          * @return just adding something
         */
+
+        public bool isBulletInScreen(Vector2 maxWindowPosition)
+        {
+
+            if ((position.X < 0) || (position.X > maxWindowPosition.X) || (position.Y < 0) || (position.Y > maxWindowPosition.Y))
+                return false;
+            else return true;
+
+
+
+        }
+
+
+
         protected void move(Vector2 bulletPositon)
         {
             position = bulletPositon;
