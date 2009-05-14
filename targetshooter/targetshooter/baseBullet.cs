@@ -89,8 +89,21 @@ namespace targetshooter
             
         }
 
+        protected void setBulletImage(Texture2D bulletImg)
+        {
+        
+            this.bulletImage=bulletImg;
+        
+        }
+        protected void setBulletPosition(Vector2 pos)
+        {
+
+            position = pos;
+        
+        }
+
         // Constructor
-        public baseBullet(Texture2D bulletimg, float spd, Vector2 pos,int rotationAngleInDegree)
+        public baseBullet(Texture2D bulletimg, Vector2 pos, float spd, int rotationAngleInDegree)
         {
 
             bulletImage = bulletimg;
