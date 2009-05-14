@@ -172,7 +172,7 @@ namespace targetshooter
             //pos.Y = Window.ClientBounds.Height - texture.Height;
             // TODO: use this.Content to load your game content here
 
-             player = new playerTank(Content.Load<Texture2D>(@"images/tank_body"),Content.Load<Texture2D>(@"images/tank_turret"), new Vector2(10, 10),new Vector2(10,10) + new Vector2(60, 60));
+             player = new playerTank(Content.Load<Texture2D>(@"images/tank_body"),Content.Load<Texture2D>(@"images/tank_turret"), Content.Load<Texture2D>(@"images/bullet"),4.0f,new Vector2(10, 10),new Vector2(10,10) + new Vector2(60, 60));
         
         }
 
@@ -236,6 +236,10 @@ namespace targetshooter
             if ((Keyboard.GetState().IsKeyDown(Keys.Escape)))
                 this.Exit();
             //Putting the player on the bottom of the screen.
+
+
+
+            player.update(new Vector2(Window.ClientBounds.Height, Window.ClientBounds.Width));
 
 
             if (enemyDirectionCheckDelay <= 0)
@@ -411,7 +415,14 @@ namespace targetshooter
             spriteBatch.Draw(player.imageOfTurret, new Vector2(player.TurretPosition.X - 55, player.TurretPosition.Y - 55), null, Color.White, player.getTurretAngle(),
         new Vector2(25, 70), 1.0f, SpriteEffects.None, 0f);
 
+            List<playerTankShell> playerShellList = player.getBulletList();
 
+            foreach (playerTankShell bull in playerShellList)
+            {
+                //if (!(collisionCheckWithTurret(bull.getBulletPosition())))
+                 spriteBatch.Draw(bull.getBulletImage(), bull.getShellPosition(), Color.White);
+                //else ;
+            }
 
             //spriteBatch.Draw(player.tankImage, player.Position, Color.White, MathHelper.ToRadians(player.getTankAngle()), new Vector2(40, 70), 1.0f, SpriteEffects.None, 0f);
 

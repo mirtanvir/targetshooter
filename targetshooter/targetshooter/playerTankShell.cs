@@ -56,5 +56,11 @@ namespace targetshooter
         
         }
 
+        public Vector2 getShellPosition()
+        {
+
+            return base.getBulletPosition();
+        
+        }
     }
 }

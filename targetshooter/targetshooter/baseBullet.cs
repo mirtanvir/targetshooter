@@ -53,7 +53,7 @@ namespace targetshooter
         protected void update()
         {
 
-            position= updateClass.updateBulletPosition(angleInDegree , base.getBulletPosition(), base.getSpeed());
+            position= updateClass.updateBulletPosition(angleInDegree ,position , speed );
         
         }
 
@@ -122,7 +122,7 @@ namespace targetshooter
             position = pos;
         
         }
-
+       
         // Constructor
         public baseBullet(Texture2D bulletimg, Vector2 pos, float spd, int rotationAngleInDegree)
         {
