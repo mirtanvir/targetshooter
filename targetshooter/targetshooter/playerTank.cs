@@ -69,7 +69,10 @@ namespace targetshooter
 
             // Rectangle turretRect = new Rectangle((int)tankTurretPos.X, (int)tankTurretPos.Y, tankTurret.Width, tankTurret.Height);
             float factor = 140.0f;
-            return new Vector2(tankTurretPos.X - 60, tankTurretPos.Y - 60);
+            Vector2 turPos = new Vector2(tankTurretPos.X - 60, tankTurretPos.Y - 60);
+            //turPos.Normalize();
+
+            return new Vector2(turPos.X,turPos.Y);
             // return new Vector2((tankTurretPos.X-60)+ (factor*(float)Math.Cos(Convert.ToDouble(MathHelper.ToRadians(90) - turretRotationAngle))), (tankTurretPos.Y-30) -factor*(float)Math.Sin(Convert.ToDouble(MathHelper.ToRadians(90) - turretRotationAngle)) );
 
         }

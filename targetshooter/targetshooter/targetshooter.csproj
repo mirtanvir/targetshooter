@@ -87,6 +87,7 @@
     <Compile Include="backupGame.cs" />
     <Compile Include="baseBullet.cs" />
     <Compile Include="BaseTank.cs" />
+    <Compile Include="infoBar.cs" />
     <Compile Include="playerTank.cs" />
     <Compile Include="playerTankShell.cs" />
     <Compile Include="updateClass.cs" />
