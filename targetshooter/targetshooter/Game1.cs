@@ -100,6 +100,11 @@ namespace targetshooter
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            this.graphics.PreferredBackBufferWidth = 1280;
+            this.graphics.PreferredBackBufferHeight = 800;
+            this.graphics.IsFullScreen = true;
+
+
         }
 
 
