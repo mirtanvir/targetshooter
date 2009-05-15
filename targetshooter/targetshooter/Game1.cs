@@ -102,7 +102,7 @@ namespace targetshooter
             Content.RootDirectory = "Content";
             this.graphics.PreferredBackBufferWidth = 1280;
             this.graphics.PreferredBackBufferHeight = 800;
-            //this.graphics.IsFullScreen = true;
+            this.graphics.IsFullScreen = true;
 
 
         }
