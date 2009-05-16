@@ -7,6 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTe
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0BB47E9E-4C71-43F8-9C52-D497CBAA36A4}"
 	ProjectSection(SolutionItems) = preProject
+		..\..\design Assignment\Class_Design_Sofrware_Engineering_1_Final_Proj.doc = ..\..\design Assignment\Class_Design_Sofrware_Engineering_1_Final_Proj.doc
 		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
 		targetshooter.vsmdi = targetshooter.vsmdi
 		targetshooter1.vsmdi = targetshooter1.vsmdi
