@@ -66,15 +66,30 @@ namespace UnitTest
 
         /// <summary>
         ///A test for updateTankPositionDown
+        ///By Mir Tanvir Hossain
         ///</summary>
         [TestMethod()]
-        public void updateTankPositionDownTest()
+        public void updateTankPositionDownTestPass()
         {
             int tankAngleInDegree = 0; // TODO: Initialize to an appropriate value
             Vector2 position = new Vector2(10,10); // TODO: Initialize to an appropriate value
             float tankSpeed = 100F; // TODO: Initialize to an appropriate value
             float gameTimeChanged = .001F; // TODO: Initialize to an appropriate value
             Vector2 expected = new Vector2(10,10.1F); // TODO: Initialize to an appropriate value
+            Vector2 actual;
+            actual = updateClass.updateTankPositionDown(tankAngleInDegree, position, tankSpeed, gameTimeChanged);
+            Assert.AreEqual(expected, actual);
+            //Assert.Inconclusive("Verify the correctness of this test method.");
+        }
+
+        [TestMethod()]
+        public void updateTankPositionDownTestFail()
+        {
+            int tankAngleInDegree = 0; // TODO: Initialize to an appropriate value
+            Vector2 position = new Vector2(10, 10); // TODO: Initialize to an appropriate value
+            float tankSpeed = 100F; // TODO: Initialize to an appropriate value
+            float gameTimeChanged = .001F; // TODO: Initialize to an appropriate value
+            Vector2 expected = new Vector2(10, 10.3F); // TODO: Initialize to an appropriate value
             Vector2 actual;
             actual = updateClass.updateTankPositionDown(tankAngleInDegree, position, tankSpeed, gameTimeChanged);
             Assert.AreEqual(expected, actual);
