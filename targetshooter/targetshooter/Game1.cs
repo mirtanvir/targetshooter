@@ -21,7 +21,7 @@ namespace targetshooter
     /// </summary>
     /// 
    
-    public class Game1 : Microsoft.Xna.Framework.Game
+    public class TargetShooter : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -40,7 +40,7 @@ namespace targetshooter
             healthPercentage = args.health;
         }
 
-        public Game1()
+        public TargetShooter()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
