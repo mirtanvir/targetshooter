@@ -17,7 +17,7 @@ using System.Threading;
 
 namespace targetshooter
 {
-    class baseBullet
+   public class baseBullet
     {
         private Vector2 position;
         private float speed;

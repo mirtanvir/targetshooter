@@ -15,7 +15,7 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace targetshooter
 {
-    class BaseTank
+    public class BaseTank
     {
             /*
 
@@ -86,6 +86,24 @@ namespace targetshooter
         
        // updateClass update;
 
+        protected int healthPercentages
+        {
+
+
+            get
+            {
+
+                return healthPercentage;
+            }
+            set
+            {
+
+                healthPercentage = value;
+
+            }
+
+        }
+        
 
         public Vector2 TurretPosition{
         
@@ -138,6 +156,7 @@ namespace targetshooter
             this.turretAngleInDegree = 0;
             this.tankAngleInDegree = 0;
             this.tankSpeed = 200f;
+            this.healthPercentage = 100;
         
         }
 
@@ -174,7 +193,7 @@ namespace targetshooter
 
 
         }
-        public int numberOflives
+        protected int numberOflives
         
         {
 

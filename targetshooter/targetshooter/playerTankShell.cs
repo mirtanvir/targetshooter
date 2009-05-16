@@ -14,7 +14,7 @@ using System.Threading;
 
 namespace targetshooter
 {
-    class playerTankShell: baseBullet
+    public class playerTankShell: baseBullet
     {
 
       

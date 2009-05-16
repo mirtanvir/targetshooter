@@ -26,14 +26,28 @@ namespace targetshooter
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         int shotCountDown;
+        int healthPercentage;
+        SpriteFont infoBarFont;
+
+        public void Subscribe(playerTank tank)
+        {
+
+            tank.OnTankLiveAndHealthChange += new playerTank.TankLiveAndHealthChangeHandler(healthHasChanged);
+        }
+        public void healthHasChanged(object player, TankInfoEventArgs args)
+        {
+
+            healthPercentage = args.health;
+        }
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             this.graphics.PreferredBackBufferWidth = 1280;
             this.graphics.PreferredBackBufferHeight = 800;
-            this.graphics.IsFullScreen = true;
-
+            this.graphics.IsFullScreen = false;
+            
 
         }
 
@@ -70,9 +84,13 @@ namespace targetshooter
             spriteBatch = new SpriteBatch(GraphicsDevice);
             // TODO: use this.Content to load your game content here
 
-            player = new playerTank(Content.Load<Texture2D>(@"images/tank_body"), Content.Load<Texture2D>(@"images/tank_turret"), Content.Load<Texture2D>(@"images/bullet"), 10.0f, new Vector2(10, 10), new Vector2(10, 10) + new Vector2(60, 60));
+            infoBarFont = Content.Load<SpriteFont>(@"fonts/infoBar");
 
+            player = new playerTank(Content.Load<Texture2D>(@"images/tank_body"), Content.Load<Texture2D>(@"images/tank_turret"), Content.Load<Texture2D>(@"images/bullet"), 10.0f, 3,new Vector2(10, 10), new Vector2(10, 10) + new Vector2(60, 60));
+            healthPercentage = 100;
+            this.Subscribe(player);
         }
+
 
 
         /// <summary>
@@ -88,7 +106,7 @@ namespace targetshooter
 
 
 
-
+        
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -209,6 +227,12 @@ namespace targetshooter
                 spriteBatch.Draw(bull.getBulletImage(), bull.getShellPosition(), Color.White);
     
             }
+
+
+
+            spriteBatch.DrawString(infoBarFont, healthPercentage.ToString(), new Vector2(50, 50), Color.White);
+
+
 
 
 
