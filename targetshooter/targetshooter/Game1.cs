@@ -185,30 +185,6 @@ namespace targetshooter
             base.Update(gameTime);
         }
 
-
-        public bool randToBool(int x)
-        {
-
-            if (x >= 1)
-                return true;
-            else return false;
-
-        }
-        string getEnemyLifeString()
-        {
-
-            if (numberOfEnemyLife == 3)
-                return "***";
-            else if (numberOfEnemyLife == 2)
-                return "**";
-            else if (numberOfEnemyLife == 1)
-                return "*";
-            else return "";
-        }
-        int numberOfEnemyLife = 3;
-        long counter = 0;
-        bool isBulletFired = false;
-        Vector2 bulletPos;
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
