@@ -32,6 +32,9 @@ namespace targetshooter
         initialScreen init = new initialScreen();
         bool initScrnFlag = true, gameFlag = false, helpFlag = false;
 
+        help helpScreen; 
+
+
         public void Subscribe(playerTank tank)
         {
 
@@ -93,6 +96,7 @@ namespace targetshooter
 
             player = new playerTank(Content.Load<Texture2D>(@"images/tank_body"), Content.Load<Texture2D>(@"images/tank_turret"), Content.Load<Texture2D>(@"images/bullet"), 10.0f, 3, new Vector2(10, 10), new Vector2(10, 10) + new Vector2(60, 60));
 
+            helpScreen = new help(Content.Load<SpriteFont>(@"fonts/help"), new Vector2(400, 400), "Help goes here");
 
 
             healthPercentage = 100;
@@ -249,8 +253,9 @@ namespace targetshooter
 
             }
             else if (helpFlag)
-            { 
-            
+            {
+
+                spriteBatch.DrawString(helpScreen.helpSprite, helpScreen.HelpString, helpScreen.HelpPosition, Color.White);
 
             
             }
