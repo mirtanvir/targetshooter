@@ -21,12 +21,15 @@ namespace targetshooter
         private List<NPCTankShell> shellList = new List<NPCTankShell>();
         private Texture2D bulletImage;
         private float tankShellSpeed;
-        public NPCTank(Texture2D imgOfTank, Texture2D imgOfTankTurret, Texture2D imgOfTheShell, float shellSpeed, Vector2 firstPosition, Vector2 turretPos)
+        public NPCTank(Texture2D imgOfTank, Texture2D imgOfTankTurret, Texture2D imgOfTheShell, float shellSpeed,int numberOfLives, Vector2 firstPosition, Vector2 turretPos)
             : base(imgOfTank, imgOfTankTurret, firstPosition, turretPos)
         {
             bulletImage = imgOfTheShell;
             //shellList  = new playerTankShell(imgOfTheShell,
+            base.numberOflives = numberOfLives;
 
+            base.tankAngle = 180;
+            base.turretAngle = 180;
 
             tankShellSpeed = shellSpeed;
         }

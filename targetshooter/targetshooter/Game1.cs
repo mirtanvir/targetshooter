@@ -31,7 +31,8 @@ namespace targetshooter
         SpriteFont initScreenFont;
         initialScreen init = new initialScreen();
         bool initScrnFlag = true, gameFlag = false, helpFlag = false;
-
+        playerTank player;
+        NPCTank enemy;
         help helpScreen; 
 
 
@@ -80,7 +81,7 @@ namespace targetshooter
         /// all of your content.
         /// </summary>
 
-        playerTank player;
+        
 
         protected override void LoadContent()
         {
@@ -95,9 +96,9 @@ namespace targetshooter
             initScreenFont = Content.Load<SpriteFont>(@"fonts/initScreen");
 
             player = new playerTank(Content.Load<Texture2D>(@"images/tank_body"), Content.Load<Texture2D>(@"images/tank_turret"), Content.Load<Texture2D>(@"images/bullet"), 10.0f, 3, new Vector2(10, 10), new Vector2(10, 10) + new Vector2(60, 60));
-
+            enemy = new NPCTank(Content.Load<Texture2D>(@"images/tank_body"), Content.Load<Texture2D>(@"images/tank_turret"), Content.Load<Texture2D>(@"images/bullet"), 10.0f, 0, new Vector2(100, 100), new Vector2(100, 100) + new Vector2(60, 60));
             helpScreen = new help(Content.Load<SpriteFont>(@"fonts/help"), new Vector2(400, 400), "Help goes here");
-
+            //enemy.
 
             healthPercentage = 100;
             this.Subscribe(player);
@@ -267,6 +268,12 @@ namespace targetshooter
 
                 spriteBatch.Draw(player.imageOfTurret, new Vector2(player.TurretPosition.X - 55, player.TurretPosition.Y - 55), null, Color.White, player.getTurretAngle(),
             new Vector2(25, 70), 1.0f, SpriteEffects.None, 0f);
+
+               spriteBatch.Draw(enemy.tankImage, enemy.Position, null, Color.White, enemy.getTankAngle(), new Vector2(40, 70), 1.0f, SpriteEffects.None, 0f);
+               spriteBatch.Draw(enemy.imageOfTurret, new Vector2(enemy.TurretPosition.X - 55, enemy.TurretPosition.Y - 55), null, Color.White, enemy.getTurretAngle(),
+           new Vector2(25, 70), 1.0f, SpriteEffects.None, 0f);
+
+
 
                 List<playerTankShell> playerShellList = player.getBulletList();
 
