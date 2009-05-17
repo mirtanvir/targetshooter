@@ -23,7 +23,8 @@ namespace targetshooter
         private float speed;
         private int angleInDegree;
         private Texture2D bulletImage;
-
+        private int height;
+        private int width;
 
         /*
          *  move the bullet
@@ -131,6 +132,8 @@ namespace targetshooter
             this.speed = spd;
             this.position = pos;
             this.angleInDegree = rotationAngleInDegree;
+            this.width = bulletImage.Width;
+            this.height = bulletImage.Height;
         }
 
         /*
@@ -165,6 +168,22 @@ namespace targetshooter
             this.bulletImage = image;
 
         }
+
+       public int getHeight()
+       {
+       
+           return height;
+       
+       }
+
+       public int getWidth()
+       {
+
+           return width;
+
+       
+       }
+
 
     }
 }

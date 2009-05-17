@@ -83,10 +83,11 @@ namespace targetshooter
         private int tankAngleInDegree;
         private int turretAngleInDegree;
         private float firingRate;
-        
+        private int wide;
+        private int high;
        // updateClass update;
 
-        protected int healthPercentages
+        public int healthPercentages
         {
 
 
@@ -103,7 +104,31 @@ namespace targetshooter
             }
 
         }
+
+        public void getHit(int damageModifier)
+        {
+            bool isDead = false;
+            healthPercentage = healthPercentage - damageModifier;
+
+
+            if (healthPercentage <= 0)
+            {
+                numberOflives = numberOflives - 1;
+                healthPercentages = 100;
+            }
+          
+
+        }
+
+        public bool isDead()
+        {
+
+            if (numberOflives > 0)
+                return false;
+            else return true;
         
+        }
+
 
         public Vector2 TurretPosition{
         
@@ -157,7 +182,8 @@ namespace targetshooter
             this.tankAngleInDegree = 0;
             this.tankSpeed = 200f;
             this.healthPercentage = 100;
-        
+            this.high = imageOfTank.Height;
+            this.wide = imageOfTank.Width;
         }
 
 
@@ -193,7 +219,7 @@ namespace targetshooter
 
 
         }
-        protected int numberOflives
+        public int numberOflives
         
         {
 
@@ -260,6 +286,36 @@ namespace targetshooter
 
 
             }
+        }
+
+
+        public int width {
+
+            get {
+
+                return wide;
+            }
+            set {
+
+                wide = value;
+            
+            }
+        
+        }
+
+
+        public int getHeight() {
+
+                return high;
+            
+        
+        }
+
+        public int getWidth()
+        {
+
+            return wide;
+        
         }
 
 

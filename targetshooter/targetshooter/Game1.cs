@@ -34,7 +34,10 @@ namespace targetshooter
         playerTank player;
         NPCTank enemy;
         help helpScreen; 
+        int enemyShotCountDown =500;
+        List<NPCTankShell> enemyShellList = new List<NPCTankShell>();
 
+        infoBar info;
 
         public void Subscribe(playerTank tank)
         {
@@ -45,7 +48,7 @@ namespace targetshooter
         public void healthHasChanged(object player, TankInfoEventArgs args)
         {
 
-            healthPercentage = args.health;
+            info.updateHealthAndLives(args.lives, args.health);
         }
 
         public TargetShooter()
@@ -98,6 +101,10 @@ namespace targetshooter
             player = new playerTank(Content.Load<Texture2D>(@"images/tank_body"), Content.Load<Texture2D>(@"images/tank_turret"), Content.Load<Texture2D>(@"images/bullet"), 10.0f, 3, new Vector2(10, 10), new Vector2(10, 10) + new Vector2(60, 60));
             enemy = new NPCTank(Content.Load<Texture2D>(@"images/tank_body"), Content.Load<Texture2D>(@"images/tank_turret"), Content.Load<Texture2D>(@"images/bullet"), 10.0f, 0, new Vector2(100, 100), new Vector2(100, 100) + new Vector2(60, 60));
             helpScreen = new help(Content.Load<SpriteFont>(@"fonts/help"), new Vector2(400, 400), "Help goes here");
+            info = new infoBar(0, 0, Content.Load<SpriteFont>(@"fonts/infoBar"), new Vector2(10, Window.ClientBounds.Y - 10));
+
+            info.updateHealthAndLives(player.numberOflives, player.healthPercentages);
+
             //enemy.
 
             healthPercentage = 100;
@@ -138,6 +145,8 @@ namespace targetshooter
 
             float t = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+
+
             KeyboardState keyState = Keyboard.GetState();
             
             if( keyState.IsKeyDown(Keys.F1))
@@ -157,6 +166,9 @@ namespace targetshooter
            
             if (gameFlag)
             {
+
+                enemy.update(new Vector2(Window.ClientBounds.Height, Window.ClientBounds.Width));
+
                 player.update(new Vector2(Window.ClientBounds.Height, Window.ClientBounds.Width));
 
             }
@@ -234,6 +246,41 @@ namespace targetshooter
             }
 
 
+            //make the enemy tank fire every .5 seconds;
+
+
+           
+                if (enemyShotCountDown <= 0)
+                {
+
+                    enemy.fireShell();
+
+                    enemyShotCountDown = 500;
+
+
+                }
+                else enemyShotCountDown = enemyShotCountDown - gameTime.ElapsedGameTime.Milliseconds;
+
+
+
+
+                if (enemyShellList.Count > 0)
+
+                    for (int i = 0; i < enemyShellList.Count; i++)
+                    {
+                        NPCTankShell enemyShell = enemyShellList[i];
+
+                        if (collide(player.Position, player.getWidth(), player.getHeight(), enemyShell.getShellPosition(), enemyShell.getWidth(), enemyShell.getHeight()))
+                        {
+
+                            player.getHit(10);
+                            player.notifyAboutHit();
+                            enemyShellList.RemoveAt(i);
+                        }
+
+                    }
+
+
             base.Update(gameTime);
         }
 
@@ -286,7 +333,19 @@ namespace targetshooter
 
 
 
-                spriteBatch.DrawString(infoBarFont, healthPercentage.ToString(), new Vector2(50, 50), Color.White);
+                 enemyShellList = enemy.getBulletList();
+
+                foreach (NPCTankShell bull in enemyShellList)
+                {
+
+                    spriteBatch.Draw(bull.getBulletImage(), bull.getShellPosition(), Color.White);
+
+                }
+
+
+
+
+                spriteBatch.DrawString(info.fontSprite,info.getInfoBar(),info.position, Color.White);
 
 
 
@@ -299,6 +358,17 @@ namespace targetshooter
 
             spriteBatch.End();
             base.Draw(gameTime);
+        }
+
+
+
+        bool collide(Vector2 object1Pos, int object1Width, int object1Height, Vector2 object2Pos, int object2Width, int object2Height)
+        {
+
+            Rectangle object1Rect = new Rectangle((int)object1Pos.X, (int)object1Pos.Y, object1Width, object1Height);
+            Rectangle object2Rect = new Rectangle((int)object2Pos.X, (int)object2Pos.Y, object2Width, object2Height);
+
+            return object1Rect.Intersects(object2Rect);
         }
 
 

@@ -21,12 +21,12 @@ namespace targetshooter
         private List<playerTankShell> shellList = new List<playerTankShell>();
         private Texture2D bulletImage;
         private float tankShellSpeed;
-        public playerTank(Texture2D imgOfTank, Texture2D imgOfTankTurret, Texture2D imgOfTheShell, float shellSpeed,int numberOfLives, Vector2 firstPosition, Vector2 turretPos)
+        public playerTank(Texture2D imgOfTank, Texture2D imgOfTankTurret, Texture2D imgOfTheShell, float shellSpeed,int numberOfLive, Vector2 firstPosition, Vector2 turretPos)
             : base(imgOfTank, imgOfTankTurret, firstPosition, turretPos)
         {
             bulletImage = imgOfTheShell;
             //shellList  = new playerTankShell(imgOfTheShell,
-            base.numberOflives = numberOflives;
+            base.numberOflives = numberOfLive;
 
             tankShellSpeed = shellSpeed;
         }
@@ -51,6 +51,9 @@ namespace targetshooter
             shellList.Add(shell);
 
         }
+
+    
+
 
         public void rotateTankClockwise()
         {
@@ -148,16 +151,7 @@ namespace targetshooter
                 if (!b.isBulletInScreen(MaxWindow))
                 {
                     shellList.RemoveAt(i);
-                    TankInfoEventArgs info = new TankInfoEventArgs(base.numberOflives, base.healthPercentages);
-                    if (OnTankLiveAndHealthChange != null)
-                    {
-                        int health = base.healthPercentages;
-                        base.healthPercentages= health - 1;
-
-
-                        OnTankLiveAndHealthChange(this, info);
                     
-                    }
                 }
 
                 //    if (collide(b.getBulletPosition()))
@@ -173,11 +167,28 @@ namespace targetshooter
 
 
             }
-
-
-
-
         }
+
+            public void notifyAboutHit()
+            {
+            
+                TankInfoEventArgs info = new TankInfoEventArgs(base.numberOflives, base.healthPercentages);
+                    if (OnTankLiveAndHealthChange != null)
+                    {
+                        int health = base.healthPercentages;
+                        base.healthPercentages= health - 1;
+
+
+                        OnTankLiveAndHealthChange(this, info);
+                    
+                    }
+            
+            }
+
+
+
+
+        
 
         public delegate void TankLiveAndHealthChangeHandler(object playerTank, TankInfoEventArgs tankinfoEventArgs);
 
