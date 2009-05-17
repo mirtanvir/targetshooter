@@ -20,7 +20,7 @@ namespace targetshooter
     /// This is the main type for your game
     /// </summary>
     /// 
-   
+
     public class TargetShooter : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
@@ -28,12 +28,16 @@ namespace targetshooter
         int shotCountDown;
         int healthPercentage;
         SpriteFont infoBarFont;
+        SpriteFont initScreenFont;
+        initialScreen init = new initialScreen();
+        bool initScrnFlag = true, gameFlag = false, helpFlag = false;
 
         public void Subscribe(playerTank tank)
         {
 
             tank.OnTankLiveAndHealthChange += new playerTank.TankLiveAndHealthChangeHandler(healthHasChanged);
         }
+
         public void healthHasChanged(object player, TankInfoEventArgs args)
         {
 
@@ -47,7 +51,7 @@ namespace targetshooter
             this.graphics.PreferredBackBufferWidth = 1280;
             this.graphics.PreferredBackBufferHeight = 800;
             this.graphics.IsFullScreen = false;
-            
+
 
         }
 
@@ -85,8 +89,12 @@ namespace targetshooter
             // TODO: use this.Content to load your game content here
 
             infoBarFont = Content.Load<SpriteFont>(@"fonts/infoBar");
+            initScreenFont = Content.Load<SpriteFont>(@"fonts/initScreen");
 
-            player = new playerTank(Content.Load<Texture2D>(@"images/tank_body"), Content.Load<Texture2D>(@"images/tank_turret"), Content.Load<Texture2D>(@"images/bullet"), 10.0f, 3,new Vector2(10, 10), new Vector2(10, 10) + new Vector2(60, 60));
+            player = new playerTank(Content.Load<Texture2D>(@"images/tank_body"), Content.Load<Texture2D>(@"images/tank_turret"), Content.Load<Texture2D>(@"images/bullet"), 10.0f, 3, new Vector2(10, 10), new Vector2(10, 10) + new Vector2(60, 60));
+
+
+
             healthPercentage = 100;
             this.Subscribe(player);
         }
@@ -106,7 +114,7 @@ namespace targetshooter
 
 
 
-        
+
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -121,11 +129,32 @@ namespace targetshooter
 
 
 
-            player.update(new Vector2(Window.ClientBounds.Height, Window.ClientBounds.Width));
-
+           
 
             float t = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+            KeyboardState keyState = Keyboard.GetState();
+            
+            if( keyState.IsKeyDown(Keys.F1))
+            {
+                    helpFlag = true;
+                    initScrnFlag = false;
+                    gameFlag = false;
+            
+            }
+            else if(keyState.IsKeyDown(Keys.P)){
+            gameFlag = true;
+            initScrnFlag = false;
+
+            
+            }
+
+           
+            if (gameFlag)
+            {
+                player.update(new Vector2(Window.ClientBounds.Height, Window.ClientBounds.Width));
+
+            }
 
 
             if ((Keyboard.GetState().IsKeyDown(Keys.Down)))// && (player.Position.Y <= Window.ClientBounds.Height - texture.Height))
@@ -213,32 +242,50 @@ namespace targetshooter
 
             GraphicsDevice.Clear(Color.Red);
             spriteBatch.Begin();
-
-            spriteBatch.Draw(player.tankImage, player.Position, null, Color.White, player.getTankAngle(), new Vector2(40, 70), 1.0f, SpriteEffects.None, 0f);
-
-            spriteBatch.Draw(player.imageOfTurret, new Vector2(player.TurretPosition.X - 55, player.TurretPosition.Y - 55), null, Color.White, player.getTurretAngle(),
-        new Vector2(25, 70), 1.0f, SpriteEffects.None, 0f);
-
-            List<playerTankShell> playerShellList = player.getBulletList();
-
-            foreach (playerTankShell bull in playerShellList)
+            if (initScrnFlag)
             {
-    
-                spriteBatch.Draw(bull.getBulletImage(), bull.getShellPosition(), Color.White);
-    
+
+                spriteBatch.DrawString(initScreenFont, init.getMenu(), new Vector2(500, 500), Color.White);
+
+            }
+            else if (helpFlag)
+            { 
+            
+
+            
+            }
+            else if (gameFlag)
+            {
+
+
+                spriteBatch.Draw(player.tankImage, player.Position, null, Color.White, player.getTankAngle(), new Vector2(40, 70), 1.0f, SpriteEffects.None, 0f);
+
+                spriteBatch.Draw(player.imageOfTurret, new Vector2(player.TurretPosition.X - 55, player.TurretPosition.Y - 55), null, Color.White, player.getTurretAngle(),
+            new Vector2(25, 70), 1.0f, SpriteEffects.None, 0f);
+
+                List<playerTankShell> playerShellList = player.getBulletList();
+
+                foreach (playerTankShell bull in playerShellList)
+                {
+
+                    spriteBatch.Draw(bull.getBulletImage(), bull.getShellPosition(), Color.White);
+
+                }
+
+
+
+                spriteBatch.DrawString(infoBarFont, healthPercentage.ToString(), new Vector2(50, 50), Color.White);
+
+
+
+
+
+
+
+
             }
 
-
-
-            spriteBatch.DrawString(infoBarFont, healthPercentage.ToString(), new Vector2(50, 50), Color.White);
-
-
-
-
-
             spriteBatch.End();
-
-
             base.Draw(gameTime);
         }
 
