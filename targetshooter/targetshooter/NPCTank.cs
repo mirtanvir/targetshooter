@@ -27,7 +27,7 @@ namespace targetshooter
             bulletImage = imgOfTheShell;
             //shellList  = new playerTankShell(imgOfTheShell,
             base.numberOflives = numberOfLives;
-            base.TankSpeed = 10f;
+            base.TankSpeed = 30f;
             base.tankAngle = 180;
             base.turretAngle = 180;
 
@@ -249,9 +249,10 @@ namespace targetshooter
         }
         bool clockWiseFlag = false;
         bool counterClockWIseFlag = false;
-
+        int lastCoordinate;
         public void aim2(Vector2 positionOfPlayer)
         {
+
 
             debug = " Co-ordinate: " + getCoordinate(positionOfPlayer, this.Position).ToString();
            // double theta=0;
@@ -263,16 +264,35 @@ namespace targetshooter
                 theta=90f-theta;
 
                 float targetTheta = (float) theta;
-                targetTheta = targetTheta;
+
+
+                debug += "Turret Angle" + this.turretAngle + "\n Target angle:" + targetTheta.ToString() + "\nTan Theta:" + TanTheta.ToString()
+                + "\nTheta: " + theta.ToString();
+
+                if (this.turretAngle > 270)
+                     this.rotateTurretClockwise();
+                else if ((/*(this.turretAngle < targetTheta) &&*/ (targetTheta > 90)) || (this.turretAngle > targetTheta))
+                {
+
+                    this.rotateTurretCounterClockwise();
+
+                }
                 
-                debug += "Turret Angle" + this.turretAngle+" Target angle:" + targetTheta.ToString()  + "Tan Theta:" + TanTheta.ToString()
-                + "Theta: " + theta.ToString();
+                else this.rotateTurretClockwise();
+
+                //if (!(this.turretAngle > targetTheta))
+                //    rotateTurretClockwise();
+                //else rotateTurretCounterClockwise();
+                
+                
+                //if (((this.turretAngle > targetTheta) && (targetTheta > 90)))
+                //    rotateTurretCounterClockwise();
+                //else rotateTurretClockwise(); 
 
 
-
-                if (!(this.turretAngle > targetTheta))
-                    rotateTurretClockwise();
-                else rotateTurretCounterClockwise();
+                //if (!(this.turretAngle > targetTheta))
+                //    rotateTurretClockwise();
+                //else rotateTurretCounterClockwise();
             
             }
 
@@ -292,9 +312,17 @@ namespace targetshooter
 
 
 
-                if (!(this.turretAngle > targetTheta))
-                    rotateTurretClockwise();
-                else rotateTurretCounterClockwise();
+                if (((this.turretAngle < 90) /*&& (targetTheta > 270))*/) || (this.turretAngle > targetTheta))
+                {
+
+                    this.rotateTurretCounterClockwise();
+
+                }
+                else this.rotateTurretClockwise();
+
+                //if (!(this.turretAngle > targetTheta))
+                //    rotateTurretClockwise();
+                //else rotateTurretCounterClockwise();
 
             }
 
@@ -328,7 +356,7 @@ namespace targetshooter
                 theta = 90f + theta;
 
                 float targetTheta = (float)theta;
-                targetTheta = targetTheta;
+                //targetTheta = targetTheta;
 
                 debug += "Turret Angle" + this.turretAngle + " \nTarget angle:" + targetTheta.ToString() + "\nTan Theta:" + TanTheta.ToString()
                 + "\nTheta: " + theta.ToString();

@@ -117,24 +117,24 @@ namespace targetshooter
             NPCTank enemy;
 
 
-            enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 10f, 1, new Vector2(100, 0), new Vector2(100, 0) + new Vector2(60, 60));
+            //enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 10f, 1, new Vector2(100, 0), new Vector2(100, 0) + new Vector2(60, 60));
 
-            enemyList.Add(enemy);
+            //enemyList.Add(enemy);
 
-            enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 10f, 1, new Vector2(400, 0), new Vector2(400, 0) + new Vector2(60, 60));
+            //enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 10f, 1, new Vector2(400, 0), new Vector2(400, 0) + new Vector2(60, 60));
 
-            enemyList.Add(enemy);
+            //enemyList.Add(enemy);
             enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 10f, 1, new Vector2(700, 0), new Vector2(700, 0) + new Vector2(60, 60));
 
             enemyList.Add(enemy);
 
-            enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 10f, 1, new Vector2(1000, 0), new Vector2(1000, 0) + new Vector2(60, 60));
+            //enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 10f, 1, new Vector2(1000, 0), new Vector2(1000, 0) + new Vector2(60, 60));
 
-            enemyList.Add(enemy);
+            //enemyList.Add(enemy);
 
-            enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 10f, 1, new Vector2(1200, 0), new Vector2(1200, 0) + new Vector2(60, 60));
+            //enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 10f, 1, new Vector2(1200, 0), new Vector2(1200, 0) + new Vector2(60, 60));
 
-            enemyList.Add(enemy);
+            //enemyList.Add(enemy);
   
 
 
@@ -348,7 +348,7 @@ namespace targetshooter
             //      + "Turret Slope: " + calculateTurretSlope().ToString() + "Turret Position= " + tankTurretPos.ToString() + "\n Turret Origin Rotation= " + new Vector2((texture.Width / 2) - 3, (texture.Height / 2) - 2).ToString();
 
            // debugString ="Slope of enemy Turret"+ updateClass.calculateSlope((int)MathHelper.ToDegrees(enemy.getTurretAngle()))  + "Angle of the Enemy Turret: " + MathHelper.ToDegrees(enemy.getTurretAngle()).ToString()+ " Theta:" + enemy.theta()  ;   //"Firing position: " + calculateBulletFiringPos().ToString();
-            //debugString = enemy.getDebugString();
+            debugString = enemyList[0].getDebugString();
 
             if (initScrnFlag)
             {
@@ -369,7 +369,7 @@ namespace targetshooter
             //    spriteBatch.Draw(myTexture, Vector2.Zero, Color.White);
 
 
-                //spriteBatch.DrawString(debug, debugString, new Vector2(10, 40), Color.DarkBlue, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+                spriteBatch.DrawString(debug, debugString, new Vector2(10, 40), Color.DarkBlue, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
                         
 
 
