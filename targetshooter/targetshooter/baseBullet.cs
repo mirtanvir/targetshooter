@@ -25,7 +25,7 @@ namespace targetshooter
         private Texture2D bulletImage;
         private int height;
         private int width;
-
+        
         /*
          *  move the bullet
          * 

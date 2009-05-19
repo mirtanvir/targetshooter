@@ -23,6 +23,7 @@ namespace targetshooter
 
     public class TargetShooter : Microsoft.Xna.Framework.Game
     {
+        SpriteFont debug;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         int shotCountDown;
@@ -84,13 +85,13 @@ namespace targetshooter
         /// all of your content.
         /// </summary>
 
-        
+        Texture2D myTexture;
 
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-
-
+            myTexture = CreateRectangle(640, 10);
+            debug = Content.Load<SpriteFont>(@"fonts/debugInformation");
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
             // TODO: use this.Content to load your game content here
@@ -98,8 +99,8 @@ namespace targetshooter
             infoBarFont = Content.Load<SpriteFont>(@"fonts/infoBar");
             initScreenFont = Content.Load<SpriteFont>(@"fonts/initScreen");
 
-            player = new playerTank(Content.Load<Texture2D>(@"images/tank_body"), Content.Load<Texture2D>(@"images/tank_turret"), Content.Load<Texture2D>(@"images/bullet"), 10.0f, 3, new Vector2(10, 10), new Vector2(10, 10) + new Vector2(60, 60));
-            enemy = new NPCTank(Content.Load<Texture2D>(@"images/tank_body"), Content.Load<Texture2D>(@"images/tank_turret"), Content.Load<Texture2D>(@"images/bullet"), 10.0f, 0, new Vector2(100, 100), new Vector2(100, 100) + new Vector2(60, 60));
+            player = new playerTank(Content.Load<Texture2D>(@"images/tank_body"), Content.Load<Texture2D>(@"images/tank_turret"), Content.Load<Texture2D>(@"images/bullet"), 10.0f, 3, new Vector2(800, 500), new Vector2(800, 500) + new Vector2(60, 60));
+            enemy = new NPCTank(Content.Load<Texture2D>(@"images/tank_body"), Content.Load<Texture2D>(@"images/tank_turret"), Content.Load<Texture2D>(@"images/bullet"), 10.0f, 0, new Vector2(600, 600), new Vector2(600, 600) + new Vector2(60, 60));
             helpScreen = new help(Content.Load<SpriteFont>(@"fonts/help"), new Vector2(400, 400), "Help goes here");
             info = new infoBar(0, 0, Content.Load<SpriteFont>(@"fonts/infoBar"), new Vector2(10, Window.ClientBounds.Y - 10));
 
@@ -166,8 +167,10 @@ namespace targetshooter
            
             if (gameFlag)
             {
-
-                enemy.update(new Vector2(Window.ClientBounds.Height, Window.ClientBounds.Width));
+                
+                Rectangle tankRect = new Rectangle((int)player.Position.X, (int)player.Position.Y, player.imageOfTurret.Width, player.imageOfTurret.Height);
+                
+                enemy.update(new Vector2(Window.ClientBounds.Height, Window.ClientBounds.Width), player.Position,new Vector2(tankRect.Left,tankRect.Bottom), new Vector2(tankRect.Right,tankRect.Top)  );
 
                 player.update(new Vector2(Window.ClientBounds.Height, Window.ClientBounds.Width));
 
@@ -263,24 +266,26 @@ namespace targetshooter
 
 
 
+                List<NPCTankShell> enShellList = new List<NPCTankShell>();
+                enShellList = enemy.getBulletList();
+                if (enShellList.Count > 0)
 
-                if (enemyShellList.Count > 0)
-
-                    for (int i = 0; i < enemyShellList.Count; i++)
+                    for (int i = 0; i < enShellList.Count; i++)
                     {
-                        NPCTankShell enemyShell = enemyShellList[i];
+                        NPCTankShell enemyShell = enShellList[i];
 
                         if (collide(player.Position, player.getWidth(), player.getHeight(), enemyShell.getShellPosition(), enemyShell.getWidth(), enemyShell.getHeight()))
                         {
-
+                            enemy.remoteSheelFromListAt(i);
+                            
                             player.getHit(10);
                             player.notifyAboutHit();
-                            enemyShellList.RemoveAt(i);
+                            
                         }
 
                     }
 
-
+                
             base.Update(gameTime);
         }
 
@@ -288,12 +293,20 @@ namespace targetshooter
         /// This is called when the game should draw itself.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        string debugString;
         protected override void Draw(GameTime gameTime)
         {
 
 
             GraphicsDevice.Clear(Color.Red);
             spriteBatch.Begin();
+
+            //debugString = "Debug: # of bullet= " + bulletList.Count().ToString() + "Turret Angle= " + turretAngleInDegree.ToString()
+            //      + "Turret Slope: " + calculateTurretSlope().ToString() + "Turret Position= " + tankTurretPos.ToString() + "\n Turret Origin Rotation= " + new Vector2((texture.Width / 2) - 3, (texture.Height / 2) - 2).ToString();
+
+            debugString ="Slope of enemy Turret"+ updateClass.calculateSlope((int)MathHelper.ToDegrees(enemy.getTurretAngle()))  + "Angle of the Enemy Turret: " + MathHelper.ToDegrees(enemy.getTurretAngle()).ToString()+ " Theta:" + enemy.theta()  ;   //"Firing position: " + calculateBulletFiringPos().ToString();
+            debugString = enemy.getDebugString();
+
             if (initScrnFlag)
             {
 
@@ -309,6 +322,12 @@ namespace targetshooter
             }
             else if (gameFlag)
             {
+
+                spriteBatch.Draw(myTexture, Vector2.Zero, Color.White);
+
+
+                spriteBatch.DrawString(debug, debugString, new Vector2(10, 40), Color.DarkBlue, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+                        
 
 
                 spriteBatch.Draw(player.tankImage, player.Position, null, Color.White, player.getTankAngle(), new Vector2(40, 70), 1.0f, SpriteEffects.None, 0f);
@@ -331,9 +350,8 @@ namespace targetshooter
 
                 }
 
-
-
-                 enemyShellList = enemy.getBulletList();
+                
+                enemyShellList = enemy.getBulletList();
 
                 foreach (NPCTankShell bull in enemyShellList)
                 {
@@ -358,6 +376,20 @@ namespace targetshooter
 
             spriteBatch.End();
             base.Draw(gameTime);
+        }
+
+        private Texture2D CreateRectangle(int width, int height)
+        {
+            Texture2D rectangleTexture = new Texture2D(GraphicsDevice, width, height, 1, TextureUsage.None,
+            SurfaceFormat.Color);// create the rectangle texture, ,but it will have no color! lets fix that
+            Color[] color = new Color[width * height];//set the color to the amount of pixels in the textures
+
+            for (int i = 0; i < color.Length; i++)//loop through all the colors setting them to whatever values we want
+            {
+                color[i] = new Color(0, 0, 0, 255);
+            }
+            rectangleTexture.SetData(color);//set the color data on the texture
+            return rectangleTexture;//return the texture
         }
 
 

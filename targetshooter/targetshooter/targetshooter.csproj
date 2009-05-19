@@ -84,6 +84,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AI.cs" />
     <Compile Include="backupGame.cs" />
     <Compile Include="baseBullet.cs" />
     <Compile Include="BaseTank.cs" />
@@ -148,6 +149,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Class_Design_Sofrware_Engineering_1_Final_Proj.doc" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

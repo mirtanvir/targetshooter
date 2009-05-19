@@ -87,6 +87,15 @@ namespace targetshooter
         private int high;
        // updateClass update;
 
+        
+        public int getTurretAngle()
+        {
+
+            return turretAngleInDegree;
+        
+        }
+
+        
         public int healthPercentages
         {
 
