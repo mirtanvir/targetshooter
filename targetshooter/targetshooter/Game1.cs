@@ -23,6 +23,9 @@ namespace targetshooter
 
     public class TargetShooter : Microsoft.Xna.Framework.Game
     {
+        Texture2D enemyTankTexture;
+        Texture2D enemyTurretTexture;
+        Texture2D enemyShellTexture;
         SpriteFont debug;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -33,7 +36,7 @@ namespace targetshooter
         initialScreen init = new initialScreen();
         bool initScrnFlag = true, gameFlag = false, helpFlag = false;
         playerTank player;
-        NPCTank enemy;
+        List<NPCTank> enemyList = new List<NPCTank>();
         help helpScreen; 
         int enemyShotCountDown =500;
         List<NPCTankShell> enemyShellList = new List<NPCTankShell>();
@@ -100,13 +103,42 @@ namespace targetshooter
             initScreenFont = Content.Load<SpriteFont>(@"fonts/initScreen");
 
             player = new playerTank(Content.Load<Texture2D>(@"images/tank_body"), Content.Load<Texture2D>(@"images/tank_turret"), Content.Load<Texture2D>(@"images/bullet"), 10.0f, 3, new Vector2(800, 500), new Vector2(800, 500) + new Vector2(60, 60));
-            enemy = new NPCTank(Content.Load<Texture2D>(@"images/tank_body"), Content.Load<Texture2D>(@"images/tank_turret"), Content.Load<Texture2D>(@"images/bullet"), 10.0f, 0, new Vector2(10, 10), new Vector2(10, 10) + new Vector2(60, 60));
+            
+            enemyTankTexture = Content.Load<Texture2D>(@"images/tank_body");
+            enemyTurretTexture = Content.Load<Texture2D>(@"images/tank_turret");
+            enemyShellTexture= Content.Load<Texture2D>(@"images/bullet");
+            
             helpScreen = new help(Content.Load<SpriteFont>(@"fonts/help"), new Vector2(400, 400), "Help goes here");
             info = new infoBar(0, 0, Content.Load<SpriteFont>(@"fonts/infoBar"), new Vector2(10, Window.ClientBounds.Y - 10));
 
             info.updateHealthAndLives(player.numberOflives, player.healthPercentages);
 
             //enemy.
+            NPCTank enemy;
+
+
+            enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 10f, 1, new Vector2(100, 0), new Vector2(100, 0) + new Vector2(60, 60));
+
+            enemyList.Add(enemy);
+
+            enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 10f, 1, new Vector2(400, 0), new Vector2(400, 0) + new Vector2(60, 60));
+
+            enemyList.Add(enemy);
+            enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 10f, 1, new Vector2(700, 0), new Vector2(700, 0) + new Vector2(60, 60));
+
+            enemyList.Add(enemy);
+
+            enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 10f, 1, new Vector2(1000, 0), new Vector2(1000, 0) + new Vector2(60, 60));
+
+            enemyList.Add(enemy);
+
+            enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 10f, 1, new Vector2(1200, 0), new Vector2(1200, 0) + new Vector2(60, 60));
+
+            enemyList.Add(enemy);
+  
+
+
+            
 
             healthPercentage = 100;
             this.Subscribe(player);
@@ -169,9 +201,13 @@ namespace targetshooter
             {
                 
                 Rectangle tankRect = new Rectangle((int)player.Position.X, (int)player.Position.Y, player.imageOfTurret.Width, player.imageOfTurret.Height);
-                
-                enemy.update(new Vector2(Window.ClientBounds.Height, Window.ClientBounds.Width), player.Position,new Vector2(tankRect.Left,tankRect.Bottom), new Vector2(tankRect.Right,tankRect.Top)  );
 
+                for (int i = 0; i < enemyList.Count; i++)
+                {
+                    NPCTank enemy = enemyList[i];
+
+                    enemy.update(t, new Vector2(Window.ClientBounds.Height, Window.ClientBounds.Width), player.Position, new Vector2(tankRect.Left, tankRect.Bottom), new Vector2(tankRect.Right, tankRect.Top));
+                }
                 player.update(new Vector2(Window.ClientBounds.Height, Window.ClientBounds.Width));
 
             }
@@ -255,9 +291,10 @@ namespace targetshooter
            
                 if (enemyShotCountDown <= 0)
                 {
-
-                    enemy.fireShell();
-
+                    foreach (NPCTank enemy in enemyList)
+                    {
+                        enemy.fireShell();
+                    }
                     enemyShotCountDown = 500;
 
 
@@ -266,26 +303,32 @@ namespace targetshooter
 
 
 
-                List<NPCTankShell> enShellList = new List<NPCTankShell>();
-                enShellList = enemy.getBulletList();
-                if (enShellList.Count > 0)
+                List<List<NPCTankShell>> enShellList = new List<List<NPCTankShell>>();
+                foreach (NPCTank  enemy  in enemyList)
+                {
+                    enShellList.Add(enemy.getBulletList());
+                    if (enShellList.Count > 0)
 
-                    for (int i = 0; i < enShellList.Count; i++)
-                    {
-                        NPCTankShell enemyShell = enShellList[i];
-
-                        if (collide(player.Position, player.getWidth(), player.getHeight(), enemyShell.getShellPosition(), enemyShell.getWidth(), enemyShell.getHeight()))
+                        for (int i = 0; i < enShellList.Count; i++)
                         {
-                            enemy.remoteSheelFromListAt(i);
-                            
-                            player.getHit(10);
-                            player.notifyAboutHit();
-                            
+                            List<NPCTankShell> bullListForOneTank = new List<NPCTankShell>();
+                            bullListForOneTank = enShellList[i];
+                            for (int j = 0; j < bullListForOneTank.Count; j++)
+                            {
+                                NPCTankShell enemyShell = bullListForOneTank[j];
+
+                                if (collide(player.Position, player.getWidth(), player.getHeight(), enemyShell.getShellPosition(), enemyShell.getWidth(), enemyShell.getHeight()))
+                                {
+                                    enemy.remoteSheelFromListAt(j);
+
+                                    player.getHit(10);
+                                    player.notifyAboutHit();
+
+                                }
+
+                            }
                         }
-
-                    }
-
-                
+                }   
             base.Update(gameTime);
         }
 
@@ -304,8 +347,8 @@ namespace targetshooter
             //debugString = "Debug: # of bullet= " + bulletList.Count().ToString() + "Turret Angle= " + turretAngleInDegree.ToString()
             //      + "Turret Slope: " + calculateTurretSlope().ToString() + "Turret Position= " + tankTurretPos.ToString() + "\n Turret Origin Rotation= " + new Vector2((texture.Width / 2) - 3, (texture.Height / 2) - 2).ToString();
 
-            debugString ="Slope of enemy Turret"+ updateClass.calculateSlope((int)MathHelper.ToDegrees(enemy.getTurretAngle()))  + "Angle of the Enemy Turret: " + MathHelper.ToDegrees(enemy.getTurretAngle()).ToString()+ " Theta:" + enemy.theta()  ;   //"Firing position: " + calculateBulletFiringPos().ToString();
-            debugString = enemy.getDebugString();
+           // debugString ="Slope of enemy Turret"+ updateClass.calculateSlope((int)MathHelper.ToDegrees(enemy.getTurretAngle()))  + "Angle of the Enemy Turret: " + MathHelper.ToDegrees(enemy.getTurretAngle()).ToString()+ " Theta:" + enemy.theta()  ;   //"Firing position: " + calculateBulletFiringPos().ToString();
+            //debugString = enemy.getDebugString();
 
             if (initScrnFlag)
             {
@@ -323,10 +366,10 @@ namespace targetshooter
             else if (gameFlag)
             {
 
-                spriteBatch.Draw(myTexture, Vector2.Zero, Color.White);
+            //    spriteBatch.Draw(myTexture, Vector2.Zero, Color.White);
 
 
-                spriteBatch.DrawString(debug, debugString, new Vector2(10, 40), Color.DarkBlue, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+                //spriteBatch.DrawString(debug, debugString, new Vector2(10, 40), Color.DarkBlue, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
                         
 
 
@@ -335,10 +378,7 @@ namespace targetshooter
                 spriteBatch.Draw(player.imageOfTurret, new Vector2(player.TurretPosition.X - 55, player.TurretPosition.Y - 55), null, Color.White, player.getTurretAngle(),
             new Vector2(25, 70), 1.0f, SpriteEffects.None, 0f);
 
-               spriteBatch.Draw(enemy.tankImage, enemy.Position, null, Color.White, enemy.getTankAngle(), new Vector2(40, 70), 1.0f, SpriteEffects.None, 0f);
-               spriteBatch.Draw(enemy.imageOfTurret, new Vector2(enemy.TurretPosition.X - 55, enemy.TurretPosition.Y - 55), null, Color.White, enemy.getTurretAngle(),
-           new Vector2(25, 70), 1.0f, SpriteEffects.None, 0f);
-
+               
 
 
                 List<playerTankShell> playerShellList = player.getBulletList();
@@ -350,16 +390,27 @@ namespace targetshooter
 
                 }
 
-                
-                enemyShellList = enemy.getBulletList();
 
-                foreach (NPCTankShell bull in enemyShellList)
+                foreach (NPCTank enemy in enemyList)
+                {
+                    enemyShellList = enemy.getBulletList();
+
+                    foreach (NPCTankShell bull in enemyShellList)
+                    {
+
+                        spriteBatch.Draw(bull.getBulletImage(), bull.getShellPosition(), Color.White);
+
+                    }
+                }
+                foreach (NPCTank enemy in enemyList)
                 {
 
-                    spriteBatch.Draw(bull.getBulletImage(), bull.getShellPosition(), Color.White);
+                    spriteBatch.Draw(enemy.tankImage, enemy.Position, null, Color.White, enemy.getTankAngle(), new Vector2(40, 70), 1.0f, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(enemy.imageOfTurret, new Vector2(enemy.TurretPosition.X - 55, enemy.TurretPosition.Y - 55), null, Color.White, enemy.getTurretAngle(),
+                new Vector2(25, 70), 1.0f, SpriteEffects.None, 0f);
 
+                
                 }
-
 
 
 

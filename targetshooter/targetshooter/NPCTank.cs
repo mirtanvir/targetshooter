@@ -27,7 +27,7 @@ namespace targetshooter
             bulletImage = imgOfTheShell;
             //shellList  = new playerTankShell(imgOfTheShell,
             base.numberOflives = numberOfLives;
-
+            base.TankSpeed = 10f;
             base.tankAngle = 180;
             base.turretAngle = 180;
 
@@ -154,20 +154,24 @@ namespace targetshooter
 
         }
 
-        public void MovePlayerTankDown(float timeChangedSinceLastUpdate)
+        public void MoveNPCTankDown(float timeChangedSinceLastUpdate)
         {
 
-            Vector2 newPos = updateClass.updateTankPositionDown(tankAngle, Position, TankSpeed, timeChangedSinceLastUpdate);
+            Vector2 newPos = updateClass.UpdateTankPositionUp(tankAngle, Position, TankSpeed, timeChangedSinceLastUpdate);
             base.MoveTank(newPos);
             base.TurretPosition = Position + new Vector2(60, 60);
 
         }
-        public void update(Vector2 MaxWindow, Vector2 playerPos, Vector2 tankRightTip, Vector2 tankLeftTip)
+        public void update(float timeChanged, Vector2 MaxWindow, Vector2 playerPos, Vector2 tankRightTip, Vector2 tankLeftTip)
         {
 
             aim2(playerPos);
            // aim(playerPos);
             fixTurret();
+
+
+            this.MoveNPCTankDown(timeChanged);
+
 
             for (int i = 0; i < shellList.Count(); i++)
             {
