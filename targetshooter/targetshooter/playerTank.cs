@@ -59,8 +59,8 @@ namespace targetshooter
         {
 
 
-            int currentTankAngle = tankAngle;
-            int currentTurretAngle = turretAngle;
+            float currentTankAngle = tankAngle;
+            float currentTurretAngle = turretAngle;
             base.turretAngle = currentTurretAngle + 1;
             base.tankAngle = currentTankAngle + 1;
             fixTankandTurret();
@@ -85,7 +85,7 @@ namespace targetshooter
         public void rotateTurretClockwise()
         {
 
-            int currentTurretAngle = turretAngle;
+            float currentTurretAngle = turretAngle;
 
             base.turretAngle = currentTurretAngle + 1;
             fixTankandTurret();
@@ -94,7 +94,7 @@ namespace targetshooter
 
         public void rotateTurretCounterClockwise()
         {
-            int currentTurretAngle = turretAngle;
+            float currentTurretAngle = turretAngle;
 
             base.turretAngle = currentTurretAngle - 1;
             fixTankandTurret();
@@ -104,8 +104,8 @@ namespace targetshooter
         public void rotateTankCounterClockwise()
         {
 
-            int currentTankAngle = tankAngle;
-            int currentTurretAngle = turretAngle;
+            float currentTankAngle = tankAngle;
+            float currentTurretAngle = turretAngle;
 
             base.turretAngle = currentTurretAngle - 1;
             base.tankAngle = currentTankAngle - 1;

@@ -80,15 +80,15 @@ namespace targetshooter
         private int numberOfLives;
         private int healthPercentage;
         private float tankSpeed;
-        private int tankAngleInDegree;
-        private int turretAngleInDegree;
+        private float tankAngleInDegree;
+        private float turretAngleInDegree;
         private float firingRate;
         private int wide;
         private int high;
        // updateClass update;
 
         
-        public int getTurretAngle()
+        public float getTurretAngle()
         {
 
             return turretAngleInDegree;
@@ -154,7 +154,7 @@ namespace targetshooter
         }
 
 
-        protected int tankAngle {
+        protected float tankAngle {
 
             get {
 
@@ -167,7 +167,7 @@ namespace targetshooter
         
         }
 
-        protected int turretAngle {
+        protected float turretAngle {
 
             get {
                 return turretAngleInDegree;

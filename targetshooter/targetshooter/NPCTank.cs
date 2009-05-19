@@ -59,8 +59,8 @@ namespace targetshooter
         {
 
 
-            int currentTankAngle = tankAngle;
-            int currentTurretAngle = turretAngle;
+            float currentTankAngle = tankAngle;
+            float currentTurretAngle = turretAngle;
             base.turretAngle = currentTurretAngle + 1;
             base.tankAngle = currentTankAngle + 1;
             fixTank();
@@ -85,18 +85,18 @@ namespace targetshooter
         public void rotateTurretClockwise()
         {
 
-            int currentTurretAngle = turretAngle;
+            float currentTurretAngle = turretAngle;
 
-            base.turretAngle = currentTurretAngle + 1;
+            base.turretAngle = currentTurretAngle + .5f;
             fixTurret();
 
         }
 
         public void rotateTurretCounterClockwise()
         {
-            int currentTurretAngle = turretAngle;
+            float currentTurretAngle = turretAngle;
 
-            base.turretAngle = currentTurretAngle - 1;
+            base.turretAngle = currentTurretAngle - .5f;
             fixTurret();
 
 
@@ -104,11 +104,11 @@ namespace targetshooter
         public void rotateTankCounterClockwise()
         {
 
-            int currentTankAngle = tankAngle;
-            int currentTurretAngle = turretAngle;
+            float currentTankAngle = tankAngle;
+            float currentTurretAngle = turretAngle;
 
-            base.turretAngle = currentTurretAngle - 1;
-            base.tankAngle = currentTankAngle - 1;
+            base.turretAngle = currentTurretAngle - .5f;
+            base.tankAngle = currentTankAngle - .5f;
             fixTank();
 
         }
@@ -132,7 +132,7 @@ namespace targetshooter
             if (turretAngle > 360)
                 base.turretAngle = 0;
             else if (turretAngle < 0)
-                base.turretAngle = 360 - turretAngle;
+                base.turretAngle = 360 + turretAngle;
         
         }
 
@@ -165,7 +165,8 @@ namespace targetshooter
         public void update(Vector2 MaxWindow, Vector2 playerPos, Vector2 tankRightTip, Vector2 tankLeftTip)
         {
 
-            aim(playerPos,tankRightTip,  tankLeftTip);
+            aim2(playerPos);
+           // aim(playerPos);
             fixTurret();
 
             for (int i = 0; i < shellList.Count(); i++)
@@ -206,7 +207,7 @@ namespace targetshooter
         public Vector2 findTipOfTheTurret(Vector2 pos)
         {
             Vector2 posOfTip=pos;
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 2; i++)
             {
 
                 posOfTip = updateClass.updateBulletPosition(base.turretAngle, posOfTip, .01f);
@@ -242,15 +243,114 @@ namespace targetshooter
             bool ret =object1Rect.Intersects(object2Rect);
             return ret;
         }
-        public void aim2(Vector2 positionOfPlayer, int playerWidth, int playerHeight)
-        {
-            this.rotateTurretClockwise();
-            
+        bool clockWiseFlag = false;
+        bool counterClockWIseFlag = false;
 
+        public void aim2(Vector2 positionOfPlayer)
+        {
+
+            debug = " Co-ordinate: " + getCoordinate(positionOfPlayer, this.Position).ToString();
+           // double theta=0;
+            if (getCoordinate(positionOfPlayer, this.Position) == 0)
+            {
+                double TanTheta = (this.Position.Y-positionOfPlayer.Y) / (positionOfPlayer.X - this.Position.X);
+               double  theta = Math.Atan(TanTheta);
+                theta = MathHelper.ToDegrees((float)theta);
+                theta=90f-theta;
+
+                float targetTheta = (float) theta;
+                targetTheta = targetTheta;
+                
+                debug += "Turret Angle" + this.turretAngle+" Target angle:" + targetTheta.ToString()  + "Tan Theta:" + TanTheta.ToString()
+                + "Theta: " + theta.ToString();
+
+
+
+                if (!(this.turretAngle > targetTheta))
+                    rotateTurretClockwise();
+                else rotateTurretCounterClockwise();
+            
+            }
+
+
+            if (getCoordinate(positionOfPlayer, this.Position) == 3)
+            {
+                double TanTheta = (this.Position.Y - positionOfPlayer.Y) / (this.Position.X - positionOfPlayer.X);
+                double theta = Math.Atan(TanTheta);
+                theta = MathHelper.ToDegrees((float)theta);
+                theta = 270f + theta;
+
+                float targetTheta = (float)theta;
+                targetTheta = targetTheta;
+
+                debug += "Turret Angle" + this.turretAngle + " \nTarget angle:" + targetTheta.ToString() + "\nTan Theta:" + TanTheta.ToString()
+                + "\nTheta: " + theta.ToString();
+
+
+
+                if (!(this.turretAngle > targetTheta))
+                    rotateTurretClockwise();
+                else rotateTurretCounterClockwise();
+
+            }
+
+
+
+            if (getCoordinate(positionOfPlayer, this.Position) == 2)
+            {
+                double TanTheta = (positionOfPlayer.Y - this.Position.Y) / (this.Position.X - positionOfPlayer.X);
+                double theta = Math.Atan(TanTheta);
+                theta = MathHelper.ToDegrees((float)theta);
+                theta = 270f - theta;
+
+                float targetTheta = (float)theta;
+                targetTheta = targetTheta;
+
+                debug += "Turret Angle" + this.turretAngle + " \nTarget angle:" + targetTheta.ToString() + "\nTan Theta:" + TanTheta.ToString()
+                + "\nTheta: " + theta.ToString();
+
+
+
+                if (!(this.turretAngle > targetTheta))
+                    rotateTurretClockwise();
+                else rotateTurretCounterClockwise();
+
+            }
+             if ((getCoordinate(positionOfPlayer, this.Position) == 1))
+             {
+                double TanTheta = (positionOfPlayer.Y - this.Position.Y) / (positionOfPlayer.X-this.Position.X);
+                double theta = Math.Atan(TanTheta);
+                theta = MathHelper.ToDegrees((float)theta);
+                theta = 90f + theta;
+
+                float targetTheta = (float)theta;
+                targetTheta = targetTheta;
+
+                debug += "Turret Angle" + this.turretAngle + " \nTarget angle:" + targetTheta.ToString() + "\nTan Theta:" + TanTheta.ToString()
+                + "\nTheta: " + theta.ToString();
+
+
+
+                if (!(this.turretAngle > targetTheta))
+                    rotateTurretClockwise();
+                else rotateTurretCounterClockwise();
+
+            
+            }
+
+
+
+
+
+
+            //if( clockWiseFlag)
+            //    rotateTurretClockwise();
+            //else if (counterClockWIseFlag)
+            //    rotateTurretCounterClockwise();
         
         }
 
-        public void aim(Vector2 positionOfPlayer, Vector2 tankRightTip, Vector2 tankLeftTip)
+        public void aim(Vector2 positionOfPlayer)
         {
 
             
@@ -258,7 +358,7 @@ namespace targetshooter
             Vector2 turretPosition = this.calculateBulletFiringPos(base.TurretPosition);
             Vector2 anotherPoint = this.findTipOfTheTurret(turretPosition);
 
-            int currTurretAngle = base.turretAngle;
+            float currTurretAngle = base.turretAngle;
             //int TempAngle = currTurretAngle - 90;
 
             float turretSlope = updateClass.calculateSlope(currTurretAngle);
@@ -266,9 +366,10 @@ namespace targetshooter
 
             float anotherSlope = (anotherPoint.Y - turretPosition.Y) / (anotherPoint.X-turretPosition.X);
             float slopeOfThePlayer = (positionOfPlayer.Y - turretPosition.Y) / (positionOfPlayer.X - turretPosition.X);
-            float slopeOfThePlayerRight = (tankRightTip.Y - turretPosition.Y) / (tankRightTip.X - turretPosition.X);
-            float slopeOfThePlayerLeft = (tankLeftTip.Y - turretPosition.Y) / (tankLeftTip.X - turretPosition.X);
-            //double TanTheta = (updateClass.calculateSlope(0) - slopeOfThePlayer) / (1 + updateClass.calculateSlope(0) * slopeOfThePlayer);
+            
+            //float slopeOfThePlayerRight = (tankRightTip.Y - turretPosition.Y) / (tankRightTip.X - turretPosition.X);
+            //float slopeOfThePlayerLeft = (tankLeftTip.Y - turretPosition.Y) / (tankLeftTip.X - turretPosition.X);
+            ////double TanTheta = (updateClass.calculateSlope(0) - slopeOfThePlayer) / (1 + updateClass.calculateSlope(0) * slopeOfThePlayer);
             //double theta = Math.Atan(TanTheta);
             //theta = MathHelper.ToDegrees((float)theta);
             // angle = theta;
@@ -282,6 +383,8 @@ namespace targetshooter
                 //+ " Same Sign: " + sameSign(anotherSlope, slopeOfThePlayer).ToString()
                 //+ " Maximum turret slope:" + maxSlope +" " + Math.Abs(anotherSlope - slopeOfThePlayer); 
 
+            debug += " Co-ordinate: " + getCoordinate(positionOfPlayer, this.Position).ToString();
+            
             //debug += "Collide:" + collide(positionOfPlayer, playerWidth, playerHeight, anotherPoint);
             maxTurretSlope(anotherSlope);
             //debug = "Targeting Slope: " + anotherSlope.ToString() + "Left Tank Slope: " + slopeOfThePlayerLeft
@@ -296,7 +399,7 @@ namespace targetshooter
 
 
             
-            if ((Math.Abs(slopeOfThePlayer-anotherSlope) > .01))
+            if ((Math.Abs(slopeOfThePlayer-anotherSlope) > .1))
             {//
 
                 //if (!negate)
@@ -309,9 +412,9 @@ namespace targetshooter
 
                 if (Math.Abs(anotherSlope + .766666) > .01)
                 {
-                    rotateTurretClockwise();
+                    
                 }
-
+                rotateTurretClockwise();
                  
 
             }
@@ -324,6 +427,32 @@ namespace targetshooter
                 rotateTurretClockwise();
 
         }
+
+        private int getCoordinate(Vector2 Playerposition, Vector2 enemyPosition)
+        {
+
+            if ((Playerposition.X > enemyPosition.X) && (Playerposition.Y < enemyPosition.Y))
+            {
+
+                return 0;
+
+            }
+            else if ((Playerposition.X > enemyPosition.X) && (Playerposition.Y > enemyPosition.Y))
+            {
+
+                return 1;
+
+            }
+            else if ((Playerposition.X < enemyPosition.X) && (Playerposition.Y > enemyPosition.Y))
+            {
+
+                return 2;
+
+            }
+            else return 3;
+        }
+
+
         string debug;
 
         private bool sameSign(float v1, float v2)

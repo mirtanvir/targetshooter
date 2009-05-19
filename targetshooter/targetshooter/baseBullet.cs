@@ -21,7 +21,7 @@ namespace targetshooter
     {
         private Vector2 position;
         private float speed;
-        private int angleInDegree;
+        private float angleInDegree;
         private Texture2D bulletImage;
         private int height;
         private int width;
@@ -78,7 +78,7 @@ namespace targetshooter
          * @return angleInDegree
          * 
         */
-        protected int getAngle()
+        protected float getAngle()
         {
             return this.angleInDegree;
         }
@@ -125,7 +125,7 @@ namespace targetshooter
         }
        
         // Constructor
-        public baseBullet(Texture2D bulletimg, Vector2 pos, float spd, int rotationAngleInDegree)
+        public baseBullet(Texture2D bulletimg, Vector2 pos, float spd, float rotationAngleInDegree)
         {
 
             bulletImage = bulletimg;

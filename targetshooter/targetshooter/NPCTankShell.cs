@@ -20,7 +20,7 @@ namespace targetshooter
 
 
 
-        public NPCTankShell(Texture2D playerTankShellImage, Vector2 firingPosition, float speed, int turretAngle)
+        public NPCTankShell(Texture2D playerTankShellImage, Vector2 firingPosition, float speed, float turretAngle)
             : base(playerTankShellImage, firingPosition, speed, turretAngle)
         {
 
