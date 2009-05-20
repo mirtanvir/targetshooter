@@ -103,7 +103,8 @@ namespace targetshooter
             initScreenFont = Content.Load<SpriteFont>(@"fonts/initScreen");
 
             player = new playerTank(Content.Load<Texture2D>(@"images/tank_body"), Content.Load<Texture2D>(@"images/tank_turret"), Content.Load<Texture2D>(@"images/bullet"), 10.0f, 3, new Vector2(800, 500), new Vector2(800, 500) + new Vector2(60, 60));
-            
+           // player.
+
             enemyTankTexture = Content.Load<Texture2D>(@"images/tank_body");
             enemyTurretTexture = Content.Load<Texture2D>(@"images/tank_turret");
             enemyShellTexture= Content.Load<Texture2D>(@"images/bullet");
@@ -117,24 +118,24 @@ namespace targetshooter
             NPCTank enemy;
 
 
-            //enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 10f, 1, new Vector2(100, 0), new Vector2(100, 0) + new Vector2(60, 60));
-
-            //enemyList.Add(enemy);
-
-            //enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 10f, 1, new Vector2(400, 0), new Vector2(400, 0) + new Vector2(60, 60));
-
-            //enemyList.Add(enemy);
-            enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 10f, 1, new Vector2(700, 0), new Vector2(700, 0) + new Vector2(60, 60));
+            enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(100, 0), new Vector2(100, 0) + new Vector2(60, 60));
 
             enemyList.Add(enemy);
 
-            //enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 10f, 1, new Vector2(1000, 0), new Vector2(1000, 0) + new Vector2(60, 60));
+            enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(400, 0), new Vector2(400, 0) + new Vector2(60, 60));
 
-            //enemyList.Add(enemy);
+            enemyList.Add(enemy);
+            enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(700, 0), new Vector2(700, 0) + new Vector2(60, 60));
 
-            //enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 10f, 1, new Vector2(1200, 0), new Vector2(1200, 0) + new Vector2(60, 60));
+            enemyList.Add(enemy);
 
-            //enemyList.Add(enemy);
+            enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(1000, 0), new Vector2(1000, 0) + new Vector2(60, 60));
+
+            enemyList.Add(enemy);
+
+            enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(1200, 0), new Vector2(1200, 0) + new Vector2(60, 60));
+
+            enemyList.Add(enemy);
   
 
 
@@ -208,7 +209,7 @@ namespace targetshooter
 
                     enemy.update(t, new Vector2(Window.ClientBounds.Height, Window.ClientBounds.Width), player.Position, new Vector2(tankRect.Left, tankRect.Bottom), new Vector2(tankRect.Right, tankRect.Top));
                 }
-                player.update(new Vector2(Window.ClientBounds.Height, Window.ClientBounds.Width));
+                player.update(new Vector2(Window.ClientBounds.Width, Window.ClientBounds.Height));
 
             }
 
@@ -348,7 +349,7 @@ namespace targetshooter
             //      + "Turret Slope: " + calculateTurretSlope().ToString() + "Turret Position= " + tankTurretPos.ToString() + "\n Turret Origin Rotation= " + new Vector2((texture.Width / 2) - 3, (texture.Height / 2) - 2).ToString();
 
            // debugString ="Slope of enemy Turret"+ updateClass.calculateSlope((int)MathHelper.ToDegrees(enemy.getTurretAngle()))  + "Angle of the Enemy Turret: " + MathHelper.ToDegrees(enemy.getTurretAngle()).ToString()+ " Theta:" + enemy.theta()  ;   //"Firing position: " + calculateBulletFiringPos().ToString();
-            debugString = enemyList[0].getDebugString();
+            //debugString = enemyList[0].getDebugString();
 
             if (initScrnFlag)
             {
@@ -368,7 +369,7 @@ namespace targetshooter
 
             //    spriteBatch.Draw(myTexture, Vector2.Zero, Color.White);
 
-
+                debugString = "Tank Angle:" + MathHelper.ToDegrees(player.getTankAngle());
                 spriteBatch.DrawString(debug, debugString, new Vector2(10, 40), Color.DarkBlue, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
                         
 

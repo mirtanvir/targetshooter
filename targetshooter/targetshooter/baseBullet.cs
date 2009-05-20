@@ -39,7 +39,7 @@ namespace targetshooter
             if ((position.X < 0) || (position.X > maxWindowPosition.X) || (position.Y < 0) || (position.Y > maxWindowPosition.Y))
                 return false;
             else return true;
-
+            //return true;
 
 
         }

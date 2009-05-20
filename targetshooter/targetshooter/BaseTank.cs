@@ -180,7 +180,7 @@ namespace targetshooter
         }
 
 
-        public BaseTank(Texture2D imgOfTank, Texture2D imgOfTankTurret ,Vector2 firstPosition, Vector2 turretPos)
+        public BaseTank(Texture2D imgOfTank, Texture2D imgOfTankTurret ,Vector2 firstPosition, Vector2 turretPos, float tankSpeed)
         {
 
             this.imageOfTank = imgOfTank;
@@ -189,12 +189,27 @@ namespace targetshooter
             this.turretPosition=turretPos;
             this.turretAngleInDegree = 0;
             this.tankAngleInDegree = 0;
-            this.tankSpeed = 200f;
+            this.tankSpeed = tankSpeed;
             this.healthPercentage = 100;
             //this.high = imageOfTank.Height;
             //this.wide = imageOfTank.Width;
         }
 
+        //public float TankSpeed
+        //{
+
+        //    get
+        //    {
+
+        //        return tankSpeed;
+        //    }
+        //    set
+        //    {
+        //        tankSpeed = value;
+
+        //    }
+
+        //}
 
         public Texture2D imageOfTurret{
     

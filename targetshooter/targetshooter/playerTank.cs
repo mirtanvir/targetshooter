@@ -22,12 +22,12 @@ namespace targetshooter
         private Texture2D bulletImage;
         private float tankShellSpeed;
         public playerTank(Texture2D imgOfTank, Texture2D imgOfTankTurret, Texture2D imgOfTheShell, float shellSpeed,int numberOfLive, Vector2 firstPosition, Vector2 turretPos)
-            : base(imgOfTank, imgOfTankTurret, firstPosition, turretPos)
+            : base(imgOfTank, imgOfTankTurret, firstPosition, turretPos,0)
         {
             bulletImage = imgOfTheShell;
             //shellList  = new playerTankShell(imgOfTheShell,
             base.numberOflives = numberOfLive;
-
+            base.TankSpeed = 10f;
             tankShellSpeed = shellSpeed;
         }
 
@@ -119,6 +119,11 @@ namespace targetshooter
                 base.tankAngle = 0;
             else if (tankAngle < 0)
                 base.tankAngle = 360 - tankAngle;
+            if (turretAngle > 360)
+                base.turretAngle = 0;
+            else if (turretAngle < 0)
+                base.turretAngle = 360 - turretAngle;
+        
         }
 
         public void movePlayerTankUp(float timeChangedSinceLastUpdate)
