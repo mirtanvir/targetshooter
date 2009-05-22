@@ -103,6 +103,7 @@
     <Compile Include="Game1.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ClassDiagram1.png" />
     <Content Include="Game.ico" />
   </ItemGroup>
   <ItemGroup>
