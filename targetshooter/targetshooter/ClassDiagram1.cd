@@ -1,115 +1,122 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="targetshooter.AI">
-    <Position X="5.25" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>AI.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="targetshooter.BresLine">
-    <Position X="7" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAACAAAAAAQEAAAABAAAAAAAg=</HashCode>
-      <FileName>AI.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="targetshooter.baseBullet" Collapsed="true">
-    <Position X="1.75" Y="3.5" Width="1.5" />
+  <Class Name="targetshooter.baseBullet">
+    <Position X="8.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>wAAEAEAAAAAAAASAQABAIAAACAAQQQARAAAAAAAEAAA=</HashCode>
       <FileName>baseBullet.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="targetshooter.BaseTank" Collapsed="true">
-    <Position X="1.75" Y="0.5" Width="1.5" />
+  <Class Name="targetshooter.BaseTank">
+    <Position X="2.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QAYACAIAABAAAAAgQBAAAIIICBCARAhACAAgBAAQuAA=</HashCode>
+      <HashCode>QAYACAIAABAAAAAgQBAAAIIICBCARAlACAAgBAAQuAA=</HashCode>
       <FileName>BaseTank.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="targetshooter.TargetShooter" Collapsed="true">
+    <Position X="0.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BASCEEAAAAAIAwAAIAiAAQAAAABOAAqhQAAAGMIAEAU=</HashCode>
+      <FileName>Game1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="targetshooter.NPCTank">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQACCAAAAHAAAAABTAAAAIAkAEMgdAIAAAEABEFGQ=</HashCode>
+      <FileName>NPCTank.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="targetshooter.NPCTankShell">
+    <Position X="10" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAEAEAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>NPCTankShell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="targetshooter.playerTank">
+    <Position X="4.25" Y="2" Width="1.5" />
+    <NestedTypes>
+      <Delegate Name="targetshooter.playerTank.TankLiveAndHealthChangeHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>playerTank.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAEBAAAABRBAAAAAEAAIAPAAAAAAAAEEAw=</HashCode>
+      <FileName>playerTank.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="targetshooter.playerTankShell">
+    <Position X="6.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAEAEAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>playerTankShell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="targetshooter.AI">
+    <Position X="15.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAACAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="targetshooter.BresLine">
+    <Position X="17.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAACAAAAAAQEAAAABAAAAAAAg=</HashCode>
+      <FileName>AI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="targetshooter.environment" Collapsed="true">
-    <Position X="8.75" Y="0.5" Width="1.5" />
+    <Position X="19.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>environment.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="targetshooter.TargetShooter" Collapsed="true">
-    <Position X="5.25" Y="2.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>BAQCEEAAAAAAAwAAAAgAAAAAAAAGAAqBQAAAGMIAEAc=</HashCode>
-      <FileName>Game1.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="targetshooter.help" Collapsed="true">
-    <Position X="10.5" Y="0.5" Width="1.5" />
+  <Class Name="targetshooter.help">
+    <Position X="21" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAACAAAAQIICAQAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>help.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="targetshooter.infoBar">
-    <Position X="5.25" Y="1.5" Width="1.5" />
+    <Position X="16" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAIIAACBAOAgAAABCABAEAAAAg=</HashCode>
       <FileName>infoBar.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="targetshooter.initialScreen" Collapsed="true">
-    <Position X="7.75" Y="3" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAIAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>initialScreen.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="targetshooter.NPCTank" Collapsed="true">
-    <Position X="0.5" Y="1.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAACAAAAAEBAAAABRBAAAAAEAAIgNAAAAAAAAEEAQ=</HashCode>
-      <FileName>NPCTank.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="targetshooter.NPCTankShell" Collapsed="true">
-    <Position X="2.75" Y="4.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>BAAEAEAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
-      <FileName>NPCTankShell.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="targetshooter.playerTank" Collapsed="true">
-    <Position X="2.75" Y="1.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAACAAAAAEBAAAABRBAAAAAEAAIAPAAAAAAAAEEAw=</HashCode>
-      <FileName>playerTank.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="targetshooter.TankInfoEventArgs" Collapsed="true">
-    <Position X="10.5" Y="1.5" Width="1.5" />
+  <Class Name="targetshooter.TankInfoEventArgs">
+    <Position X="17.75" Y="3.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAg=</HashCode>
       <FileName>playerTank.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="targetshooter.playerTankShell" Collapsed="true">
-    <Position X="0.5" Y="4.75" Width="1.5" />
+  <Class Name="targetshooter.updateClass">
+    <Position X="11" Y="5.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>BAAEAEAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
-      <FileName>playerTankShell.cs</FileName>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAISAAAAAAAAAAAABAgAAAAAA=</HashCode>
+      <FileName>updateClass.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="targetshooter.Program" Collapsed="true">
-    <Position X="8.75" Y="1.5" Width="1.5" />
+  <Class Name="targetshooter.initialScreen">
+    <Position X="13" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>initialScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="targetshooter.Program">
+    <Position X="19.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="targetshooter.updateClass" Collapsed="true">
-    <Position X="6.75" Y="4.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAIAAAAAAAAICAAAAAAAAAAAAAAgAAAAAA=</HashCode>
-      <FileName>updateClass.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

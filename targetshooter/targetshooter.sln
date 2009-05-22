@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0BB47E9E-4C71-43F8-9C52-D497CBAA36A4}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\design Assignment\Class_Design_Sofrware_Engineering_1_Final_Proj.doc = ..\..\design Assignment\Class_Design_Sofrware_Engineering_1_Final_Proj.doc
+		ClassDiagram1.png = ClassDiagram1.png
 		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
 		targetshooter.vsmdi = targetshooter.vsmdi
 		targetshooter1.vsmdi = targetshooter1.vsmdi
@@ -17,9 +18,6 @@ Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
 		Manager = AnkhSVN - Subversion Support for Visual Studio
-	EndGlobalSection
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = targetshooter1.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

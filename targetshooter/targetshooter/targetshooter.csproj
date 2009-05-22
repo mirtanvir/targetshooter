@@ -13,7 +13,8 @@
     <XnaPlatform>Windows</XnaPlatform>
     <XnaCrossPlatformGroupID>cce8a2f4-c5e8-415f-9cf9-c2e47070964c</XnaCrossPlatformGroupID>
     <ApplicationIcon>Game.ico</ApplicationIcon>
-    <Thumbnail>GameThumbnail.png</Thumbnail>
+    <Thumbnail>
+    </Thumbnail>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -103,7 +104,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
-    <Content Include="GameThumbnail.png" />
   </ItemGroup>
   <ItemGroup>
     <NestedContentProject Include="Content\Content.contentproj">
