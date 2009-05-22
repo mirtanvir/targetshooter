@@ -21,6 +21,37 @@ namespace targetshooter
     /// </summary>
     /// 
 
+    // global class to share window/player width/height
+    // across files
+    static class GlobalClass
+    {
+        private static int grDevHeight = 0;
+        private static int grDevWidth = 0;
+        private static int grPlHeight = 0;
+        private static int grPlWidth = 0;
+
+        public static int GlobalHeight
+        {
+            get { return grDevHeight; }
+            set { grDevHeight = value; }
+        }
+        public static int GlobalWidth
+        {
+            get { return grDevWidth; }
+            set { grDevWidth = value; }
+        }
+        public static int GloHeight
+        {
+            get { return grPlHeight; }
+            set { grPlHeight = value; }
+        }
+        public static int GloWidth
+        {
+            get { return grPlWidth; }
+            set { grPlWidth = value; }
+        }
+    }
+
     public class TargetShooter : Microsoft.Xna.Framework.Game
     {
         Texture2D enemyTankTexture;
@@ -197,6 +228,12 @@ namespace targetshooter
             
             }
 
+            // initialize window & tank width/height here so it can be accessed
+            // else where
+            GlobalClass.GlobalWidth = graphics.GraphicsDevice.Viewport.Width;
+            GlobalClass.GlobalHeight = graphics.GraphicsDevice.Viewport.Height;
+            GlobalClass.GloHeight = player.tankImage.Height;
+            GlobalClass.GloWidth = player.tankImage.Width;
            
             if (gameFlag)
             {

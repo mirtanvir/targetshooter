@@ -19,6 +19,8 @@ namespace targetshooter
 {
     static class updateClass
     {
+        //to control different actions for player or enemy tank based upon this flag
+        public static bool m_bIsPlayer = true;
 
         public static float calculateSlope(float objectAngelInDegree)
         {
@@ -31,9 +33,10 @@ namespace targetshooter
 
         static string debugString;
 
-        public static Vector2 UpdateTankPositionUp(float tankAngleInDegree, Vector2 position, float tankSpeed, float gameTimeChanged)
+        public static Vector2 UpdateTankPositionUp(bool isplayer, float tankAngleInDegree, Vector2 position, float tankSpeed, float gameTimeChanged)
         {
             Vector2 prevPosition = position;
+            m_bIsPlayer = isplayer;
 
             double speed = tankSpeed;// (double)tankSpeed;
             float radian = MathHelper.ToRadians(tankAngleInDegree);
@@ -135,13 +138,6 @@ namespace targetshooter
             }
 
 
-
-
-
-
-
-
-
             #region prevCode
             //float slope = calculateSlope(tankAngleInDegree);// (float)Math.Tan(Convert.ToDouble(MathHelper.ToRadians(90) - MathHelper.ToRadians(tankAngleInDegree)));
 
@@ -178,15 +174,41 @@ namespace targetshooter
 
             #endregion prevCode
 
-            return position;
+            // keep the player tank within the window boundary;
+           // again do this only for player tank and not for npc tank
+           if (m_bIsPlayer)
+           {
+               //string dbg;
+               //dbg = "dw " + GlobalClass.GlobalWidth + " dh " + GlobalClass.GlobalHeight + " plw " + GlobalClass.GloWidth + " plh " + GlobalClass.GloHeight;
+               //System.Console.WriteLine(dbg);
+               //dbg = "pos x " + position.X + " pos y " + position.Y;
+               //System.Console.WriteLine(dbg);
 
+               int MaxX = GlobalClass.GlobalWidth - GlobalClass.GloHeight/2;
+               int MaxY = GlobalClass.GlobalHeight - GlobalClass.GloHeight/2;
+               int MinX = GlobalClass.GloHeight/2;
+               int MinY = GlobalClass.GloHeight / 2;
 
+               if (position.X > MaxX)
+                   position.X = MaxX;
+               else if (position.X < MinX)
+                   position.X = MinX;
+
+               if (position.Y > MaxY)
+                   position.Y = MaxY;
+               else if (position.Y < MinY)
+                   position.Y = MinY;
+
+           }
+
+           return position;
         }
 
 
 
-        public static Vector2 updateTankPositionDown(float tankAngleInDegree, Vector2 position, float tankSpeed, float gameTimeChanged)
+        public static Vector2 updateTankPositionDown(bool isplayer, float tankAngleInDegree, Vector2 position, float tankSpeed, float gameTimeChanged)
         {
+            m_bIsPlayer = isplayer;
             Vector2 prevPosition = position;
 
             double speed =tankSpeed;// (double)tankSpeed;
@@ -286,6 +308,26 @@ namespace targetshooter
 
 
 
+            }
+
+            // keep the player tank within the window boundary;
+            // again do this only for player tank and not for npc tank
+            if (m_bIsPlayer)
+            {
+                int MaxX = GlobalClass.GlobalWidth - GlobalClass.GloHeight / 2;
+                int MaxY = GlobalClass.GlobalHeight - GlobalClass.GloHeight / 2;
+                int MinX = GlobalClass.GloHeight / 2;
+                int MinY = GlobalClass.GloHeight / 2;
+
+                if (position.X > MaxX)
+                    position.X = MaxX;
+                else if (position.X < MinX)
+                    position.X = MinX;
+
+                if (position.Y > MaxY)
+                    position.Y = MaxY;
+                else if (position.Y < MinY)
+                    position.Y = MinY;
             }
 
 

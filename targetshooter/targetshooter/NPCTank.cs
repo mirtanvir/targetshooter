@@ -149,7 +149,7 @@ namespace targetshooter
         public void movePlayerTankUp(float timeChangedSinceLastUpdate)
         {
 
-            Vector2 newPos = updateClass.UpdateTankPositionUp(tankAngle, Position, TankSpeed, timeChangedSinceLastUpdate);
+            Vector2 newPos = updateClass.UpdateTankPositionUp(false, tankAngle, Position, TankSpeed, timeChangedSinceLastUpdate);
             base.MoveTank(newPos);
             base.TurretPosition = Position + new Vector2(60, 60);
 
@@ -158,7 +158,7 @@ namespace targetshooter
         public void MoveNPCTankDown(float timeChangedSinceLastUpdate)
         {
 
-            Vector2 newPos = updateClass.UpdateTankPositionUp(tankAngle, Position, TankSpeed, timeChangedSinceLastUpdate);
+            Vector2 newPos = updateClass.UpdateTankPositionUp(false, tankAngle, Position, TankSpeed, timeChangedSinceLastUpdate);
             base.MoveTank(newPos);
             base.TurretPosition = Position + new Vector2(60, 60);
 

@@ -77,7 +77,7 @@ namespace UnitTest
             float gameTimeChanged = .001F; // TODO: Initialize to an appropriate value
             Vector2 expected = new Vector2(10,10.1F); // TODO: Initialize to an appropriate value
             Vector2 actual;
-            actual = updateClass.updateTankPositionDown(tankAngleInDegree, position, tankSpeed, gameTimeChanged);
+            actual = updateClass.updateTankPositionDown(true, tankAngleInDegree, position, tankSpeed, gameTimeChanged);
             Assert.AreEqual(expected, actual);
             //Assert.Inconclusive("Verify the correctness of this test method.");
         }
@@ -91,7 +91,7 @@ namespace UnitTest
             float gameTimeChanged = .001F; // TODO: Initialize to an appropriate value
             Vector2 expected = new Vector2(10, 10.3F); // TODO: Initialize to an appropriate value
             Vector2 actual;
-            actual = updateClass.updateTankPositionDown(tankAngleInDegree, position, tankSpeed, gameTimeChanged);
+            actual = updateClass.updateTankPositionDown(true, tankAngleInDegree, position, tankSpeed, gameTimeChanged);
             Assert.AreEqual(expected, actual);
             //Assert.Inconclusive("Verify the correctness of this test method.");
         }
