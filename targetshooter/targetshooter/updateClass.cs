@@ -37,15 +37,12 @@ namespace targetshooter
         {
             Vector2 prevPosition = position;
             m_bIsPlayer = isplayer;
-
+            //string dbg;
             double speed = tankSpeed;// (double)tankSpeed;
             float radian = MathHelper.ToRadians(tankAngleInDegree);
 
-
-
             if (tankAngleInDegree > 0 && tankAngleInDegree < 90)
             {
-
                 int y = (int)(speed * Math.Cos(((double)radian)));
 
 
@@ -87,7 +84,6 @@ namespace targetshooter
             }
             else if (tankAngleInDegree < 180 && tankAngleInDegree > 90)
             {
-
                 tankAngleInDegree = 180f - tankAngleInDegree;
                 radian = MathHelper.ToRadians(tankAngleInDegree);
                 int y = (int)(speed * Math.Cos(((double)radian)));
@@ -104,37 +100,22 @@ namespace targetshooter
             }
             else if (tankAngleInDegree == 0)
             {
-
                 position.Y = position.Y - (int)speed;
 
-
-
             }
-
-
             else if (tankAngleInDegree == 180)
             {
-
                 position.Y = position.Y + (int)speed;
-
-
 
             }
             else if (tankAngleInDegree == 270)
             {
-
                 position.X = position.X - (int)speed;
-
-
 
             }
             else if (tankAngleInDegree == 90)
             {
-
                 position.X = position.X + (int)speed;
-
-
-
             }
 
 
@@ -178,26 +159,45 @@ namespace targetshooter
            // again do this only for player tank and not for npc tank
            if (m_bIsPlayer)
            {
-               //string dbg;
+               //dbg = "prev X " + prevPosition.X + " curr X " + position.X;
+               //System.Console.WriteLine(dbg);
+
+               //System.Console.WriteLine(position.X);
                //dbg = "dw " + GlobalClass.GlobalWidth + " dh " + GlobalClass.GlobalHeight + " plw " + GlobalClass.GloWidth + " plh " + GlobalClass.GloHeight;
                //System.Console.WriteLine(dbg);
                //dbg = "pos x " + position.X + " pos y " + position.Y;
                //System.Console.WriteLine(dbg);
+               //System.Console.WriteLine("-------------------------------");
 
-               int MaxX = GlobalClass.GlobalWidth - GlobalClass.GloHeight/2;
-               int MaxY = GlobalClass.GlobalHeight - GlobalClass.GloHeight/2;
-               int MinX = GlobalClass.GloHeight/2;
-               int MinY = GlobalClass.GloHeight / 2;
+               int MaxX = GlobalClass.scrWidth - GlobalClass.plHeight/2;
+               int MaxY = GlobalClass.scrHeight - GlobalClass.plHeight/2;
+               int MinX = GlobalClass.plHeight/2;
+               int MinY = GlobalClass.plHeight/2;
 
                if (position.X > MaxX)
+               {
                    position.X = MaxX;
+                   position.Y = prevPosition.Y;
+               }
                else if (position.X < MinX)
+               {
                    position.X = MinX;
+                   position.Y = prevPosition.Y;
+               }
 
                if (position.Y > MaxY)
+               {
                    position.Y = MaxY;
+                   position.X = prevPosition.X;
+               }
                else if (position.Y < MinY)
+               {
                    position.Y = MinY;
+                   position.X = prevPosition.X;
+               }
+
+               //dbg = "new  X " + position.X;
+               //System.Console.WriteLine(dbg);
 
            }
 
@@ -314,20 +314,33 @@ namespace targetshooter
             // again do this only for player tank and not for npc tank
             if (m_bIsPlayer)
             {
-                int MaxX = GlobalClass.GlobalWidth - GlobalClass.GloHeight / 2;
-                int MaxY = GlobalClass.GlobalHeight - GlobalClass.GloHeight / 2;
-                int MinX = GlobalClass.GloHeight / 2;
-                int MinY = GlobalClass.GloHeight / 2;
+                int MaxX = GlobalClass.scrWidth - GlobalClass.plHeight / 2;
+                int MaxY = GlobalClass.scrHeight - GlobalClass.plHeight / 2;
+                int MinX = GlobalClass.plHeight / 2;
+                int MinY = GlobalClass.plHeight / 2;
 
                 if (position.X > MaxX)
+                {
                     position.X = MaxX;
+                    position.Y = prevPosition.Y;
+                }
                 else if (position.X < MinX)
+                {
                     position.X = MinX;
+                    position.Y = prevPosition.Y;
+                }
 
                 if (position.Y > MaxY)
+                {
                     position.Y = MaxY;
+                    position.X = prevPosition.X;
+
+                }
                 else if (position.Y < MinY)
+                {
                     position.Y = MinY;
+                    position.X = prevPosition.X;
+                }
             }
 
 

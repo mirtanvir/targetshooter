@@ -14,6 +14,7 @@ using System.Net.Sockets;
 using System.Net;
 using System.IO;
 using System.Threading;
+
 namespace targetshooter
 {
     /// <summary>
@@ -25,30 +26,30 @@ namespace targetshooter
     // across files
     static class GlobalClass
     {
-        private static int grDevHeight = 0;
-        private static int grDevWidth = 0;
-        private static int grPlHeight = 0;
-        private static int grPlWidth = 0;
+        private static int screenHeight = 0;
+        private static int screenWidth = 0;
+        private static int playerHeight = 0;
+        private static int playerWidth = 0;
 
-        public static int GlobalHeight
+        public static int scrHeight
         {
-            get { return grDevHeight; }
-            set { grDevHeight = value; }
+            get { return screenHeight; }
+            set { screenHeight = value; }
         }
-        public static int GlobalWidth
+        public static int scrWidth
         {
-            get { return grDevWidth; }
-            set { grDevWidth = value; }
+            get { return screenWidth; }
+            set { screenWidth = value; }
         }
-        public static int GloHeight
+        public static int plHeight
         {
-            get { return grPlHeight; }
-            set { grPlHeight = value; }
+            get { return playerHeight; }
+            set { playerHeight = value; }
         }
-        public static int GloWidth
+        public static int plWidth
         {
-            get { return grPlWidth; }
-            set { grPlWidth = value; }
+            get { return playerWidth; }
+            set { playerWidth = value; }
         }
     }
 
@@ -230,10 +231,10 @@ namespace targetshooter
 
             // initialize window & tank width/height here so it can be accessed
             // else where
-            GlobalClass.GlobalWidth = graphics.GraphicsDevice.Viewport.Width;
-            GlobalClass.GlobalHeight = graphics.GraphicsDevice.Viewport.Height;
-            GlobalClass.GloHeight = player.tankImage.Height;
-            GlobalClass.GloWidth = player.tankImage.Width;
+            GlobalClass.scrWidth = graphics.GraphicsDevice.Viewport.Width;
+            GlobalClass.scrHeight = graphics.GraphicsDevice.Viewport.Height;
+            GlobalClass.plHeight = player.tankImage.Height;
+            GlobalClass.plWidth = player.tankImage.Width;
            
             if (gameFlag)
             {
