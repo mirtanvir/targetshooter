@@ -47,7 +47,7 @@ namespace targetshooter
 
         public string getInfoBar()
         {
-            string info = "Current Level =" + currentLevel + ". Current Score =" + currentScore + "Number of Lives Remaining " + lives + " current health= " + health;
+            string info = "Current Level = " + currentLevel + "  Current Score = " + currentScore + "  Number of Lives Remaining = " + lives + "  Current Health = " + health;
             return info;
         }
 

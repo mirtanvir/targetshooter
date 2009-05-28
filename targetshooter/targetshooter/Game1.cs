@@ -17,6 +17,8 @@ using System.Threading;
 
 namespace targetshooter
 {
+
+
     /// <summary>
     /// This is the main type for your game
     /// </summary>
@@ -141,8 +143,9 @@ namespace targetshooter
             enemyTurretTexture = Content.Load<Texture2D>(@"images/tank_turret");
             enemyShellTexture= Content.Load<Texture2D>(@"images/bullet");
             
-            helpScreen = new help(Content.Load<SpriteFont>(@"fonts/help"), new Vector2(400, 400), "Help goes here");
-            info = new infoBar(0, 0, Content.Load<SpriteFont>(@"fonts/infoBar"), new Vector2(10, Window.ClientBounds.Y - 10));
+            helpScreen = new help(Content.Load<SpriteFont>(@"fonts/help"), new Vector2(400, 200), 
+                " TARGET SHOOTER GAME \n (Keyboard info) \n Up and Down arrows to move front and back \n Left arrow to turn the player tank left \n Right arrow to turn the player tank right \n 'a' to move the turret Right \n 's' to move the turret Left");
+            info = new infoBar(0, 0, Content.Load<SpriteFont>(@"fonts/infoBar"), new Vector2(10, Window.ClientBounds.Y +650));
 
             info.updateHealthAndLives(player.numberOflives, player.healthPercentages);
 

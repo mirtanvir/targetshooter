@@ -8,7 +8,7 @@ namespace targetshooter
 {
     class initialScreen
     {
-        string menu = "Press F1 for help\nPress p to play\nPress Esc to quit";
+        string menu = " Press F1 for help\n Press p to play\n Press Esc to quit";
          
         public string getMenu()
         {
