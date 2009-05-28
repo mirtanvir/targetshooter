@@ -153,29 +153,29 @@ namespace targetshooter
             info.updateHealthAndLives(player.numberOflives, player.healthPercentages);
 
             //enemy.
-            NPCTank enemy;
+            //NPCTank enemy;
 
 
-            enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(100, 0), new Vector2(100, 0) + new Vector2(60, 60));
+            //enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(100, 0), new Vector2(100, 0) + new Vector2(60, 60));
 
-            enemyList.Add(enemy);
+            //enemyList.Add(enemy);
 
-            enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(400, 0), new Vector2(400, 0) + new Vector2(60, 60));
+            //enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(400, 0), new Vector2(400, 0) + new Vector2(60, 60));
 
-            enemyList.Add(enemy);
-            enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(700, 0), new Vector2(700, 0) + new Vector2(60, 60));
+            //enemyList.Add(enemy);
+            //enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(700, 0), new Vector2(700, 0) + new Vector2(60, 60));
 
-            enemyList.Add(enemy);
+            //enemyList.Add(enemy);
 
-            enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(1000, 0), new Vector2(1000, 0) + new Vector2(60, 60));
+            //enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(1000, 0), new Vector2(1000, 0) + new Vector2(60, 60));
 
-            enemyList.Add(enemy);
+            //enemyList.Add(enemy);
 
-            enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(1200, 0), new Vector2(1200, 0) + new Vector2(60, 60));
+            //enemy = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(1200, 0), new Vector2(1200, 0) + new Vector2(60, 60));
 
-            enemyList.Add(enemy);
-  
+            //enemyList.Add(enemy);
 
+            randomTank();
 
             
 
