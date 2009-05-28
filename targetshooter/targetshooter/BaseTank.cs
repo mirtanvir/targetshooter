@@ -191,8 +191,8 @@ namespace targetshooter
             this.tankAngleInDegree = 0;
             this.tankSpeed = tankSpeed;
             this.healthPercentage = 100;
-            //this.high = imageOfTank.Height;
-            //this.wide = imageOfTank.Width;
+            this.high = imageOfTank.Height;
+            this.wide = imageOfTank.Width;
         }
 
         //public float TankSpeed

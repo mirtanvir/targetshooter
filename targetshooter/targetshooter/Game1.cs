@@ -60,6 +60,7 @@ namespace targetshooter
         Texture2D enemyTankTexture;
         Texture2D enemyTurretTexture;
         Texture2D enemyShellTexture;
+        Texture2D backgroundTexture;
         SpriteFont debug;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -126,6 +127,8 @@ namespace targetshooter
 
         protected override void LoadContent()
         {
+            backgroundTexture = Content.Load<Texture2D>(@"images/sand");
+
             // Create a new SpriteBatch, which can be used to draw textures.
             myTexture = CreateRectangle(640, 10);
             debug = Content.Load<SpriteFont>(@"fonts/debugInformation");
@@ -238,99 +241,99 @@ namespace targetshooter
             GlobalClass.scrHeight = graphics.GraphicsDevice.Viewport.Height;
             GlobalClass.plHeight = player.tankImage.Height;
             GlobalClass.plWidth = player.tankImage.Width;
-           
+
             if (gameFlag)
             {
-                
+
                 Rectangle tankRect = new Rectangle((int)player.Position.X, (int)player.Position.Y, player.imageOfTurret.Width, player.imageOfTurret.Height);
 
                 for (int i = 0; i < enemyList.Count; i++)
                 {
                     NPCTank enemy = enemyList[i];
 
-                    enemy.update(t, new Vector2(Window.ClientBounds.Height, Window.ClientBounds.Width), player.Position, new Vector2(tankRect.Left, tankRect.Bottom), new Vector2(tankRect.Right, tankRect.Top));
+                    enemy.update(t, new Vector2( Window.ClientBounds.Width, Window.ClientBounds.Height), player.Position, new Vector2(tankRect.Left, tankRect.Bottom), new Vector2(tankRect.Right, tankRect.Top));
                 }
                 player.update(new Vector2(Window.ClientBounds.Width, Window.ClientBounds.Height));
 
-            }
-
-
-            if ((Keyboard.GetState().IsKeyDown(Keys.Down)))// && (player.Position.Y <= Window.ClientBounds.Height - texture.Height))
-            {
-
-                player.MovePlayerTankDown(t);
 
 
 
-
-            }
-
-
-            //trying to make the player go up
-            if ((Keyboard.GetState().IsKeyDown(Keys.Up)))// && (pos.Y <= 0))
-            {
-
-                player.movePlayerTankUp(t);
-
-
-            }
-
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
-            {
-                if (shotCountDown <= 0)
+                if ((Keyboard.GetState().IsKeyDown(Keys.Down)))// && (player.Position.Y <= Window.ClientBounds.Height - texture.Height))
                 {
 
-                    player.fireShell();
+                    player.MovePlayerTankDown(t);
 
-                    shotCountDown = 100;
+
 
 
                 }
-                else shotCountDown = shotCountDown - gameTime.ElapsedGameTime.Milliseconds;
-            }
+
+
+                //trying to make the player go up
+                if ((Keyboard.GetState().IsKeyDown(Keys.Up)))// && (pos.Y <= 0))
+                {
+
+                    player.movePlayerTankUp(t);
+
+
+                }
+
+
+                if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                {
+                    if (shotCountDown <= 0)
+                    {
+
+                        player.fireShell();
+
+                        shotCountDown = 100;
+
+
+                    }
+                    else shotCountDown = shotCountDown - gameTime.ElapsedGameTime.Milliseconds;
+                }
 
 
 
 
 
 
-            //Turrent rotation angle
-    
-            if (Keyboard.GetState().IsKeyDown(Keys.S))
-            {
+                //Turrent rotation angle
+
+                if (Keyboard.GetState().IsKeyDown(Keys.S))
+                {
 
 
-                player.rotateTurretClockwise();
+                    player.rotateTurretClockwise();
 
-            }
+                }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                player.rotateTurretCounterClockwise();
-            }
-
-
+                if (Keyboard.GetState().IsKeyDown(Keys.A))
+                {
+                    player.rotateTurretCounterClockwise();
+                }
 
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
-            {
-
-                player.rotateTankClockwise();
-
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Left))
-            {
 
 
-                player.rotateTankCounterClockwise();
-            }
+                if (Keyboard.GetState().IsKeyDown(Keys.Right))
+                {
+
+                    player.rotateTankClockwise();
+
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.Left))
+                {
 
 
-            //make the enemy tank fire every .5 seconds;
+                    player.rotateTankCounterClockwise();
+                }
 
 
-           
+                //make the enemy tank fire every .5 seconds;
+
+
+
                 if (enemyShotCountDown <= 0)
                 {
                     foreach (NPCTank enemy in enemyList)
@@ -346,7 +349,7 @@ namespace targetshooter
 
 
                 List<List<NPCTankShell>> enShellList = new List<List<NPCTankShell>>();
-                foreach (NPCTank  enemy  in enemyList)
+                foreach (NPCTank enemy in enemyList)
                 {
                     enShellList.Add(enemy.getBulletList());
                     if (enShellList.Count > 0)
@@ -370,7 +373,8 @@ namespace targetshooter
 
                             }
                         }
-                }   
+                }
+            }
             base.Update(gameTime);
         }
 
@@ -382,16 +386,17 @@ namespace targetshooter
         protected override void Draw(GameTime gameTime)
         {
 
-
-            GraphicsDevice.Clear(Color.Red);
+            GraphicsDevice.Clear(Color.Blue);
             spriteBatch.Begin();
+
+            spriteBatch.Draw(backgroundTexture, new Vector2(0, 0), Color.White);
 
             //debugString = "Debug: # of bullet= " + bulletList.Count().ToString() + "Turret Angle= " + turretAngleInDegree.ToString()
             //      + "Turret Slope: " + calculateTurretSlope().ToString() + "Turret Position= " + tankTurretPos.ToString() + "\n Turret Origin Rotation= " + new Vector2((texture.Width / 2) - 3, (texture.Height / 2) - 2).ToString();
 
-           // debugString ="Slope of enemy Turret"+ updateClass.calculateSlope((int)MathHelper.ToDegrees(enemy.getTurretAngle()))  + "Angle of the Enemy Turret: " + MathHelper.ToDegrees(enemy.getTurretAngle()).ToString()+ " Theta:" + enemy.theta()  ;   //"Firing position: " + calculateBulletFiringPos().ToString();
+                        // debugString ="Slope of enemy Turret"+ updateClass.calculateSlope((int)MathHelper.ToDegrees(enemy.getTurretAngle()))  + "Angle of the Enemy Turret: " + MathHelper.ToDegrees(enemy.getTurretAngle()).ToString()+ " Theta:" + enemy.theta()  ;   //"Firing position: " + calculateBulletFiringPos().ToString();
             //debugString = enemyList[0].getDebugString();
-
+            
             if (initScrnFlag)
             {
 

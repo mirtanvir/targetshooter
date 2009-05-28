@@ -14,7 +14,7 @@
       <FileName>BaseTank.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="targetshooter.TargetShooter" Collapsed="true">
+  <Class Name="targetshooter.TargetShooter">
     <Position X="0.5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BASCEEAAAAAIAwAAIAiAAQAAAABOAAqhQAAAGMIAEAU=</HashCode>
@@ -22,7 +22,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="targetshooter.NPCTank">
-    <Position X="0.5" Y="2" Width="1.5" />
+    <Position X="1" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAQACCAAAAHAAAAABTAAAAIAkAEMgdAIAAAEABEFGQ=</HashCode>
       <FileName>NPCTank.cs</FileName>
