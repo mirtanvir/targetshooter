@@ -95,6 +95,7 @@
     <Compile Include="initialScreen.cs" />
     <Compile Include="NPCTank.cs" />
     <Compile Include="NPCTankShell.cs" />
+    <Compile Include="partialTargetshooter.cs" />
     <Compile Include="playerTank.cs" />
     <Compile Include="playerTankShell.cs" />
     <Compile Include="updateClass.cs" />

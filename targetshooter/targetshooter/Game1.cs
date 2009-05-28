@@ -26,7 +26,7 @@ namespace targetshooter
 
     // global class to share window/player width/height
     // across files
-    static class GlobalClass
+    static  class GlobalClass
     {
         private static int screenHeight = 0;
         private static int screenWidth = 0;
@@ -55,7 +55,7 @@ namespace targetshooter
         }
     }
 
-    public class TargetShooter : Microsoft.Xna.Framework.Game
+    public partial class TargetShooter : Microsoft.Xna.Framework.Game
     {
         Texture2D enemyTankTexture;
         Texture2D enemyTurretTexture;
