@@ -509,14 +509,7 @@ namespace targetshooter
 
 
 
-        bool collide(Vector2 object1Pos, int object1Width, int object1Height, Vector2 object2Pos, int object2Width, int object2Height)
-        {
-
-            Rectangle object1Rect = new Rectangle((int)object1Pos.X, (int)object1Pos.Y, object1Width, object1Height);
-            Rectangle object2Rect = new Rectangle((int)object2Pos.X, (int)object2Pos.Y, object2Width, object2Height);
-
-            return object1Rect.Intersects(object2Rect);
-        }
+        
 
 
     }
