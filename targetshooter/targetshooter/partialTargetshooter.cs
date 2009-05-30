@@ -26,7 +26,43 @@ namespace targetshooter
 
         public void randomTank()
         {
-            
+            if (enemyList.Count() == 0 && totalNumOfEnemy > 0)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    
+                    int tmp = random.Next(0, 2);
+                    y = random.Next(0, graphics.GraphicsDevice.Viewport.Height);
+
+                    if (y >= 0 && y <= 10)
+                        x = random.Next(0, graphics.GraphicsDevice.Viewport.Width);
+                    if (tmp == 0)
+                        x = 10;
+                    else
+                        x = Window.ClientBounds.Width - 10; //random.Next(0, graphics.GraphicsDevice.Viewport.Width);
+
+                    NPCTank en = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(x, y), new Vector2(x, y) + new Vector2(60, 60));
+
+                    if (x == 10 && y < Window.ClientBounds.Height/2)
+                        for (int j = 0; j < 300; j++)
+                            en.rotateTankClockwise();
+                    else if (x == 10 && y > Window.ClientBounds.Height / 2)
+                        for (int j = 0; j < 230; j++)
+                            en.rotateTankClockwise();
+                    else if (x == Window.ClientBounds.Width -10 && y < Window.ClientBounds.Height/2)
+                        for (int j = 0; j < 45; j++)
+                            en.rotateTankClockwise();
+                    else if (x == Window.ClientBounds.Width - 10 && y > Window.ClientBounds.Height / 2)
+                        for (int j = 0; j < 130; j++)
+                            en.rotateTankClockwise();
+
+                    enemyList.Add(en);
+                    totalNumOfEnemy--;
+                }
+            }
+
+        }
+            /*
             if (enemyList.Count() == 0 && totalNumOfEnemy > 0)
             {
                 for (int i = 0; i < 3; i++)
@@ -61,11 +97,13 @@ namespace targetshooter
                 do
                 {
                     int tmp = random.Next(0, 2);
+                    y = random.Next(0, graphics.GraphicsDevice.Viewport.Height);
+                    
                     if (tmp == 0)
                         x = 10;
                     else
                         x = Window.ClientBounds.Width -  10; //random.Next(0, graphics.GraphicsDevice.Viewport.Width);
-                    y = random.Next(0, graphics.GraphicsDevice.Viewport.Height);
+                    
                 } while (x == player.Position.X || y == player.Position.Y);
                 NPCTank en = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(x, y), new Vector2(x, y) + new Vector2(60, 60));
 
@@ -87,7 +125,7 @@ namespace targetshooter
                 
 
             }
-        }
+        }*/
         public bool isTankInScreen(Vector2 maxWindowPosition, NPCTank tank)
         {
             // for (int i = 0; i < enemyList.Count(); i++)
@@ -101,7 +139,7 @@ namespace targetshooter
 
 
         }
-
+        
           
 
     }
