@@ -137,7 +137,7 @@ namespace targetshooter
             //        x = 0;
             //    else x = ((speed* gameTimeChanged) / slope );
 
-            //    position.X = position.X + x ;
+            //    position.X = position.X + (float) x ;
             //}
             //else if ((tankAngleInDegree < 270) && (tankAngleInDegree > 90))
             //{
@@ -149,7 +149,7 @@ namespace targetshooter
             //        x = 0;
             //    else x = ((speed * gameTimeChanged) / slope);
 
-            //    position.X = position.X - x * gameTimeChanged;
+            //    position.X = position.X - (float) x * gameTimeChanged;
 
             //}
 
@@ -219,27 +219,27 @@ namespace targetshooter
             if (tankAngleInDegree > 0 && tankAngleInDegree < 90)
             {
 
-                int y = (int)(speed * Math.Cos(((double)radian)));
+                double y = (speed * Math.Cos(((double)radian)));
 
 
-                int x = (int)(speed * Math.Sin((double)radian));
+                double x = (speed * Math.Sin((double)radian));
 
 
-                position.X = position.X - x;
-                position.Y = position.Y + y;
+                position.X = position.X - (float) x;
+                position.Y = position.Y + (float) y;
             }
             else if (tankAngleInDegree < 360 && tankAngleInDegree > 270)
             {
                 tankAngleInDegree = 360f - tankAngleInDegree;
                 radian = MathHelper.ToRadians(tankAngleInDegree);
-                int y = (int)(speed * Math.Cos(((double)radian)));
+                double y = (speed * Math.Cos(((double)radian)));
 
 
-                int x = (int)(speed * Math.Sin((double)radian));
+                double x = (speed * Math.Sin((double)radian));
 
 
-                position.X = position.X + x;
-                position.Y = position.Y + y;
+                position.X = position.X + (float) x;
+                position.Y = position.Y + (float) y;
 
 
             }
@@ -247,14 +247,14 @@ namespace targetshooter
             {
                 tankAngleInDegree = 270f - tankAngleInDegree;
                 radian = MathHelper.ToRadians(tankAngleInDegree);
-                int x = (int)(speed * Math.Cos(((double)radian)));
+                double x = (speed * Math.Cos(((double)radian)));
 
 
-                int y = (int)(speed * Math.Sin((double)radian));
+                double y = (speed * Math.Sin((double)radian));
 
 
-                position.X = position.X + x;
-                position.Y = position.Y - y;
+                position.X = position.X + (float) x;
+                position.Y = position.Y - (float) y;
 
 
             }
@@ -263,14 +263,14 @@ namespace targetshooter
 
                 tankAngleInDegree = 180f - tankAngleInDegree;
                 radian = MathHelper.ToRadians(tankAngleInDegree);
-                int y = (int)(speed * Math.Cos(((double)radian)));
+                double y = (speed * Math.Cos(((double)radian)));
 
 
-                int x = (int)(speed * Math.Sin((double)radian));
+                double x = (speed * Math.Sin((double)radian));
 
 
-                position.X = position.X - x;
-                position.Y = position.Y - y;
+                position.X = position.X - (float) x;
+                position.Y = position.Y - (float) y;
 
 
 
@@ -360,7 +360,7 @@ namespace targetshooter
             //        x = 0;
             //    else x = (tankSpeed  / slope);
 
-            //    position.X = position.X - x * gameTimeChanged;
+            //    position.X = position.X - (float) x * gameTimeChanged;
             //}
             //else if ((tankAngleInDegree < 270) && (tankAngleInDegree > 90))
             //{
@@ -372,7 +372,7 @@ namespace targetshooter
             //        x = 0;
             //    else x = (tankSpeed  / slope);
 
-            //    position.X = position.X + x * gameTimeChanged;
+            //    position.X = position.X + (float) x * gameTimeChanged;
 
             //}
 
@@ -394,27 +394,27 @@ namespace targetshooter
             if (tankAngleInDegree > 0 && tankAngleInDegree < 90)
             {
 
-                int y = (int)(speed * Math.Cos(((double)radian)));
+                double y = (speed * Math.Cos(((double)radian)));
 
 
-                int x = (int)(speed * Math.Sin((double)radian));
+                double x = (speed * Math.Sin((double)radian));
 
 
-                position.X = position.X + x;
-                position.Y = position.Y - y;
+                position.X = position.X + (float) x;
+                position.Y = position.Y - (float) y;
             }
             else if (tankAngleInDegree < 360 && tankAngleInDegree > 270)
             {
                 tankAngleInDegree = 360f - tankAngleInDegree;
                 radian = MathHelper.ToRadians(tankAngleInDegree);
-                int y = (int)(speed * Math.Cos(((double)radian)));
+                double y = (speed * Math.Cos(((double)radian)));
 
 
-                int x = (int)(speed * Math.Sin((double)radian));
+                double x = (speed * Math.Sin((double)radian));
 
 
-                position.X = position.X - x;
-                position.Y = position.Y - y;
+                position.X = position.X - (float) x;
+                position.Y = position.Y - (float) y;
 
 
             }
@@ -422,14 +422,14 @@ namespace targetshooter
             {
                 tankAngleInDegree = 270f - tankAngleInDegree;
                 radian = MathHelper.ToRadians(tankAngleInDegree);
-                int x = (int)(speed * Math.Cos(((double)radian)));
+                double x = (speed * Math.Cos(((double)radian)));
 
 
-                int y = (int)(speed * Math.Sin((double)radian));
+                double y = (speed * Math.Sin((double)radian));
 
 
-                position.X = position.X - x;
-                position.Y = position.Y + y;
+                position.X = position.X - (float) x;
+                position.Y = position.Y + (float) y;
 
 
             }
@@ -438,14 +438,14 @@ namespace targetshooter
 
                 tankAngleInDegree = 180f - tankAngleInDegree;
                 radian = MathHelper.ToRadians(tankAngleInDegree);
-                int y = (int)(speed * Math.Cos(((double)radian)));
+                double y = (speed * Math.Cos(((double)radian)));
 
 
-                int x = (int)(speed * Math.Sin((double)radian));
+                double x = (speed * Math.Sin((double)radian));
 
 
-                position.X = position.X + x;
-                position.Y = position.Y + y;
+                position.X = position.X + (float) x;
+                position.Y = position.Y + (float) y;
 
 
 
@@ -499,7 +499,7 @@ namespace targetshooter
             //            x = 0;
             //        else x = (speed / _slope);
 
-            //        _position.X = _position.X + x;
+            //        _position.X = _position.X + (float) x;
             //    }
             //    else if ((_turretAngleInDegree < 270) && (_turretAngleInDegree > 90))
             //    {
@@ -511,7 +511,7 @@ namespace targetshooter
             //            x = 0;
             //        else x = (speed / _slope);
 
-            //        _position.X = _position.X - x;
+            //        _position.X = _position.X - (float) x;
 
             //    }
             //    return _position;
