@@ -377,16 +377,68 @@ namespace targetshooter
                             bullListForOneTank = enShellList[i];
                             for (int j = 0; j < bullListForOneTank.Count; j++)
                             {
+                                
                                 NPCTankShell enemyShell = bullListForOneTank[j];
 
-                                if (collide(player.Position, player.getWidth(), player.getHeight(), enemyShell.getShellPosition(), enemyShell.getWidth(), enemyShell.getHeight()))
+                                Vector2 tankOrigin = new Vector2(GlobalClass.plWidth / 2, GlobalClass.plHeight / 2);
+                                
+                                Matrix playerTransform =
+                                Matrix.CreateTranslation(new Vector3(-tankOrigin, 0.0f)) *
+                                    // Matrix.CreateScale(block.Scale) *  would go here
+                                 Matrix.CreateRotationZ(player.getTankAngle()) *
+                                 Matrix.CreateTranslation(new Vector3(player.Position, 0.0f));
+
+                                // Calculate the bounding rectangle of this block in world space
+                                Rectangle playerRectangle = CalculateBoundingRectangle(
+                                         new Rectangle(0, 0, player.width, player.getHeight()),
+                                         playerTransform);
+
+                                Rectangle bulletRectangle = new Rectangle((int)enemyShell.getShellPosition().X, (int)enemyShell.getShellPosition().Y,
+                enemyShell.getBulletImage().Width, enemyShell.getBulletImage().Height);
+
+                                Color[] bulletTextureData;
+                                Color[] playerTextureData;
+
+                                playerTextureData =
+                                  new Color[player.tankImage.Width * player.tankImage.Height];
+                                player.tankImage.GetData(playerTextureData);
+                                bulletTextureData =
+                                    new Color[enemyShell.getBulletImage().Width * enemyShell.getBulletImage().Height];
+                                enemyShell.getBulletImage().GetData(bulletTextureData);
+
+
+                                Matrix bulletTransform =
+               Matrix.CreateTranslation(new Vector3(enemyShell.getShellPosition(), 0.0f));
+                                
+                                
+                                if (bulletRectangle.Intersects(playerRectangle))
                                 {
-                                    enemy.remoteSheelFromListAt(j);
+                                    // Check collision with person
+                                    if (IntersectPixels(bulletTransform, enemyShell.getBulletImage().Width,
+                                                         enemyShell.getBulletImage().Height, bulletTextureData,
+                                                        playerTransform, player.tankImage.Width,
+                                                        player.tankImage.Height, playerTextureData))
+                                    {
+                                        enemy.remoteSheelFromListAt(j);
 
-                                    player.getHit(10);
-                                    player.notifyAboutHit();
+                                        player.getHit(10);
+                                        player.notifyAboutHit();
 
+                                    }
                                 }
+
+
+
+
+
+                                //if (collide(player.Position, player.getWidth(), player.getHeight(), enemyShell.getShellPosition(), enemyShell.getWidth(), enemyShell.getHeight()))
+                                //{
+                                //    enemy.remoteSheelFromListAt(j);
+
+                                //    player.getHit(10);
+                                //    player.notifyAboutHit();
+
+                                //}
 
                             }
                         }
