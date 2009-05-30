@@ -21,39 +21,37 @@ namespace targetshooter
     {
         int x, y;
         Random random = new Random();
+        int totalNumOfEnemy = 50;
 
         public void randomTank()
         {
             
-            if (enemyList.Count() == 0)
+            if (enemyList.Count() == 0 && totalNumOfEnemy > 0)
             {
                 for (int i = 0; i < 3; i++)
                 {
                     x = random.Next(0, graphics.GraphicsDevice.Viewport.Width);
                     y = random.Next(0, graphics.GraphicsDevice.Viewport.Height);
-                    /*for (int i = 0; i < enemyList.Count; i++)
-                    {
-                        if (enemyList.ElementAt(i).Position.X = x && enemyList.ElementAt(i).Position.Y = y)
-
-
-                    }*/
+                 
                     NPCTank en = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(x, y), new Vector2(x, y) + new Vector2(60, 60));
 
                     int rot = random.Next(0, 360);
                     for (int j = 0; j < rot; j++)
-                        //{
+                    {
 
                         en.rotateTankClockwise();
 
-                    //}
+                    }
 
                     enemyList.Add(en);
+                    totalNumOfEnemy--;
                 }
-                //numOfEnemy = 3;
+               
             }
-            else if (enemyList.Count < 3)
+            else if (enemyList.Count() < 3 && totalNumOfEnemy > 0)
             {
-
+                x = random.Next(0, graphics.GraphicsDevice.Viewport.Width);
+                y = random.Next(0, graphics.GraphicsDevice.Viewport.Height);
                 NPCTank en = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(x, y), new Vector2(x, y) + new Vector2(60, 60));
 
                 int rot = random.Next(0, 360);
@@ -65,26 +63,23 @@ namespace targetshooter
                 //}
 
                 enemyList.Add(en);
+                totalNumOfEnemy--;
 
-            }
-            /*   else if (numOfEnemy < 3)
-               {
-                   x = random.Next(0, 1200);
-                   y = random.Next(0, 600);
-                   enemyList.Add(new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(x, y), new Vector2(x, y) + new Vector2(60, 60)));
-                   numOfEnemy++;         
-               }
-               else
-               {
-                   enemyList.RemoveAt(0);
-                   numOfEnemy--;
-               }*/
-
-        
+            }       
         }
+      /*  public bool isTankInScreen(Vector2 maxWindowPosition, NPCTank tank)
+        {
+            // for (int i = 0; i < enemyList.Count(); i++)
+            //{
+       //     if (tank.getWidth() < 0 || (tank.getWidth() > maxWindowPosition.X) || (tank.getHeight() < 0) || (tank.getHeight > maxWindowPosition.Y))
+                return false;
+            else
+                return true;
+            // }
+            //return true;
 
 
-
-
+        }*/
     }
+
 }
