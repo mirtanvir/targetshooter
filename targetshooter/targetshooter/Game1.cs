@@ -244,6 +244,17 @@ namespace targetshooter
 
             if (gameFlag)
             {
+                for (int i = 0; i < enemyList.Count(); i++)
+                {
+
+                    if (enemyList.ElementAt(i).Position.X < 0 || (enemyList.ElementAt(i).Position.X > Window.ClientBounds.Width) || (enemyList.ElementAt(i).Position.Y < 0) || (enemyList.ElementAt(i).Position.Y > Window.ClientBounds.Height))
+                    {
+                        enemyList.RemoveAt(i);
+                        randomTank();
+                    }
+                    //System.Console.WriteLine("OK");
+                    
+                }
 
                 Rectangle tankRect = new Rectangle((int)player.Position.X, (int)player.Position.Y, player.imageOfTurret.Width, player.imageOfTurret.Height);
 
