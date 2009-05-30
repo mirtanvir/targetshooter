@@ -177,10 +177,9 @@ namespace targetshooter
             }
             else
             {
-                int tmp = 180;
+               
                 Vector2 newPos = updateClass.UpdateTankPositionUp(true, tankAngle, Position, TankSpeed, timeChangedSinceLastUpdate);
                 if (base.Position.X == newPos.X && base.Position.Y == newPos.Y)
-                // for (int i = 1; i < tmp; i++)
                 {
                     OnTheScreenBoundaryCounter = 1;
                     OnTheScreenBoundary = true;
@@ -197,18 +196,8 @@ namespace targetshooter
                         
                         rotateTankClockwise();
                          newPos = updateClass.UpdateTankPositionUp(true, tankAngle, Position, TankSpeed, timeChangedSinceLastUpdate);
-                        if (base.Position.X == newPos.X && base.Position.Y == newPos.Y)
-                        {
-                            ;//do nothing
-                        }
-                        else
-                        {
-
-                          //  i = 180;
-                        }
-                    }
-
-                        
+                     
+                }       
                 else
                 {
                     base.MoveTank(newPos);
