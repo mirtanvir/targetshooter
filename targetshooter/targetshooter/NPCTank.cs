@@ -28,7 +28,7 @@ namespace targetshooter
             bulletImage = imgOfTheShell;
             //shellList  = new playerTankShell(imgOfTheShell,
             base.numberOflives = numberOfLives;
-            base.TankSpeed = 2f;
+            base.TankSpeed =1.5f;
             base.tankAngle = 180;
             base.turretAngle = 180;
 

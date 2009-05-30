@@ -33,9 +33,13 @@ namespace targetshooter
                 {
                     do
                     {
-                        x = random.Next(0, graphics.GraphicsDevice.Viewport.Width);
+                        int tmp = random.Next(0, 2);
+                        if (tmp == 0)
+                            x = 10;
+                        else
+                            x = Window.ClientBounds.Width - 10; //random.Next(0, graphics.GraphicsDevice.Viewport.Width);
                         y = random.Next(0, graphics.GraphicsDevice.Viewport.Height);
-                    } while (x == player.Position.X || y == player.Position.Y);
+                    } while (x == player.Position.X && y == player.Position.Y);
                  
                     NPCTank en = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(x, y), new Vector2(x, y) + new Vector2(60, 60));
 
@@ -56,7 +60,11 @@ namespace targetshooter
             {
                 do
                 {
-                    x = random.Next(0, graphics.GraphicsDevice.Viewport.Width);
+                    int tmp = random.Next(0, 2);
+                    if (tmp == 0)
+                        x = 10;
+                    else
+                        x = Window.ClientBounds.Width -  10; //random.Next(0, graphics.GraphicsDevice.Viewport.Width);
                     y = random.Next(0, graphics.GraphicsDevice.Viewport.Height);
                 } while (x == player.Position.X || y == player.Position.Y);
                 NPCTank en = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(x, y), new Vector2(x, y) + new Vector2(60, 60));
