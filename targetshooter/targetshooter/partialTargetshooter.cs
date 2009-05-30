@@ -19,12 +19,12 @@ namespace targetshooter
 {
     public partial class TargetShooter
     {
-
+        int x, y;
+        Random random = new Random();
 
         public void randomTank()
         {
-            int x, y;
-            Random random= new Random();
+            
             if (enemyList.Count() == 0)
             {
                 for (int i = 0; i < 3; i++)
@@ -38,7 +38,9 @@ namespace targetshooter
 
                     }*/
                     NPCTank en = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(x, y), new Vector2(x, y) + new Vector2(60, 60));
-                    for (int j = 0; j < 50; j++)
+
+                    int rot = random.Next(0, 360);
+                    for (int j = 0; j < rot; j++)
                         //{
 
                         en.rotateTankClockwise();
@@ -48,6 +50,22 @@ namespace targetshooter
                     enemyList.Add(en);
                 }
                 //numOfEnemy = 3;
+            }
+            else if (enemyList.Count < 3)
+            {
+
+                NPCTank en = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(x, y), new Vector2(x, y) + new Vector2(60, 60));
+
+                int rot = random.Next(0, 360);
+                for (int j = 0; j < rot; j++)
+                    //{
+
+                    en.rotateTankClockwise();
+
+                //}
+
+                enemyList.Add(en);
+
             }
             /*   else if (numOfEnemy < 3)
                {
