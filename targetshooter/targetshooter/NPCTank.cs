@@ -225,8 +225,8 @@ namespace targetshooter
 
         public void remoteSheelFromListAt(int index)
         {
-
-            shellList.RemoveAt(index);
+            if (shellList.Count != 0)
+                shellList.RemoveAt(index);
 
         
         }
