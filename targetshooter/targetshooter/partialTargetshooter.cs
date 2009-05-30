@@ -73,7 +73,7 @@ namespace targetshooter
                             }
 
                         }
-                    } while (counter != true);
+                    } while (counter == true);
 
                     NPCTank en = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(x, y), new Vector2(x, y) + new Vector2(60, 60));
 
