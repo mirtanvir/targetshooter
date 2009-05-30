@@ -191,6 +191,14 @@ namespace targetshooter
             
             }
 
+            public void removeShellFromListAt(int index)
+            {
+                if (shellList.Count != 0)
+                    shellList.RemoveAt(index);
+
+
+            }
+
 
 
 
@@ -225,5 +233,6 @@ namespace targetshooter
         public readonly int health;
     
     }
+      
 
 }

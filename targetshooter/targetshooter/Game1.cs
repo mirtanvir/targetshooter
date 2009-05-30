@@ -366,8 +366,42 @@ namespace targetshooter
 
 
                 List<List<NPCTankShell>> enShellList = new List<List<NPCTankShell>>();
-                foreach (NPCTank enemy in enemyList)
+                
+                for (int k=0;k<enemyList.Count();k++)
+                //for (NPCTank enemy in enemyList)
                 {
+                    NPCTank enemy = enemyList[k];
+
+                    List<playerTankShell> playerShellList = player.getBulletList();
+
+                    for(int x=0;x<playerShellList.Count();x++)
+                    //foreach (playerTankShell playerShell in playerShellList)
+                    {
+                        playerTankShell playerShell = playerShellList[x];
+
+                        if (collide(enemy.tankImage, enemy.Position, enemy.getTankAngle(), playerShell.getBulletImage(), playerShell.getShellPosition()))
+                        {
+                            enemy.getHit(10);
+
+                            playerShellList[x].Dead = true;
+                            //player.removeSheelFromListAt(k);
+                        
+                        }
+                    
+                    }
+
+
+                    if (enemy.isDead())
+                    {
+
+                        if (enemyList.Count() >=k)
+                        {
+                            enemyList.RemoveAt(k);
+                        
+                        }
+                    
+                    }
+
                     enShellList.Add(enemy.getBulletList());
                     if (enShellList.Count > 0)
 
@@ -381,69 +415,88 @@ namespace targetshooter
                                 
                                 NPCTankShell enemyShell = bullListForOneTank[j];
 
-                                Vector2 tankOrigin = new Vector2(GlobalClass.plWidth / 2, GlobalClass.plHeight / 2);
+               //                 Vector2 tankOrigin = new Vector2(GlobalClass.plWidth / 2, GlobalClass.plHeight / 2);
                                 
-                                Matrix playerTransform =
-                                Matrix.CreateTranslation(new Vector3(-tankOrigin, 0.0f)) *
-                                    // Matrix.CreateScale(block.Scale) *  would go here
-                                 Matrix.CreateRotationZ(player.getTankAngle()) *
-                                 Matrix.CreateTranslation(new Vector3(player.Position, 0.0f));
+               //                 Matrix playerTransform =
+               //                 Matrix.CreateTranslation(new Vector3(-tankOrigin, 0.0f)) *
+               //                     // Matrix.CreateScale(block.Scale) *  would go here
+               //                  Matrix.CreateRotationZ(player.getTankAngle()) *
+               //                  Matrix.CreateTranslation(new Vector3(player.Position, 0.0f));
 
-                                // Calculate the bounding rectangle of this block in world space
-                                Rectangle playerRectangle = CalculateBoundingRectangle(
-                                         new Rectangle(0, 0, player.width, player.getHeight()),
-                                         playerTransform);
+               //                 // Calculate the bounding rectangle of this block in world space
+               //                 Rectangle playerRectangle = CalculateBoundingRectangle(
+               //                          new Rectangle(0, 0, player.width, player.getHeight()),
+               //                          playerTransform);
 
-                                Rectangle bulletRectangle = new Rectangle((int)enemyShell.getShellPosition().X, (int)enemyShell.getShellPosition().Y,
-                enemyShell.getBulletImage().Width, enemyShell.getBulletImage().Height);
+               //                 Rectangle bulletRectangle = new Rectangle((int)enemyShell.getShellPosition().X, (int)enemyShell.getShellPosition().Y,
+               // enemyShell.getBulletImage().Width, enemyShell.getBulletImage().Height);
 
-                                Color[] bulletTextureData;
-                                Color[] playerTextureData;
+               //                 Color[] bulletTextureData;
+               //                 Color[] playerTextureData;
 
-                                playerTextureData =
-                                  new Color[player.tankImage.Width * player.tankImage.Height];
-                                player.tankImage.GetData(playerTextureData);
-                                bulletTextureData =
-                                    new Color[enemyShell.getBulletImage().Width * enemyShell.getBulletImage().Height];
-                                enemyShell.getBulletImage().GetData(bulletTextureData);
+               //                 playerTextureData =
+               //                   new Color[player.tankImage.Width * player.tankImage.Height];
+               //                 player.tankImage.GetData(playerTextureData);
+               //                 bulletTextureData =
+               //                     new Color[enemyShell.getBulletImage().Width * enemyShell.getBulletImage().Height];
+               //                 enemyShell.getBulletImage().GetData(bulletTextureData);
 
 
-                                Matrix bulletTransform =
-               Matrix.CreateTranslation(new Vector3(enemyShell.getShellPosition(), 0.0f));
+               //                 Matrix bulletTransform =
+               //Matrix.CreateTranslation(new Vector3(enemyShell.getShellPosition(), 0.0f));
                                 
                                 
-                                if (bulletRectangle.Intersects(playerRectangle))
+               //                 if (bulletRectangle.Intersects(playerRectangle))
+               //                 {
+               //                     // Check collision with person
+               //                     if (IntersectPixels(bulletTransform, enemyShell.getBulletImage().Width,
+               //                                          enemyShell.getBulletImage().Height, bulletTextureData,
+               //                                         playerTransform, player.tankImage.Width,
+               //                                         player.tankImage.Height, playerTextureData))
+               //                     {
+               //                         enemy.remoteSheelFromListAt(j);
+
+               //                         player.getHit(10);
+               //                         player.notifyAboutHit();
+
+               //                     }
+               //                 }
+
+
+
+
+
+                                if (collide(player.tankImage, player.Position, player.getTankAngle(), enemyShell.getBulletImage(), enemyShell.getShellPosition()))
                                 {
-                                    // Check collision with person
-                                    if (IntersectPixels(bulletTransform, enemyShell.getBulletImage().Width,
-                                                         enemyShell.getBulletImage().Height, bulletTextureData,
-                                                        playerTransform, player.tankImage.Width,
-                                                        player.tankImage.Height, playerTextureData))
-                                    {
-                                        enemy.remoteSheelFromListAt(j);
+                                    enemy.remoteSheelFromListAt(j);
 
-                                        player.getHit(10);
-                                        player.notifyAboutHit();
+                                    player.getHit(10);
+                                    player.notifyAboutHit();
 
-                                    }
                                 }
-
-
-
-
-
-                                //if (collide(player.Position, player.getWidth(), player.getHeight(), enemyShell.getShellPosition(), enemyShell.getWidth(), enemyShell.getHeight()))
-                                //{
-                                //    enemy.remoteSheelFromListAt(j);
-
-                                //    player.getHit(10);
-                                //    player.notifyAboutHit();
-
-                                //}
 
                             }
                         }
                 }
+
+                List<playerTankShell> playerBulList =  player.getBulletList();
+
+                for (int y = 0; y <playerBulList.Count(); y++)
+                //foreach (playerTankShell playerShell in playerShellList)
+                {
+                    playerTankShell s= playerBulList[y];
+
+
+                    if(s.Dead)
+
+                        player.removeShellFromListAt(y);
+
+
+
+
+                }
+
+
             }
             base.Update(gameTime);
         }

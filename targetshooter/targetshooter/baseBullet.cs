@@ -25,6 +25,7 @@ namespace targetshooter
         private Texture2D bulletImage;
         private int height;
         private int width;
+        private bool dead = false;
         
         /*
          *  move the bullet
@@ -44,7 +45,25 @@ namespace targetshooter
 
         }
 
+        //public void makeDead()
+        //{
 
+        //    this.dead = true;
+        
+        //}
+
+
+       public bool Dead{
+   
+       get {
+   return this.dead;
+   }
+           set {
+
+               this.dead = value;
+           }
+   
+   }
 
         protected void move(Vector2 bulletPositon)
         {

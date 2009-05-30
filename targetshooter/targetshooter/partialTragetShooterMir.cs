@@ -22,13 +22,62 @@ namespace targetshooter
 
 
 
-        bool collide(Vector2 object1Pos, int object1Width, int object1Height, Vector2 object2Pos, int object2Width, int object2Height)
+        bool collide(Texture2D tankTexture, Vector2 tankPosition, float tankRotationInRadian,Texture2D bulletTexture, Vector2 bulletPosition)//  Vector2 object1Pos, int object1Width, int object1Height, Vector2 object2Pos, int object2Width, int object2Height)
         {
+            Vector2 tankOrigin = new Vector2(tankTexture.Width / 2, tankTexture.Height / 2);
 
-            Rectangle object1Rect = new Rectangle((int)object1Pos.X, (int)object1Pos.Y, object1Width, object1Height);
-            Rectangle object2Rect = new Rectangle((int)object2Pos.X, (int)object2Pos.Y, object2Width, object2Height);
+            Matrix playerTransform =
+            Matrix.CreateTranslation(new Vector3(-tankOrigin, 0.0f)) *
+                // Matrix.CreateScale(block.Scale) *  would go here
+             Matrix.CreateRotationZ(tankRotationInRadian) *
+             Matrix.CreateTranslation(new Vector3(tankPosition, 0.0f));
 
-            return object1Rect.Intersects(object2Rect);
+            // Calculate the bounding rectangle of this block in world space
+            Rectangle playerRectangle = CalculateBoundingRectangle(
+                     new Rectangle(0, 0, tankTexture.Width, tankTexture.Height),
+                     playerTransform);
+
+            Rectangle bulletRectangle = new Rectangle((int)bulletPosition.X, (int)bulletPosition.Y,
+bulletTexture.Width, bulletTexture.Height);
+
+            Color[] bulletTextureData;
+            Color[] playerTextureData;
+
+            playerTextureData =
+              new Color[tankTexture.Width * tankTexture.Height];
+            tankTexture.GetData(playerTextureData);
+            bulletTextureData =
+                new Color[bulletTexture.Width * bulletTexture.Height];
+            bulletTexture.GetData(bulletTextureData);
+
+
+            Matrix bulletTransform =
+Matrix.CreateTranslation(new Vector3(bulletPosition, 0.0f));
+
+
+            if (bulletRectangle.Intersects(playerRectangle))
+            {
+                // Check collision with person
+                if (IntersectPixels(bulletTransform, bulletTexture.Width,
+                                     bulletTexture.Height, bulletTextureData,
+                                    playerTransform, tankTexture.Width,
+                                    tankTexture.Height, playerTextureData))
+                {
+                    return true;
+
+                }
+
+            }
+
+            return false;
+
+
+
+
+            //Rectangle object1Rect = new Rectangle((int)object1Pos.X, (int)object1Pos.Y, object1Width, object1Height);
+            //Rectangle object2Rect = new Rectangle((int)object2Pos.X, (int)object2Pos.Y, object2Width, object2Height);
+
+            //return object1Rect.Intersects(object2Rect);
         }
 
 
