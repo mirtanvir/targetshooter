@@ -478,7 +478,7 @@ namespace targetshooter
 
 
 
-                spriteBatch.DrawString(info.fontSprite,info.getInfoBar(),info.position, Color.White);
+                spriteBatch.DrawString(info.fontSprite,info.getInfoBar(),info.position, Color.Black);
 
 
 
