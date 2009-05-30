@@ -22,6 +22,7 @@ namespace targetshooter
         private List<NPCTankShell> shellList = new List<NPCTankShell>();
         private Texture2D bulletImage;
         private float tankShellSpeed;
+        private bool isBoss = false;
         public NPCTank(Texture2D imgOfTank, Texture2D imgOfTankTurret, Texture2D imgOfTheShell, float shellSpeed,int numberOfLives, Vector2 firstPosition, Vector2 turretPos)
             : base(imgOfTank, imgOfTankTurret, firstPosition, turretPos,0)
         {
@@ -33,6 +34,11 @@ namespace targetshooter
             base.turretAngle = 180;
 
             tankShellSpeed = shellSpeed;
+        }
+
+        public void setIsBoss(bool boss)
+        {
+            isBoss = boss;
         }
 
         public float getTankAngle()
@@ -148,19 +154,67 @@ namespace targetshooter
 
         public void movePlayerTankUp(float timeChangedSinceLastUpdate)
         {
-
-            Vector2 newPos = updateClass.UpdateTankPositionUp(false, tankAngle, Position, TankSpeed, timeChangedSinceLastUpdate);
-            base.MoveTank(newPos);
-            base.TurretPosition = Position + new Vector2(60, 60);
-
+            
+                Vector2 newPos = updateClass.UpdateTankPositionUp(false, tankAngle, Position, TankSpeed, timeChangedSinceLastUpdate);
+                base.MoveTank(newPos);
+                base.TurretPosition = Position + new Vector2(60, 60);
+           
         }
 
+        private bool OnTheScreenBoundary=false;
+        private int OnTheScreenBoundaryCounter = 0;
         public void MoveNPCTankDown(float timeChangedSinceLastUpdate)
         {
 
-            Vector2 newPos = updateClass.UpdateTankPositionUp(false, tankAngle, Position, TankSpeed, timeChangedSinceLastUpdate);
+          /*  Vector2 newPos = updateClass.UpdateTankPositionUp(false, tankAngle, Position, TankSpeed, timeChangedSinceLastUpdate);
             base.MoveTank(newPos);
-            base.TurretPosition = Position + new Vector2(60, 60);
+            base.TurretPosition = Position + new Vector2(60, 60);*/
+            if (!isBoss)
+            {
+                Vector2 newPos = updateClass.UpdateTankPositionUp(false, tankAngle, Position, TankSpeed, timeChangedSinceLastUpdate);
+                base.MoveTank(newPos);
+                base.TurretPosition = Position + new Vector2(60, 60);
+            }
+            else
+            {
+                int tmp = 180;
+                Vector2 newPos = updateClass.UpdateTankPositionUp(true, tankAngle, Position, TankSpeed, timeChangedSinceLastUpdate);
+                if (base.Position.X == newPos.X && base.Position.Y == newPos.Y)
+                // for (int i = 1; i < tmp; i++)
+                {
+                    OnTheScreenBoundaryCounter = 1;
+                    OnTheScreenBoundary = true;
+                }   
+                if (this.OnTheScreenBoundaryCounter >= 45)
+                {
+                    this.OnTheScreenBoundaryCounter = 0;
+                    this.OnTheScreenBoundary = false;
+
+                }
+                if (this.OnTheScreenBoundary && (this.OnTheScreenBoundaryCounter > 0))
+                {
+                    this.OnTheScreenBoundaryCounter++;
+                        
+                        rotateTankClockwise();
+                         newPos = updateClass.UpdateTankPositionUp(true, tankAngle, Position, TankSpeed, timeChangedSinceLastUpdate);
+                        if (base.Position.X == newPos.X && base.Position.Y == newPos.Y)
+                        {
+                            ;//do nothing
+                        }
+                        else
+                        {
+
+                          //  i = 180;
+                        }
+                    }
+
+                        
+                else
+                {
+                    base.MoveTank(newPos);
+                    base.TurretPosition = Position + new Vector2(60, 60);
+                }
+            }
 
         }
         public void update(float timeChanged, Vector2 MaxWindow, Vector2 playerPos, Vector2 tankRightTip, Vector2 tankLeftTip)
