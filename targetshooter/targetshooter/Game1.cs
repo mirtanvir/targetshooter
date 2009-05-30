@@ -252,7 +252,12 @@ namespace targetshooter
                         enemyList.RemoveAt(i);
                         randomTank();
                     }
-                    //System.Console.WriteLine("OK");
+                /*    else if ( collide(enemyList.ElementAt(i).getHeight(), enemyList.ElementAt(i), player.getShellPosition(), player.getWidth(), player.getHeight()))
+                    {
+
+                        enemyList.RemoveAt(i);
+                        randomTank();
+                    }*/
                     
                 }
 
@@ -349,7 +354,7 @@ namespace targetshooter
                     {
                         enemy.fireShell();
                     }
-                    enemyShotCountDown = 500;
+                    enemyShotCountDown = 2000;
 
 
                 }
