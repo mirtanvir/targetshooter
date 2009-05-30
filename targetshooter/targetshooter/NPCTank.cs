@@ -17,7 +17,7 @@ using System.Linq;
 
 namespace targetshooter
 {
-    class NPCTank : BaseTank
+   public class NPCTank : BaseTank
     {
         private List<NPCTankShell> shellList = new List<NPCTankShell>();
         private Texture2D bulletImage;

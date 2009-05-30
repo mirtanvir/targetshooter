@@ -17,6 +17,7 @@ using System.Threading;
 
 namespace targetshooter
 {
+    
     public partial class TargetShooter
     {
         int x, y;
@@ -30,8 +31,11 @@ namespace targetshooter
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    x = random.Next(0, graphics.GraphicsDevice.Viewport.Width);
-                    y = random.Next(0, graphics.GraphicsDevice.Viewport.Height);
+                    do
+                    {
+                        x = random.Next(0, graphics.GraphicsDevice.Viewport.Width);
+                        y = random.Next(0, graphics.GraphicsDevice.Viewport.Height);
+                    } while (x == player.Position.X || y == player.Position.Y);
                  
                     NPCTank en = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(x, y), new Vector2(x, y) + new Vector2(60, 60));
 
@@ -50,28 +54,37 @@ namespace targetshooter
             }
             else if (enemyList.Count() < 3 && totalNumOfEnemy > 0)
             {
-                x = random.Next(0, graphics.GraphicsDevice.Viewport.Width);
-                y = random.Next(0, graphics.GraphicsDevice.Viewport.Height);
+                do
+                {
+                    x = random.Next(0, graphics.GraphicsDevice.Viewport.Width);
+                    y = random.Next(0, graphics.GraphicsDevice.Viewport.Height);
+                } while (x == player.Position.X || y == player.Position.Y);
                 NPCTank en = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(x, y), new Vector2(x, y) + new Vector2(60, 60));
 
                 int rot = random.Next(0, 360);
                 for (int j = 0; j < rot; j++)
-                    //{
+                {
 
                     en.rotateTankClockwise();
 
-                //}
+                }
 
                 enemyList.Add(en);
                 totalNumOfEnemy--;
 
-            }       
+            }
+                // create boss
+            else if (totalNumOfEnemy == 0)
+            {
+                
+
+            }
         }
-      /*  public bool isTankInScreen(Vector2 maxWindowPosition, NPCTank tank)
+        public bool isTankInScreen(Vector2 maxWindowPosition, NPCTank tank)
         {
             // for (int i = 0; i < enemyList.Count(); i++)
             //{
-       //     if (tank.getWidth() < 0 || (tank.getWidth() > maxWindowPosition.X) || (tank.getHeight() < 0) || (tank.getHeight > maxWindowPosition.Y))
+            if (tank.getWidth() < 0 || (tank.getWidth() > maxWindowPosition.X) || (tank.getHeight() < 0) || (tank.getHeight() > maxWindowPosition.Y))
                 return false;
             else
                 return true;
@@ -79,7 +92,10 @@ namespace targetshooter
             //return true;
 
 
-        }*/
+        }
+
+          
+
     }
 
 }
