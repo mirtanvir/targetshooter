@@ -44,16 +44,16 @@ namespace targetshooter
                     NPCTank en = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(x, y), new Vector2(x, y) + new Vector2(60, 60));
 
                     if (x == 10 && y < Window.ClientBounds.Height/2)
-                        for (int j = 0; j < 300; j++)
+                        for (int j = 0; j < 300; j++) //320
                             en.rotateTankClockwise();
                     else if (x == 10 && y > Window.ClientBounds.Height / 2)
-                        for (int j = 0; j < 230; j++)
+                        for (int j = 0; j < 240; j++) //225
                             en.rotateTankClockwise();
                     else if (x == Window.ClientBounds.Width -10 && y < Window.ClientBounds.Height/2)
-                        for (int j = 0; j < 45; j++)
+                        for (int j = 0; j < 60; j++)  //45
                             en.rotateTankClockwise();
                     else if (x == Window.ClientBounds.Width - 10 && y > Window.ClientBounds.Height / 2)
-                        for (int j = 0; j < 130; j++)
+                        for (int j = 0; j < 112; j++)  //135
                             en.rotateTankClockwise();
 
                     enemyList.Add(en);
