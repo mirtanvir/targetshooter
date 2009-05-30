@@ -256,8 +256,6 @@ namespace targetshooter
                 player.update(new Vector2(Window.ClientBounds.Width, Window.ClientBounds.Height));
 
 
-
-
                 if ((Keyboard.GetState().IsKeyDown(Keys.Down)))// && (player.Position.Y <= Window.ClientBounds.Height - texture.Height))
                 {
 
