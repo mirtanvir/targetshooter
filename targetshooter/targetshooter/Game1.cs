@@ -377,6 +377,7 @@ namespace targetshooter
                             bullListForOneTank = enShellList[i];
                             for (int j = 0; j < bullListForOneTank.Count; j++)
                             {
+                                //this portion of the code is taken from http://creators.xna.com/en-US/tutorial/collision2dperpixeltransformed. 
                                 
                                 NPCTankShell enemyShell = bullListForOneTank[j];
 
