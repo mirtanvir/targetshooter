@@ -397,6 +397,7 @@ namespace targetshooter
                         if (enemyList.Count() >=k)
                         {
                             enemyList.RemoveAt(k);
+                            randomTank();
                         
                         }
                     
