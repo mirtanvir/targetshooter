@@ -30,7 +30,7 @@ namespace targetshooter
             if (enemyList.Count() == 0 && totalNumOfEnemy > 0)
             {
                 
-                for (int l = 0; l < 8; l++)
+                for (int l = 0; l < 3; l++)
                 {
                     do
                     {
