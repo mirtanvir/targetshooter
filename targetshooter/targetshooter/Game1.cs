@@ -261,6 +261,7 @@ namespace targetshooter
                     
                 }
 
+
                 Rectangle tankRect = new Rectangle((int)player.Position.X, (int)player.Position.Y, player.imageOfTurret.Width, player.imageOfTurret.Height);
 
                 for (int i = 0; i < enemyList.Count; i++)
