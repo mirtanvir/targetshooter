@@ -22,25 +22,58 @@ namespace targetshooter
     {
         int x, y;
         Random random = new Random();
-        int totalNumOfEnemy = 3;
-        bool isBoss = false;
-
+        int totalNumOfEnemy = 10;
+        bool counter = false;
+        
         public void randomTank()
         {
             if (enemyList.Count() == 0 && totalNumOfEnemy > 0)
             {
-                for (int i = 0; i < 3; i++)
+                
+                for (int l = 0; l < 8; l++)
                 {
-                    
-                    int tmp = random.Next(0, 2);
-                    y = random.Next(0, graphics.GraphicsDevice.Viewport.Height);
+                    do
+                    {
+                        int tmp = random.Next(0, 2);
+                        y = random.Next(0, graphics.GraphicsDevice.Viewport.Height);
 
-                    if (y >= 0 && y <= 10)
-                        x = random.Next(0, graphics.GraphicsDevice.Viewport.Width);
-                    if (tmp == 0)
-                        x = 10;
-                    else
-                        x = Window.ClientBounds.Width - 10; //random.Next(0, graphics.GraphicsDevice.Viewport.Width);
+                        if (y >= 0 && y <= 10)
+                            x = random.Next(0, graphics.GraphicsDevice.Viewport.Width);
+                        if (tmp == 0)
+                            x = 10;
+                        else
+                            x = Window.ClientBounds.Width - 10; //random.Next(0, graphics.GraphicsDevice.Viewport.Width);
+
+                        for (int i = 0; i < enemyList.Count; i++)
+                        {
+                            for (int j = 1; j < GlobalClass.plWidth / 2; i++)
+                            {
+                                if (x == enemyList.ElementAt(l).getWidth() + j)
+                                {
+                                    counter = true;
+                                }
+                                else if (x == enemyList.ElementAt(l).getWidth() - j)
+                                {
+                                    counter = true;
+                                }
+                                else
+                                {
+                                    for (int k = 1; k < GlobalClass.plHeight / 2; k++)
+                                    {
+                                        if (y == enemyList.ElementAt(l).getHeight() + j)
+                                        {
+                                            counter = true;
+                                        }
+                                        else if (y == enemyList.ElementAt(l).getHeight() - j)
+                                        {
+                                            counter = true;
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+                    } while (counter != true);
 
                     NPCTank en = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(x, y), new Vector2(x, y) + new Vector2(60, 60));
 
