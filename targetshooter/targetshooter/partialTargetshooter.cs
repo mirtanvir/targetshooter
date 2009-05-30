@@ -22,7 +22,8 @@ namespace targetshooter
     {
         int x, y;
         Random random = new Random();
-        int totalNumOfEnemy = 50;
+        int totalNumOfEnemy = 3;
+        bool isBoss = false;
 
         public void randomTank()
         {
@@ -59,6 +60,73 @@ namespace targetshooter
                     enemyList.Add(en);
                     totalNumOfEnemy--;
                 }
+            }
+            else if (enemyList.Count() < 3 && totalNumOfEnemy > 0)
+            {
+                int tmp = random.Next(0, 2);
+                y = random.Next(0, graphics.GraphicsDevice.Viewport.Height);
+
+                if (y >= 0 && y <= 10)
+                    x = random.Next(0, graphics.GraphicsDevice.Viewport.Width);
+                if (tmp == 0)
+                    x = 10;
+                else
+                    x = Window.ClientBounds.Width - 10; //random.Next(0, graphics.GraphicsDevice.Viewport.Width);
+
+                NPCTank en = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(x, y), new Vector2(x, y) + new Vector2(60, 60));
+
+                if (x == 10 && y < Window.ClientBounds.Height / 2)
+                    for (int j = 0; j < 300; j++) //320
+                        en.rotateTankClockwise();
+                else if (x == 10 && y > Window.ClientBounds.Height / 2)
+                    for (int j = 0; j < 240; j++) //225
+                        en.rotateTankClockwise();
+                else if (x == Window.ClientBounds.Width - 10 && y < Window.ClientBounds.Height / 2)
+                    for (int j = 0; j < 60; j++)  //45
+                        en.rotateTankClockwise();
+                else if (x == Window.ClientBounds.Width - 10 && y > Window.ClientBounds.Height / 2)
+                    for (int j = 0; j < 112; j++)  //135
+                        en.rotateTankClockwise();
+
+                enemyList.Add(en);
+                totalNumOfEnemy--;
+
+            }
+            // create boss
+            else if (totalNumOfEnemy == 0 && enemyList.Count == 0)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+
+                    int tmp = random.Next(0, 2);
+                    y = random.Next(0, graphics.GraphicsDevice.Viewport.Height);
+
+                    if (y >= 0 && y <= 10)
+                        x = random.Next(0, graphics.GraphicsDevice.Viewport.Width);
+                    if (tmp == 0)
+                        x = 10;
+                    else
+                        x = Window.ClientBounds.Width - 10; //random.Next(0, graphics.GraphicsDevice.Viewport.Width);
+
+                    NPCTank en = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(x, y), new Vector2(x, y) + new Vector2(60, 60));
+                    en.setIsBoss(true);
+                    if (x == 10 && y < Window.ClientBounds.Height / 2)
+                        for (int j = 0; j < 300; j++) //320
+                            en.rotateTankClockwise();
+                    else if (x == 10 && y > Window.ClientBounds.Height / 2)
+                        for (int j = 0; j < 240; j++) //225
+                            en.rotateTankClockwise();
+                    else if (x == Window.ClientBounds.Width - 10 && y < Window.ClientBounds.Height / 2)
+                        for (int j = 0; j < 60; j++)  //45
+                            en.rotateTankClockwise();
+                    else if (x == Window.ClientBounds.Width - 10 && y > Window.ClientBounds.Height / 2)
+                        for (int j = 0; j < 112; j++)  //135
+                            en.rotateTankClockwise();
+
+                    enemyList.Add(en);
+                    totalNumOfEnemy--;
+                }
+
             }
 
         }
