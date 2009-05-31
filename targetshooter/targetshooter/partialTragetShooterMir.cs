@@ -19,7 +19,15 @@ namespace targetshooter
 {
     public partial class TargetShooter
     {
+        bool isGameWon()
+        { 
         
+           if((info.level==2) && (enemyList.Count()==0))
+            return true;
+            else return false;
+
+        
+        }
 
         bool isGameOver()
         {
