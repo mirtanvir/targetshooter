@@ -100,7 +100,7 @@ namespace targetshooter
             Content.RootDirectory = "Content";
             this.graphics.PreferredBackBufferWidth = 1280;
             this.graphics.PreferredBackBufferHeight = 800;
-            this.graphics.IsFullScreen = true;
+            this.graphics.IsFullScreen = false;
 
 
         }
@@ -599,7 +599,7 @@ namespace targetshooter
             if (initScrnFlag)
             {
 
-                spriteBatch.DrawString(initScreenFont, init.getMenu(), new Vector2(500, 500), Color.White);
+                spriteBatch.DrawString(initScreenFont, init.getMenu(), new Vector2(500, 500), Color.Honeydew);
 
             }
             else if (helpFlag)
@@ -612,19 +612,21 @@ namespace targetshooter
             else if(isGameWon())
             {
 
-                spriteBatch.DrawString(gameOverFont, "Congratulations! You have won. ", new Vector2(Window.ClientBounds.Center.X, Window.ClientBounds.Center.Y), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+                spriteBatch.DrawString(gameOverFont, "Congratulations! You have won. ", new Vector2(Window.ClientBounds.Center.X/2, Window.ClientBounds.Center.Y), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
 
             
             }
             else if(isGameOver()){
+                //int score = info.score;
 
-                spriteBatch.DrawString(gameOverFont,"Game Over", new Vector2(Window.ClientBounds.Center.X,Window.ClientBounds.Center.Y), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+
+                spriteBatch.DrawString(gameOverFont, "Game Over!!!\n Your Score:" + info.score.ToString(), new Vector2(Window.ClientBounds.Center.X / 2, Window.ClientBounds.Center.Y), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
             
             }
 
             else if (level2FontFlag)
                 {
-                        spriteBatch.DrawString(nextLevelFont, "Well Done! You have completed level 1. \nPress p to start level 2", new Vector2(Window.ClientBounds.Center.X, Window.ClientBounds.Center.Y), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+                        spriteBatch.DrawString(nextLevelFont, "Well Done! You have completed level 1. \nPress p to start level 2", new Vector2(Window.ClientBounds.Center.X/2, Window.ClientBounds.Center.Y), Color.Honeydew, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
                     
 
                 }
