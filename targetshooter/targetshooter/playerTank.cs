@@ -176,6 +176,17 @@ namespace targetshooter
             }
         }
 
+
+        public void resetPlayer()
+        {
+
+
+            this.shellList.Clear();
+            this.Position = new Vector2(GlobalClass.scrWidth / 2, GlobalClass.scrHeight / 2);
+            this.TurretPosition = this.Position + new Vector2(60, 60);
+        
+        }
+
             public void notifyAboutHit()
             {
             
