@@ -312,7 +312,7 @@ namespace targetshooter
 
                         player.fireShell();
 
-                        shotCountDown = 100;
+                        shotCountDown = 350;
 
 
                     }
@@ -393,17 +393,17 @@ namespace targetshooter
                             if (info.level == 2)
                             {
                                 if (!isBoss)
-                                    enemy.getHit(8);
+                                    enemy.getHit(15);
                                 else
-                                    enemy.getHit(1);
+                                    enemy.getHit(5);
 
                             }
                             else
                             {
                                 if (!isBoss)
-                                    enemy.getHit(10);
+                                    enemy.getHit(20);
                                 else
-                                    enemy.getHit(3);
+                                    enemy.getHit(10);
                             }
                             playerShellList[x].Dead = true;
                             //player.removeSheelFromListAt(k);
