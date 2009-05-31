@@ -22,7 +22,7 @@ namespace targetshooter
     {
         int x, y;
         Random random = new Random();
-        int totalNumOfEnemy = 10;
+        int totalNumOfEnemy = 50;
         bool counter ;
         NPCTank en;
         
@@ -31,7 +31,7 @@ namespace targetshooter
             if (enemyList.Count() == 0 && totalNumOfEnemy > 0)
             {
                 
-                for (int l = 0; l < 8; l++)
+                for (int l = 0; l < 3; l++)
                 {
                     
                     do
@@ -180,117 +180,3 @@ namespace targetshooter
     }
 
 }
-/*
-            if (enemyList.Count() == 0 && totalNumOfEnemy > 0)
-            {
-                for (int i = 0; i < 3; i++)
-                {
-                    do
-                    {
-                        int tmp = random.Next(0, 2);
-                        if (tmp == 0)
-                            x = 10;
-                        else
-                            x = Window.ClientBounds.Width - 10; //random.Next(0, graphics.GraphicsDevice.Viewport.Width);
-                        y = random.Next(0, graphics.GraphicsDevice.Viewport.Height);
-                    } while (x == player.Position.X && y == player.Position.Y);
-                 
-                    NPCTank en = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(x, y), new Vector2(x, y) + new Vector2(60, 60));
-
-                    int rot = random.Next(0, 360);
-                    for (int j = 0; j < rot; j++)
-                    {
-
-                        en.rotateTankClockwise();
-
-                    }
-
-                    enemyList.Add(en);
-                    totalNumOfEnemy--;
-                }
-               
-            }
-            else if (enemyList.Count() < 3 && totalNumOfEnemy > 0)
-            {
-                do
-                {
-                    int tmp = random.Next(0, 2);
-                    y = random.Next(0, graphics.GraphicsDevice.Viewport.Height);
-                    
-                    if (tmp == 0)
-                        x = 10;
-                    else
-                        x = Window.ClientBounds.Width -  10; //random.Next(0, graphics.GraphicsDevice.Viewport.Width);
-                    
-                } while (x == player.Position.X || y == player.Position.Y);
-                NPCTank en = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(x, y), new Vector2(x, y) + new Vector2(60, 60));
-
-                int rot = random.Next(0, 360);
-                for (int j = 0; j < rot; j++)
-                {
-
-                    en.rotateTankClockwise();
-
-                }
-
-                enemyList.Add(en);
-                totalNumOfEnemy--;
-
-            }
-                // create boss
-            else if (totalNumOfEnemy == 0)
-            {
-                
-
-            }
-        }*/
-/*  counter = false;
-                        int tmp = random.Next(0, 2);
-                        y = random.Next(0, graphics.GraphicsDevice.Viewport.Height);
-
-                        if (y >= 0 && y <= 10)
-                            x = random.Next(0, graphics.GraphicsDevice.Viewport.Width);
-                        if (tmp == 0)
-                            x = 10;
-                        else
-                            x = Window.ClientBounds.Width - 10; //random.Next(0, graphics.GraphicsDevice.Viewport.Width);
-
-                        if (enemyList.Count == 0 || enemyList.Count == 1)
-                        {
-                            counter = false;
-                        }
-                        else
-                        {
-                            for (int i = 0; i < enemyList.Count; i++)
-                            {
-                                for (int k=0; k < 30; k++)
-                                {
-                                    if (x == enemyList.ElementAt(i).Position.X + k)
-                                    {
-                                        for (int j = 0; j < 45; j++)
-                                        {
-                                            if (y == enemyList.ElementAt(i).Position.Y + j)
-                                                counter = true;
-                                            else if (y == enemyList.ElementAt(i).Position.Y - j)
-                                                counter = true;
-                                        }
-                                     }
-                                    else if (x == enemyList.ElementAt(i).Position.X - k)
-                                    {
-                                        for (int j = 0; j < 45; j++)
-                                        {
-                                            if (y == enemyList.ElementAt(i).Position.Y - j)
-                                                counter = true;
-                                            else if (y == enemyList.ElementAt(i).Position.Y + j)
-                                                counter = true;
-
-                                        }
-                                    }
-
-                                }
-
-                            }
-
-                        }
-                        
-                        */
