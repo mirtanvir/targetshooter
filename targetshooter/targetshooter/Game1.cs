@@ -651,7 +651,7 @@ namespace targetshooter
                 //int score = info.score;
 
 
-                spriteBatch.DrawString(gameOverFont, "Game Over!!!\n Your Score:" + info.score.ToString(), new Vector2(Window.ClientBounds.Center.X / 2, Window.ClientBounds.Center.Y), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+                spriteBatch.DrawString(gameOverFont, "Game Over!!!\n Your Score:" + info.score.ToString() + "\n\nPress 'P' to play again", new Vector2(Window.ClientBounds.Center.X / 2, Window.ClientBounds.Center.Y), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
             
             }
 
