@@ -49,6 +49,71 @@ namespace targetshooter
 
 
 
+        bool tankCollide(Texture2D tankTexture, Vector2 tankPosition, float tankRotationInRadian, Texture2D tank2Texture, Vector2 tank2Position, float tank2RotationInRadian)//  Vector2 object1Pos, int object1Width, int object1Height, Vector2 object2Pos, int object2Width, int object2Height)
+        {
+            Vector2 tankOrigin = new Vector2(tankTexture.Width / 2, tankTexture.Height / 2);
+            Vector2 tank2Origin = new Vector2(tank2Texture.Width / 2, tank2Texture.Height / 2);
+            Matrix playerTransform =
+            Matrix.CreateTranslation(new Vector3(-tankOrigin, 0.0f)) *
+                // Matrix.CreateScale(block.Scale) *  would go here
+             Matrix.CreateRotationZ(tankRotationInRadian) *
+             Matrix.CreateTranslation(new Vector3(tankPosition, 0.0f));
+
+            // Calculate the bounding rectangle of this block in world space
+            Rectangle playerRectangle = CalculateBoundingRectangle(
+                     new Rectangle(0, 0, tankTexture.Width, tankTexture.Height),
+                     playerTransform);
+
+            Rectangle tank2Rectangle = new Rectangle((int)tank2Position.X, (int)tank2Position.Y,
+tank2Texture.Width, tank2Texture.Height);
+
+            Color[] tank2TextureData;
+            Color[] playerTextureData;
+
+            playerTextureData =
+              new Color[tankTexture.Width * tankTexture.Height];
+            tankTexture.GetData(playerTextureData);
+            tank2TextureData =
+                new Color[tank2Texture.Width * tank2Texture.Height];
+            tank2Texture.GetData(tank2TextureData);
+
+
+           
+
+
+            Matrix tank2Transform =
+            Matrix.CreateTranslation(new Vector3(-tank2Origin, 0.0f)) *
+                // Matrix.CreateScale(block.Scale) *  would go here
+             Matrix.CreateRotationZ(tank2RotationInRadian) *
+             Matrix.CreateTranslation(new Vector3(tank2Position, 0.0f));
+
+
+            if (tank2Rectangle.Intersects(playerRectangle))
+            {
+                // Check collision with person
+                if (IntersectPixels(tank2Transform, tank2Texture.Width,
+                                     tank2Texture.Height, tank2TextureData,
+                                    playerTransform, tankTexture.Width,
+                                    tankTexture.Height, playerTextureData))
+                {
+                    return true;
+
+                }
+
+            }
+
+            return false;
+
+
+
+
+            //Rectangle object1Rect = new Rectangle((int)object1Pos.X, (int)object1Pos.Y, object1Width, object1Height);
+            //Rectangle object2Rect = new Rectangle((int)object2Pos.X, (int)object2Pos.Y, object2Width, object2Height);
+
+            //return object1Rect.Intersects(object2Rect);
+        }
+
+
 
 
         bool collide(Texture2D tankTexture, Vector2 tankPosition, float tankRotationInRadian,Texture2D bulletTexture, Vector2 bulletPosition)//  Vector2 object1Pos, int object1Width, int object1Height, Vector2 object2Pos, int object2Width, int object2Height)

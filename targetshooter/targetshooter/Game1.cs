@@ -567,7 +567,8 @@ namespace targetshooter
             {
                 NPCTank enemy = enemyList[z];
 
-                if (tankscollide(player.Position, player.getWidth(), player.getHeight(), enemy.Position, enemy.getWidth(), enemy.getHeight()))
+               // if (tankscollide(player.Position, player.getWidth(), player.getHeight(), enemy.Position, enemy.getWidth(), enemy.getHeight()))
+                if (tankCollide(player.tankImage,player.Position,player.getTankAngle(),enemy.tankImage,enemy.Position,enemy.getTankAngle()))
                 {
                     //string hello;
                     //hello = "COLLIDE FUNCTION CALLED";
@@ -585,18 +586,24 @@ namespace targetshooter
 
                     enemy.setstop(false);
                 }
-               NPCTank enemy1 = enemyList[z];
-               NPCTank enemy2 = enemyList[(z + 1) % enemyList.Count()];
 
-               if (tankscollide(enemy1.Position, enemy1.getWidth(), enemy1.getHeight(),
-                                 enemy2.Position, enemy2.getWidth(), enemy2.getHeight()))
-               {
-                   enemy1.rotateTankClockwise();
-                   enemy2.setstop(true);
-                   
-               }
+                if (enemyList.Count() > 1)
+                {
+                    NPCTank enemy1 = enemyList[z];
+                    NPCTank enemy2 = enemyList[(z + 1) % enemyList.Count()];
 
-             
+                    // if (tankscollide(enemy1.Position, enemy1.getWidth(), enemy1.getHeight(),
+                    //                 enemy2.Position, enemy2.getWidth(), enemy2.getHeight()))
+
+                    if (tankCollide(enemy1.tankImage, enemy1.Position, enemy1.getTankAngle(), enemy2.tankImage, enemy2.Position, enemy2.getTankAngle()))
+                    {
+                        enemy1.rotateTankClockwise();
+                        enemy2.setstop(true);
+
+                    }
+
+                }
+               // else enemy2.setstop(false);
                
                
             }
