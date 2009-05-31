@@ -66,10 +66,12 @@ namespace targetshooter
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         int shotCountDown;
+        int level2FontCountdown=5000;
         int healthPercentage;
         SpriteFont infoBarFont;
         SpriteFont initScreenFont;
         SpriteFont gameOverFont;
+        SpriteFont nextLevelFont;
         initialScreen init = new initialScreen();
         bool initScrnFlag = true, gameFlag = false, helpFlag = false;
         playerTank player;
@@ -141,6 +143,7 @@ namespace targetshooter
             infoBarFont = Content.Load<SpriteFont>(@"fonts/infoBar");
             initScreenFont = Content.Load<SpriteFont>(@"fonts/initScreen");
             gameOverFont = Content.Load<SpriteFont>(@"fonts/gameOver");
+            nextLevelFont = Content.Load<SpriteFont>(@"fonts/nextLevelFont");
 
             player = new playerTank(Content.Load<Texture2D>(@"images/tank_body"), Content.Load<Texture2D>(@"images/tank_turret"), Content.Load<Texture2D>(@"images/bullet"), 10.0f, 3, new Vector2(800, 500), new Vector2(800, 500) + new Vector2(60, 60));
            // player.
@@ -236,7 +239,7 @@ namespace targetshooter
             else if(keyState.IsKeyDown(Keys.P)){
             gameFlag = true;
             initScrnFlag = false;
-
+            level2FontFlag = false;
             
             }
 
@@ -253,6 +256,8 @@ namespace targetshooter
                 {
                     info.level = 2;
                     isBoss = false;
+                    
+                    
                     randomTank();
                     
                 }
@@ -553,8 +558,15 @@ namespace targetshooter
                    enemy1.rotateTankClockwise();
                    enemy2.setstop(true);
                }
+
+             
+               
                
             }
+
+
+
+
 
             base.Update(gameTime);
         }
@@ -603,8 +615,20 @@ namespace targetshooter
                 spriteBatch.DrawString(gameOverFont,"Game Over", new Vector2(Window.ClientBounds.Center.X,Window.ClientBounds.Center.Y), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
             
             }
+
+            else if (level2FontFlag)
+                {
+                        spriteBatch.DrawString(nextLevelFont, "Well Done! You have completed level 1. \nPress p to start level 2", new Vector2(Window.ClientBounds.Center.X, Window.ClientBounds.Center.Y), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+                    
+
+                }
+
+
             else if (gameFlag)
             {
+
+                
+
 
             //    spriteBatch.Draw(myTexture, Vector2.Zero, Color.White);
 
@@ -696,7 +720,7 @@ namespace targetshooter
 
                 spriteBatch.DrawString(info.fontSprite,info.getInfoBar(),info.position, Color.Black);
 
-
+                
 
 
 
