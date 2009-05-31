@@ -32,6 +32,12 @@ namespace targetshooter
         
         }
 
+        float distance(Vector2 object1Pos, Vector2 object2Pos)
+        {
+
+            return Vector2.Distance(object1Pos, object2Pos);
+        
+        }
 
 
 
