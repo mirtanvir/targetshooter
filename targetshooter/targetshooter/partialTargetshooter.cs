@@ -28,6 +28,7 @@ namespace targetshooter
         bool isBoss = false;
         int createTank = 3;
         bool level2Flag = true;
+        bool level2FontFlag = false;
         
         public void randomTank()
         {
@@ -36,7 +37,9 @@ namespace targetshooter
                 createTank = 5;
                 totalNumOfEnemy = 7;
                 level2Flag = false;
-                
+                level2FontFlag = true;
+                gameFlag = false;
+                player.resetPlayer();
             }
 
             if (enemyList.Count() == 0 && totalNumOfEnemy > 0)
