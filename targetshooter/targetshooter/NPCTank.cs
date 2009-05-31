@@ -36,9 +36,16 @@ namespace targetshooter
             tankShellSpeed = shellSpeed;
         }
 
-        public void setIsBoss(bool boss)
+        public  void setIsBoss( bool value)
         {
-            isBoss = boss;
+            
+                isBoss = value;
+            
+        }
+
+        public bool getIsBoss()
+        {
+            return isBoss;
         }
 
         public float getTankAngle()
