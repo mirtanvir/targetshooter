@@ -385,8 +385,21 @@ namespace targetshooter
 
                         if (collide(enemy.tankImage, enemy.Position, enemy.getTankAngle(), playerShell.getBulletImage(), playerShell.getShellPosition()))
                         {
-                            enemy.getHit(10);
+                            if (info.level == 2)
+                            {
+                                if (!isBoss)
+                                    enemy.getHit(8);
+                                else
+                                    enemy.getHit(1);
 
+                            }
+                            else
+                            {
+                                if (!isBoss)
+                                    enemy.getHit(10);
+                                else
+                                    enemy.getHit(3);
+                            }
                             playerShellList[x].Dead = true;
                             //player.removeSheelFromListAt(k);
                         
