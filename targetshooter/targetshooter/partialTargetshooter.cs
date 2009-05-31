@@ -34,7 +34,7 @@ namespace targetshooter
             if (info.level == 2)
             {
                 createTank = 5;
-                totalNumOfEnemy = 70;
+                totalNumOfEnemy = 5;
                 
             }
             if (enemyList.Count() == 0 && totalNumOfEnemy > 0)
@@ -87,7 +87,7 @@ namespace targetshooter
                     totalNumOfEnemy--;
                 }
             }
-            else if (enemyList.Count() < 3 && totalNumOfEnemy > 0)
+            else if (enemyList.Count() < createTank && totalNumOfEnemy > 0)
             {
                 do
                     {
