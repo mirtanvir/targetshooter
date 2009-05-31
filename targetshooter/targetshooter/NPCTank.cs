@@ -23,6 +23,8 @@ namespace targetshooter
         private Texture2D bulletImage;
         private float tankShellSpeed;
         private bool isBoss = false;
+        private bool stop = false; //to stop npc tank after collision with player
+
         public NPCTank(Texture2D imgOfTank, Texture2D imgOfTankTurret, Texture2D imgOfTheShell, float shellSpeed,int numberOfLives, Vector2 firstPosition, Vector2 turretPos)
             : base(imgOfTank, imgOfTankTurret, firstPosition, turretPos,0)
         {
@@ -46,6 +48,17 @@ namespace targetshooter
         public bool getIsBoss()
         {
             return isBoss;
+        }
+
+       //collision detection btwn player and tank
+        public void setstop(bool st)
+        {
+            stop = st;
+        }
+
+        public bool getstop()
+        {
+            return stop;
         }
 
         public float getTankAngle()
@@ -172,20 +185,26 @@ namespace targetshooter
         private int OnTheScreenBoundaryCounter = 0;
         public void MoveNPCTankDown(float timeChangedSinceLastUpdate)
         {
+            Vector2 prevpos = base.Position;
+            Vector2 newPos;
 
           /*  Vector2 newPos = updateClass.UpdateTankPositionUp(false, tankAngle, Position, TankSpeed, timeChangedSinceLastUpdate);
             base.MoveTank(newPos);
             base.TurretPosition = Position + new Vector2(60, 60);*/
             if (!isBoss)
             {
-                Vector2 newPos = updateClass.UpdateTankPositionUp(false, tankAngle, Position, TankSpeed, timeChangedSinceLastUpdate);
-                base.MoveTank(newPos);
+                newPos = updateClass.UpdateTankPositionUp(false, tankAngle, Position, TankSpeed, timeChangedSinceLastUpdate);
+                if (this.getstop())
+                    base.MoveTank(prevpos);
+                else
+                    base.MoveTank(newPos);
+             
                 base.TurretPosition = Position + new Vector2(60, 60);
             }
             else
             {
                
-                Vector2 newPos = updateClass.UpdateTankPositionUp(true, tankAngle, Position, TankSpeed, timeChangedSinceLastUpdate);
+                newPos = updateClass.UpdateTankPositionUp(true, tankAngle, Position, TankSpeed, timeChangedSinceLastUpdate);
                 if (base.Position.X == newPos.X && base.Position.Y == newPos.Y)
                 {
                     OnTheScreenBoundaryCounter = 1;
@@ -207,7 +226,11 @@ namespace targetshooter
                 }       
                 else
                 {
-                    base.MoveTank(newPos);
+                    if (this.getstop())
+                       base.MoveTank(prevpos);
+                    else
+                       base.MoveTank(newPos);
+                  
                     base.TurretPosition = Position + new Vector2(60, 60);
                 }
             }

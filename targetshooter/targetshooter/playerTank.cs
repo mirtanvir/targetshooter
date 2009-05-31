@@ -133,6 +133,7 @@ namespace targetshooter
             Vector2 newPos = updateClass.UpdateTankPositionUp(true, tankAngle, Position, TankSpeed, timeChangedSinceLastUpdate);
             base.MoveTank(newPos);
             base.TurretPosition = Position + new Vector2(60, 60);
+           
 
         }
 

@@ -496,6 +496,29 @@ namespace targetshooter
 
 
             }
+
+            //console output to debug
+              //string dbg;
+              //dbg = "position =" + player.Position + "player width = " + player.getWidth() +
+              //    "player height =" + player.getHeight();
+              //System.Console.WriteLine(dbg);
+
+              //collision detection between player tank and NPCTanks
+              foreach (NPCTank enemy in enemyList)
+              {
+                  if (tankscollide(player.Position, player.getWidth(), player.getHeight(), enemy.Position, enemy.getWidth(), enemy.getHeight()))
+                  {
+                      /*string hello;
+                      hello = "COLLIDE FUNCTION CALLED";
+                      System.Console.WriteLine(hello);*/
+                      enemy.setstop(true);
+                  }
+                  else 
+                      enemy.setstop(false);
+              }
+
+          
+
             base.Update(gameTime);
         }
 
@@ -619,6 +642,16 @@ namespace targetshooter
             rectangleTexture.SetData(color);//set the color data on the texture
             return rectangleTexture;//return the texture
         }
+
+        bool tankscollide(Vector2 object1Pos, int object1Width, int object1Height, Vector2 object2Pos, int object2Width, int object2Height)
+        {
+   
+            Rectangle object1Rect = new Rectangle((int)object1Pos.X, (int)object1Pos.Y, object1Width +5, object1Height +5);
+            Rectangle object2Rect = new Rectangle((int)object2Pos.X, (int)object2Pos.Y, object2Width +5, object2Height +5);
+
+            return object1Rect.Intersects(object2Rect);
+        }
+
 
 
 
