@@ -32,7 +32,11 @@ namespace targetshooter
         public void randomTank()
         {
             if (info.level == 2)
+            {
                 createTank = 5;
+                totalNumOfEnemy = 70;
+                
+            }
             if (enemyList.Count() == 0 && totalNumOfEnemy > 0)
             {
                 
