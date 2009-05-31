@@ -564,17 +564,26 @@ namespace targetshooter
 
                     foreach (NPCTankShell bull in enemyShellList)
                     {
-
-                        spriteBatch.Draw(bull.getBulletImage(), bull.getShellPosition(), Color.White);
-
+                        if(!enemyList.ElementAt(0).getIsBoss())
+                            spriteBatch.Draw(bull.getBulletImage(), bull.getShellPosition(), Color.Blue);
+                        else
+                            spriteBatch.Draw(bull.getBulletImage(), bull.getShellPosition(), Color.Red);
                     }
                 }
                 foreach (NPCTank enemy in enemyList)
                 {
-
-                    spriteBatch.Draw(enemy.tankImage, enemy.Position, null, Color.White, enemy.getTankAngle(), new Vector2(40, 70), 1.0f, SpriteEffects.None, 0f);
-                    spriteBatch.Draw(enemy.imageOfTurret, new Vector2(enemy.TurretPosition.X - 55, enemy.TurretPosition.Y - 55), null, Color.White, enemy.getTurretAngle(),
-                new Vector2(25, 70), 1.0f, SpriteEffects.None, 0f);
+                    if (!enemyList.ElementAt(0).getIsBoss())
+                    {
+                        spriteBatch.Draw(enemy.tankImage, enemy.Position, null, Color.Blue, enemy.getTankAngle(), new Vector2(40, 70), 1.0f, SpriteEffects.None, 0f);
+                        spriteBatch.Draw(enemy.imageOfTurret, new Vector2(enemy.TurretPosition.X - 55, enemy.TurretPosition.Y - 55), null, Color.Blue, enemy.getTurretAngle(),
+                        new Vector2(25, 70), 1.0f, SpriteEffects.None, 0f);
+                    }
+                    else
+                    {
+                        spriteBatch.Draw(enemy.tankImage, enemy.Position, null, Color.Red, enemy.getTankAngle(), new Vector2(40, 70), 1.0f, SpriteEffects.None, 0f);
+                        spriteBatch.Draw(enemy.imageOfTurret, new Vector2(enemy.TurretPosition.X - 55, enemy.TurretPosition.Y - 55), null, Color.Red, enemy.getTurretAngle(),
+                        new Vector2(25, 70), 1.0f, SpriteEffects.None, 0f);
+                    }
 
                 
                 }
