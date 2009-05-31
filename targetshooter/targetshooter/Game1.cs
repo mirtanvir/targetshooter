@@ -153,7 +153,7 @@ namespace targetshooter
             enemyShellTexture= Content.Load<Texture2D>(@"images/bullet");
             
             helpScreen = new help(Content.Load<SpriteFont>(@"fonts/help"), new Vector2(400, 200), 
-                " TARGET SHOOTER GAME \n (Keyboard info) \n Up and Down arrows to move front and back \n Left arrow to turn the player tank left \n Right arrow to turn the player tank right \n 'a' to move the turret Right \n 's' to move the turret Left");
+                " TARGET SHOOTER GAME \n (Keyboard info) \n Up and Down arrows to move front and back \n Left arrow to turn the player tank left \n Right arrow to turn the player tank right \n 'a' to move the turret Right \n 's' to move the turret Left\n\nPress 'P' to start game\nPress 'ESC' to exit");
             info = new infoBar(1, 0, Content.Load<SpriteFont>(@"fonts/infoBar"), new Vector2(10, Window.ClientBounds.Bottom-50));
 
             info.updateHealthAndLives(player.numberOflives, player.healthPercentages);
@@ -237,10 +237,10 @@ namespace targetshooter
             
             }
             else if(keyState.IsKeyDown(Keys.P)){
-            gameFlag = true;
-            initScrnFlag = false;
-            level2FontFlag = false;
-            
+                gameFlag = true;
+                initScrnFlag = false;
+                level2FontFlag = false;
+                helpFlag = false;
             }
 
             // initialize window & tank width/height here so it can be accessed
