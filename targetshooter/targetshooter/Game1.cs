@@ -77,7 +77,7 @@ namespace targetshooter
         help helpScreen; 
         int enemyShotCountDown =500;
         List<NPCTankShell> enemyShellList = new List<NPCTankShell>();
-
+        
         infoBar info;
 
         public void Subscribe(playerTank tank)
@@ -151,7 +151,7 @@ namespace targetshooter
             
             helpScreen = new help(Content.Load<SpriteFont>(@"fonts/help"), new Vector2(400, 200), 
                 " TARGET SHOOTER GAME \n (Keyboard info) \n Up and Down arrows to move front and back \n Left arrow to turn the player tank left \n Right arrow to turn the player tank right \n 'a' to move the turret Right \n 's' to move the turret Left");
-            info = new infoBar(0, 0, Content.Load<SpriteFont>(@"fonts/infoBar"), new Vector2(10, Window.ClientBounds.Bottom-50));
+            info = new infoBar(1, 0, Content.Load<SpriteFont>(@"fonts/infoBar"), new Vector2(10, Window.ClientBounds.Bottom-50));
 
             info.updateHealthAndLives(player.numberOflives, player.healthPercentages);
 
@@ -249,7 +249,13 @@ namespace targetshooter
 
             if (gameFlag)
             {
-                //if (player.numberOflives == 0 && player.healthPercentages == 0)
+                if (enemyList.Count == 0 && isBoss == true)
+                {
+                    info.level = 2;
+                    isBoss = false;
+                    randomTank();
+                    
+                }
                     
                 for (int i = 0; i < enemyList.Count(); i++)
                 {
@@ -607,25 +613,56 @@ namespace targetshooter
 
                     foreach (NPCTankShell bull in enemyShellList)
                     {
-                        if(!enemyList.ElementAt(0).getIsBoss())
-                            spriteBatch.Draw(bull.getBulletImage(), bull.getShellPosition(), Color.Blue);
+                        if (info.level == 2)
+                        {
+                            if (!isBoss)
+                                spriteBatch.Draw(bull.getBulletImage(), bull.getShellPosition(), Color.DarkGreen);
+                            else
+                                spriteBatch.Draw(bull.getBulletImage(), bull.getShellPosition(), Color.Gold);
+                        }
                         else
-                            spriteBatch.Draw(bull.getBulletImage(), bull.getShellPosition(), Color.Red);
+                        {
+                            if (!isBoss)
+                                spriteBatch.Draw(bull.getBulletImage(), bull.getShellPosition(), Color.Blue);
+                            else
+                                spriteBatch.Draw(bull.getBulletImage(), bull.getShellPosition(), Color.Red);
+                        }
+                        
                     }
                 }
                 foreach (NPCTank enemy in enemyList)
                 {
-                    if (!enemyList.ElementAt(0).getIsBoss())
+                   
+                    if (info.level == 2)
                     {
-                        spriteBatch.Draw(enemy.tankImage, enemy.Position, null, Color.Blue, enemy.getTankAngle(), new Vector2(40, 70), 1.0f, SpriteEffects.None, 0f);
-                        spriteBatch.Draw(enemy.imageOfTurret, new Vector2(enemy.TurretPosition.X - 55, enemy.TurretPosition.Y - 55), null, Color.Blue, enemy.getTurretAngle(),
-                        new Vector2(25, 70), 1.0f, SpriteEffects.None, 0f);
+                        if (!isBoss)
+                        {
+                            spriteBatch.Draw(enemy.tankImage, enemy.Position, null, Color.DarkGreen, enemy.getTankAngle(), new Vector2(40, 70), 1.0f, SpriteEffects.None, 0f);
+                            spriteBatch.Draw(enemy.imageOfTurret, new Vector2(enemy.TurretPosition.X - 55, enemy.TurretPosition.Y - 55), null, Color.DarkGreen, enemy.getTurretAngle(),
+                            new Vector2(25, 70), 1.0f, SpriteEffects.None, 0f);
+                        }
+                        else
+                        {
+                            spriteBatch.Draw(enemy.tankImage, enemy.Position, null, Color.Gold, enemy.getTankAngle(), new Vector2(40, 70), 1.0f, SpriteEffects.None, 0f);
+                            spriteBatch.Draw(enemy.imageOfTurret, new Vector2(enemy.TurretPosition.X - 55, enemy.TurretPosition.Y - 55), null, Color.Gold, enemy.getTurretAngle(),
+                            new Vector2(25, 70), 1.0f, SpriteEffects.None, 0f);
+                        }
+
                     }
                     else
                     {
-                        spriteBatch.Draw(enemy.tankImage, enemy.Position, null, Color.Red, enemy.getTankAngle(), new Vector2(40, 70), 1.0f, SpriteEffects.None, 0f);
-                        spriteBatch.Draw(enemy.imageOfTurret, new Vector2(enemy.TurretPosition.X - 55, enemy.TurretPosition.Y - 55), null, Color.Red, enemy.getTurretAngle(),
-                        new Vector2(25, 70), 1.0f, SpriteEffects.None, 0f);
+                        if (!isBoss)
+                        {
+                            spriteBatch.Draw(enemy.tankImage, enemy.Position, null, Color.Blue, enemy.getTankAngle(), new Vector2(40, 70), 1.0f, SpriteEffects.None, 0f);
+                            spriteBatch.Draw(enemy.imageOfTurret, new Vector2(enemy.TurretPosition.X - 55, enemy.TurretPosition.Y - 55), null, Color.Blue, enemy.getTurretAngle(),
+                            new Vector2(25, 70), 1.0f, SpriteEffects.None, 0f);
+                        }
+                        else
+                        {
+                            spriteBatch.Draw(enemy.tankImage, enemy.Position, null, Color.Red, enemy.getTankAngle(), new Vector2(40, 70), 1.0f, SpriteEffects.None, 0f);
+                            spriteBatch.Draw(enemy.imageOfTurret, new Vector2(enemy.TurretPosition.X - 55, enemy.TurretPosition.Y - 55), null, Color.Red, enemy.getTurretAngle(),
+                            new Vector2(25, 70), 1.0f, SpriteEffects.None, 0f);
+                        }
                     }
 
                 
