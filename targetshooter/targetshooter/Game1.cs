@@ -523,6 +523,10 @@ namespace targetshooter
                     hello = "COLLIDE FUNCTION CALLED";
                     System.Console.WriteLine(hello);*/
                     enemy.setstop(true);
+                    
+                    
+
+
                 }
                 else
                     enemy.setstop(false);
@@ -571,6 +575,13 @@ namespace targetshooter
             {
 
                 spriteBatch.DrawString(helpScreen.helpSprite, helpScreen.HelpString, helpScreen.HelpPosition, Color.White);
+
+            
+            }
+            else if(isGameWon())
+            {
+
+                spriteBatch.DrawString(gameOverFont, "Congratulations! You have won. ", new Vector2(Window.ClientBounds.Center.X, Window.ClientBounds.Center.Y), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
 
             
             }
