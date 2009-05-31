@@ -22,16 +22,21 @@ namespace targetshooter
     {
         int x, y;
         Random random = new Random();
-        int totalNumOfEnemy = 50;
+        int totalNumOfEnemy = 3;
         bool counter ;
         NPCTank en;
+        bool isBoss = false;
+        int createTank = 3;
+        
         
         public void randomTank()
         {
+            if (info.level == 2)
+                createTank = 5;
             if (enemyList.Count() == 0 && totalNumOfEnemy > 0)
             {
                 
-                for (int l = 0; l < 3; l++)
+                for (int l = 0; l < createTank; l++)
                 {
                     
                     do
@@ -126,7 +131,7 @@ namespace targetshooter
             // create boss
             else if (totalNumOfEnemy == 0 && enemyList.Count == 0)
             {
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < createTank; i++)
                 {
 
                     do
@@ -169,6 +174,7 @@ namespace targetshooter
                         for (int j = 0; j < 112; j++)  //135
                             en.rotateTankClockwise();
                     en.setIsBoss(true);
+                    isBoss = true;
                     enemyList.Add(en);
                     totalNumOfEnemy--;
                 }
