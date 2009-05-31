@@ -17,7 +17,7 @@ using System.Threading;
 
 namespace targetshooter
 {
-
+    
 
     /// <summary>
     /// This is the main type for your game
@@ -246,6 +246,7 @@ namespace targetshooter
 
             if (gameFlag)
             {
+           
                 for (int i = 0; i < enemyList.Count(); i++)
                 {
 
@@ -253,14 +254,7 @@ namespace targetshooter
                     {
                         enemyList.RemoveAt(i);
                         randomTank();
-                    }
-                /*    else if ( collide(enemyList.ElementAt(i).getHeight(), enemyList.ElementAt(i), player.getShellPosition(), player.getWidth(), player.getHeight()))
-                    {
-
-                        enemyList.RemoveAt(i);
-                        randomTank();
-                    }*/
-                    
+                    }    
                 }
 
 
@@ -398,6 +392,8 @@ namespace targetshooter
                         {
                             enemyList.RemoveAt(k);
                             randomTank();
+                            this.info.score += 1000;
+                            
                         
                         }
                     
