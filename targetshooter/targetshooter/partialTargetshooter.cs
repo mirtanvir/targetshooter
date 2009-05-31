@@ -29,6 +29,8 @@ namespace targetshooter
         int createTank = 3;
         bool level2Flag = true;
         bool level2FontFlag = false;
+        bool playerStuck = false;
+        Vector2 enemyStuckPos;
         
         public void randomTank()
         {

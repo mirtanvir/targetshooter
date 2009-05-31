@@ -45,6 +45,12 @@ namespace targetshooter
 
         }
 
+        public float getTankSpeed()
+        {
+
+            return base.TankSpeed;
+        
+        }
         public void fireShell()
         {
 

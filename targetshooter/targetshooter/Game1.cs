@@ -71,14 +71,9 @@ namespace targetshooter
         SpriteFont infoBarFont;
         SpriteFont initScreenFont;
         SpriteFont gameOverFont;
-
-        //SpriteFont gameProgressInfoFont;
-
-
         SpriteFont nextLevelFont;
-
         initialScreen init = new initialScreen();
-        bool initScrnFlag = true, gameFlag = false, helpFlag = false, progressFlag = false;
+        bool initScrnFlag = true, gameFlag = false, helpFlag = false;
         playerTank player;
         List<NPCTank> enemyList = new List<NPCTank>();
         help helpScreen; 
@@ -148,12 +143,7 @@ namespace targetshooter
             infoBarFont = Content.Load<SpriteFont>(@"fonts/infoBar");
             initScreenFont = Content.Load<SpriteFont>(@"fonts/initScreen");
             gameOverFont = Content.Load<SpriteFont>(@"fonts/gameOver");
-
-            //gameProgressInfoFont = Content.Load<SpriteFont>(@"fonts/infoBar");
-
             nextLevelFont = Content.Load<SpriteFont>(@"fonts/nextLevelFont");
-
-
 
             player = new playerTank(Content.Load<Texture2D>(@"images/tank_body"), Content.Load<Texture2D>(@"images/tank_turret"), Content.Load<Texture2D>(@"images/bullet"), 10.0f, 3, new Vector2(800, 500), new Vector2(800, 500) + new Vector2(60, 60));
            // player.
@@ -163,12 +153,8 @@ namespace targetshooter
             enemyShellTexture= Content.Load<Texture2D>(@"images/bullet");
             
             helpScreen = new help(Content.Load<SpriteFont>(@"fonts/help"), new Vector2(400, 200), 
-                " TARGET SHOOTER GAME \n (Keyboard info) \n Up and Down arrows to move front and back \n Left arrow to turn the player tank left \n Right arrow to turn the player tank right \n 'a' to move the turret Right \n 's' to move the turret Left " +
-                    " \n \n PRESS 'B' TO GO BACK" + 
-                    " \n \n PRESS 'P' TO START THE GAME" +
-                    " \n \n PRESS 'Esc' TO EXIT THE GAME");
-            info = new infoBar(1, 0, Content.Load<SpriteFont>(@"fonts/infoBar"), new Vector2(10, graphics.GraphicsDevice.Viewport.Height - 50));
-                //Window.ClientBounds.Bottom-100));
+                " TARGET SHOOTER GAME \n (Keyboard info) \n Up and Down arrows to move front and back \n Left arrow to turn the player tank left \n Right arrow to turn the player tank right \n 'a' to move the turret Right \n 's' to move the turret Left");
+            info = new infoBar(1, 0, Content.Load<SpriteFont>(@"fonts/infoBar"), new Vector2(10, Window.ClientBounds.Bottom-50));
 
             info.updateHealthAndLives(player.numberOflives, player.healthPercentages);
 
@@ -233,63 +219,29 @@ namespace targetshooter
                 this.Exit();
             //Putting the player on the bottom of the screen.
 
+
+
+           
+
             float t = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+
+
             KeyboardState keyState = Keyboard.GetState();
-
-            if (initScrnFlag)
+            
+            if( keyState.IsKeyDown(Keys.F1))
             {
-
-                if (keyState.IsKeyDown(Keys.F1))
-                {
                     helpFlag = true;
                     initScrnFlag = false;
                     gameFlag = false;
-                    progressFlag = false;
-
-                }
-
-                else if (keyState.IsKeyDown(Keys.P))
-                {
-                    gameFlag = true;
-                    initScrnFlag = false;
-                    helpFlag = false;
-                    progressFlag = false;
-
-                }
-                //level2FontFlag = false;
-            }
-
-           if(helpFlag)
-            {
-                if (keyState.IsKeyDown(Keys.B))
-                {
-                    initScrnFlag = true;
-                    progressFlag = false;
-                    helpFlag = false;
-                    gameFlag = false;
-                }
             
-           
-               else if (keyState.IsKeyDown(Keys.P))
-               {
-                   gameFlag = true;
-                   initScrnFlag = false;
-                   helpFlag = false;
-                   progressFlag = false;
-               }
-           }
-
-
-            /*else if (progressFlag)
-            {
-                gameFlag = false;
-                helpFlag = false;
-                initScrnFlag = false;
             }
-            else gameFlag = true;*/
-
-
+            else if(keyState.IsKeyDown(Keys.P)){
+            gameFlag = true;
+            initScrnFlag = false;
+            level2FontFlag = false;
+            
+            }
 
             // initialize window & tank width/height here so it can be accessed
             // else where
@@ -334,10 +286,21 @@ namespace targetshooter
 
                 if ((Keyboard.GetState().IsKeyDown(Keys.Down)))// && (player.Position.Y <= Window.ClientBounds.Height - texture.Height))
                 {
+                    if (playerStuck)
+                    {
+                        Vector2 currPos = player.Position;
+                        Vector2 nextPos = updateClass.updateTankPositionDown(true, player.getTankAngle(), currPos, player.getTankSpeed(), t);
+                        float currDistance = this.distance(currPos, enemyStuckPos);
+                        float nextDistance = this.distance(nextPos, enemyStuckPos);
+                        if (currDistance < nextDistance)
+                        {
+                            player.MovePlayerTankDown(t);
+                            this.playerStuck = false;
+                        }
+                    }
 
-                    player.MovePlayerTankDown(t);
 
-
+                    else player.MovePlayerTankDown(t);
 
 
                 }
@@ -347,7 +310,24 @@ namespace targetshooter
                 if ((Keyboard.GetState().IsKeyDown(Keys.Up)))// && (pos.Y <= 0))
                 {
 
-                    player.movePlayerTankUp(t);
+                    if (playerStuck)
+                    {
+                        Vector2 currPos = player.Position;
+                        Vector2 nextPos = updateClass.UpdateTankPositionUp(true, player.getTankAngle(), currPos, player.getTankSpeed(), t);
+                        float currDistance = this.distance(currPos, enemyStuckPos);
+                        float nextDistance = this.distance(nextPos, enemyStuckPos);
+                        if (currDistance < nextDistance)
+                        {
+                            player.movePlayerTankUp(t);
+                            this.playerStuck = false;
+                        
+                        }
+                    }
+
+
+                    else player.movePlayerTankUp(t);
+
+                  
 
 
                 }
@@ -589,14 +569,20 @@ namespace targetshooter
 
                 if (tankscollide(player.Position, player.getWidth(), player.getHeight(), enemy.Position, enemy.getWidth(), enemy.getHeight()))
                 {
-                    /*string hello;
-                    hello = "COLLIDE FUNCTION CALLED";
-                    System.Console.WriteLine(hello);*/
+                    //string hello;
+                    //hello = "COLLIDE FUNCTION CALLED";
+                    //System.Console.WriteLine(hello);
                     enemy.setstop(true);
+                    this.playerStuck = true;
+                    this.enemyStuckPos= enemy.Position;
+
+
+
                 }
                 else
                 {
-                    //
+                    //this.playerStuck = false;
+
                     enemy.setstop(false);
                 }
                NPCTank enemy1 = enemyList[z];
@@ -607,6 +593,7 @@ namespace targetshooter
                {
                    enemy1.rotateTankClockwise();
                    enemy2.setstop(true);
+                   
                }
 
              
@@ -639,16 +626,11 @@ namespace targetshooter
 
                         // debugString ="Slope of enemy Turret"+ updateClass.calculateSlope((int)MathHelper.ToDegrees(enemy.getTurretAngle()))  + "Angle of the Enemy Turret: " + MathHelper.ToDegrees(enemy.getTurretAngle()).ToString()+ " Theta:" + enemy.theta()  ;   //"Firing position: " + calculateBulletFiringPos().ToString();
             //debugString = enemyList[0].getDebugString();
-
-
             
             if (initScrnFlag)
             {
 
-
-                spriteBatch.DrawString(initScreenFont, init.getMenu(), new Vector2(graphics.GraphicsDevice.Viewport.Width/2, graphics.GraphicsDevice.Viewport.Height/3), Color.White);
-
-                //spriteBatch.DrawString(initScreenFont, init.getMenu(), new Vector2(500, 500), Color.Honeydew);
+                spriteBatch.DrawString(initScreenFont, init.getMenu(), new Vector2(500, 500), Color.Honeydew);
 
             }
             else if (helpFlag)
@@ -673,31 +655,6 @@ namespace targetshooter
             
             }
 
-
-            /*int numlives = info.getLives();
-            bool check = false;
-            else if(gameFlag)
-            {
-                if(numlives == 2)
-                {
-                    check = true;
-                }
-            }
-            
-            if (check)
-            {
-                progressFlag = true;
-                spriteBatch.DrawString(infoBarFont, "LOST ONE LIFE!! \n (Press space bar to continue with the game)",
-                            new Vector2(graphics.GraphicsDevice.Viewport.Width/2, graphics.GraphicsDevice.Viewport.Height/2), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
-                if (Keyboard.GetState().IsKeyDown(Keys.Space))
-                {
-                    progressFlag = false;
-                }
-            }*/
-
-
-
-
             else if (level2FontFlag)
                 {
                         spriteBatch.DrawString(nextLevelFont, "Well Done! You have completed level 1. \nPress p to start level 2", new Vector2(Window.ClientBounds.Center.X/2, Window.ClientBounds.Center.Y), Color.Honeydew, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
@@ -706,10 +663,9 @@ namespace targetshooter
                 }
 
 
-
             else if (gameFlag)
             {
-               
+
                 
 
 
