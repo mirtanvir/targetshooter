@@ -27,16 +27,18 @@ namespace targetshooter
         NPCTank en;
         bool isBoss = false;
         int createTank = 3;
-        
+        bool level2Flag = true;
         
         public void randomTank()
         {
-            if (info.level == 2)
+            if ((info.level == 2) && (level2Flag))
             {
                 createTank = 5;
-                totalNumOfEnemy = 5;
+                totalNumOfEnemy = 7;
+                level2Flag = false;
                 
             }
+
             if (enemyList.Count() == 0 && totalNumOfEnemy > 0)
             {
                 
@@ -87,7 +89,7 @@ namespace targetshooter
                     totalNumOfEnemy--;
                 }
             }
-            else if (enemyList.Count() < createTank && totalNumOfEnemy > 0)
+            else if (enemyList.Count() < 3 && totalNumOfEnemy > 0)
             {
                 do
                     {
