@@ -61,6 +61,7 @@ namespace targetshooter
         Texture2D enemyTurretTexture;
         Texture2D enemyShellTexture;
         Texture2D backgroundTexture;
+        
         SpriteFont debug;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -68,6 +69,7 @@ namespace targetshooter
         int healthPercentage;
         SpriteFont infoBarFont;
         SpriteFont initScreenFont;
+        SpriteFont gameOverFont;
         initialScreen init = new initialScreen();
         bool initScrnFlag = true, gameFlag = false, helpFlag = false;
         playerTank player;
@@ -138,6 +140,7 @@ namespace targetshooter
 
             infoBarFont = Content.Load<SpriteFont>(@"fonts/infoBar");
             initScreenFont = Content.Load<SpriteFont>(@"fonts/initScreen");
+            gameOverFont = Content.Load<SpriteFont>(@"fonts/gameOver");
 
             player = new playerTank(Content.Load<Texture2D>(@"images/tank_body"), Content.Load<Texture2D>(@"images/tank_turret"), Content.Load<Texture2D>(@"images/bullet"), 10.0f, 3, new Vector2(800, 500), new Vector2(800, 500) + new Vector2(60, 60));
            // player.
@@ -148,7 +151,7 @@ namespace targetshooter
             
             helpScreen = new help(Content.Load<SpriteFont>(@"fonts/help"), new Vector2(400, 200), 
                 " TARGET SHOOTER GAME \n (Keyboard info) \n Up and Down arrows to move front and back \n Left arrow to turn the player tank left \n Right arrow to turn the player tank right \n 'a' to move the turret Right \n 's' to move the turret Left");
-            info = new infoBar(0, 0, Content.Load<SpriteFont>(@"fonts/infoBar"), new Vector2(10, Window.ClientBounds.Y +650));
+            info = new infoBar(0, 0, Content.Load<SpriteFont>(@"fonts/infoBar"), new Vector2(10, Window.ClientBounds.Bottom-50));
 
             info.updateHealthAndLives(player.numberOflives, player.healthPercentages);
 
@@ -563,6 +566,11 @@ namespace targetshooter
 
                 spriteBatch.DrawString(helpScreen.helpSprite, helpScreen.HelpString, helpScreen.HelpPosition, Color.White);
 
+            
+            }
+            else if(isGameOver()){
+
+                spriteBatch.DrawString(gameOverFont,"Game Over", new Vector2(Window.ClientBounds.Center.X,Window.ClientBounds.Center.Y), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
             
             }
             else if (gameFlag)

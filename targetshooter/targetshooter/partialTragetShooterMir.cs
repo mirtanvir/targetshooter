@@ -19,6 +19,21 @@ namespace targetshooter
 {
     public partial class TargetShooter
     {
+        
+
+        bool isGameOver()
+        {
+
+            if (info.getLives() <= 0)
+                return true;
+            else return false;
+
+
+        
+        }
+
+
+
 
 
 
