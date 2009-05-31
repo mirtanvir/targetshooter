@@ -246,7 +246,8 @@ namespace targetshooter
 
             if (gameFlag)
             {
-           
+                //if (player.numberOflives == 0 && player.healthPercentages == 0)
+                    
                 for (int i = 0; i < enemyList.Count(); i++)
                 {
 
