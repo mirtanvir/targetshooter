@@ -134,7 +134,7 @@ namespace targetshooter
             backgroundTexture = Content.Load<Texture2D>(@"images/sand");
 
             // Create a new SpriteBatch, which can be used to draw textures.
-            myTexture = CreateRectangle(640, 10);
+           // myTexture = CreateRectangle(640, 10);
             debug = Content.Load<SpriteFont>(@"fonts/debugInformation");
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -281,7 +281,7 @@ namespace targetshooter
 
                     enemy.update(t, new Vector2( Window.ClientBounds.Width, Window.ClientBounds.Height), player.Position, new Vector2(tankRect.Left, tankRect.Bottom), new Vector2(tankRect.Right, tankRect.Top));
                 }
-                player.update(new Vector2(Window.ClientBounds.Width, Window.ClientBounds.Height));
+                
 
 
                 if ((Keyboard.GetState().IsKeyDown(Keys.Down)))// && (player.Position.Y <= Window.ClientBounds.Height - texture.Height))
@@ -524,6 +524,10 @@ namespace targetshooter
 
             }
 
+
+
+            player.update(new Vector2(Window.ClientBounds.Width, Window.ClientBounds.Height));
+
             //console output to debug
               //string dbg;
               //dbg = "position =" + player.Position + "player width = " + player.getWidth() +
@@ -537,18 +541,20 @@ namespace targetshooter
 
                 if (tankscollide(player.Position, player.getWidth(), player.getHeight(), enemy.Position, enemy.getWidth(), enemy.getHeight()))
                 {
-                    /*string hello;
+                    string hello;
                     hello = "COLLIDE FUNCTION CALLED";
-                    System.Console.WriteLine(hello);*/
+                    System.Console.WriteLine(hello);
                     enemy.setstop(true);
-                    
-                    
+
+
 
 
                 }
                 else
+                {
+                    //
                     enemy.setstop(false);
-             
+                }
                NPCTank enemy1 = enemyList[z];
                NPCTank enemy2 = enemyList[(z + 1) % enemyList.Count()];
 
@@ -733,20 +739,7 @@ namespace targetshooter
             base.Draw(gameTime);
         }
 
-        private Texture2D CreateRectangle(int width, int height)
-        {
-            Texture2D rectangleTexture = new Texture2D(GraphicsDevice, width, height, 1, TextureUsage.None,
-            SurfaceFormat.Color);// create the rectangle texture, ,but it will have no color! lets fix that
-            Color[] color = new Color[width * height];//set the color to the amount of pixels in the textures
-
-            for (int i = 0; i < color.Length; i++)//loop through all the colors setting them to whatever values we want
-            {
-                color[i] = new Color(0, 0, 0, 255);
-            }
-            rectangleTexture.SetData(color);//set the color data on the texture
-            return rectangleTexture;//return the texture
-        }
-
+  
         bool tankscollide(Vector2 object1Pos, int object1Width, int object1Height, Vector2 object2Pos, int object2Width, int object2Height)
         {
    
