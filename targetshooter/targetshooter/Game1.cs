@@ -61,7 +61,8 @@ namespace targetshooter
         Texture2D enemyTurretTexture;
         Texture2D enemyShellTexture;
         Texture2D backgroundTexture;
-        
+        //SoundEffect soundEffect;
+        Song background;
         SpriteFont debug;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -132,6 +133,12 @@ namespace targetshooter
         protected override void LoadContent()
         {
             backgroundTexture = Content.Load<Texture2D>(@"images/sand");
+            //soundEffect = Content.Load<SoundEffect>(@"Audio/Background");
+            //SoundEffectInstance soundEffectInstance = soundEffect.Play();
+            background = Content.Load<Song>(@"Audio/Background");
+            MediaPlayer.Play(background);
+            MediaPlayer.IsRepeating = true;
+
 
             // Create a new SpriteBatch, which can be used to draw textures.
            // myTexture = CreateRectangle(640, 10);
