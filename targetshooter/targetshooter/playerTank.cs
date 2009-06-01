@@ -32,6 +32,15 @@ namespace targetshooter
             tankShellSpeed = shellSpeed;
         }
 
+
+      public void setNumberOfLivesAndHealth(int numberOflives )
+      {
+          base.numberOflives = numberOflives;
+          base.healthPercentages = 100;
+      }
+
+
+
         public float getTankAngle()
         {
 
