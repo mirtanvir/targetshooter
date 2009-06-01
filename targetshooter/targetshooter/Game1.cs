@@ -285,6 +285,7 @@ namespace targetshooter
             {
                 gameFlag = false;
                 
+
                 info.updateHealthAndLives(0, 0);
             }
             // initialize window & tank width/height here so it can be accessed
