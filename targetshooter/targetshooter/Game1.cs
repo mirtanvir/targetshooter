@@ -101,7 +101,7 @@ namespace targetshooter
             Content.RootDirectory = "Content";
             this.graphics.PreferredBackBufferWidth = 1280;
             this.graphics.PreferredBackBufferHeight = 800;
-            this.graphics.IsFullScreen = false;
+            this.graphics.IsFullScreen = true;
 
 
         }
@@ -230,7 +230,7 @@ namespace targetshooter
             if ((Keyboard.GetState().IsKeyDown(Keys.C)) && isGameOver())
             {
                 player.resetPlayer();
-                player.numberOflives = 10;
+                player.numberOflives = 3;
                 player.healthPercentages = 100;
                 info.updateHealthAndLives(player.numberOflives, player.healthPercentages);
                 isBoss = false;
