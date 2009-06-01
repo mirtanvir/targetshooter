@@ -32,6 +32,7 @@ namespace targetshooter
         bool playerStuck = false;
         Vector2 enemyStuckPos;
         
+        
         public void randomTank()
         {
             if ((info.level == 2) && (level2Flag))

@@ -227,7 +227,36 @@ namespace targetshooter
             //Putting the player on the bottom of the screen.
 
 
+            if ((Keyboard.GetState().IsKeyDown(Keys.C)) && isGameOver())
+            {
+                player.resetPlayer();
+                player.numberOflives = 10;
+                player.healthPercentages = 100;
+                info.updateHealthAndLives(player.numberOflives, player.healthPercentages);
+                isBoss = false;
+                info.level = 1;
+                info.score = 0;
+                enemyList.Clear();
+                
+                
+                
 
+                //info = new infoBar(1, 0, infoBarFont, player.Position);
+                
+                totalNumOfEnemy = 3;
+                createTank = 3;
+                randomTank();
+                //player.resetPlayer();
+                //info.updateHealthAndLives(player.numberOflives, player.healthPercentages);
+                gameFlag = false;
+                initScrnFlag = true;
+                level2FontFlag = false;
+                helpFlag = false;
+
+                
+
+
+            }
            
 
             float t = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -248,8 +277,15 @@ namespace targetshooter
                 initScrnFlag = false;
                 level2FontFlag = false;
                 helpFlag = false;
+                
             }
 
+            if (isGameWon())
+            {
+                gameFlag = false;
+                
+                info.updateHealthAndLives(0, 0);
+            }
             // initialize window & tank width/height here so it can be accessed
             // else where
             GlobalClass.scrWidth = graphics.GraphicsDevice.Viewport.Width;
@@ -263,9 +299,10 @@ namespace targetshooter
                 {
                     info.level = 2;
                     isBoss = false;
-                    
-                    
+
+                    level2Flag = true;
                     randomTank();
+                    
                     
                 }
                     
@@ -347,7 +384,7 @@ namespace targetshooter
 
                         player.fireShell();
 
-                        shotCountDown = 350;
+                        shotCountDown = 300;
 
 
                     }
@@ -657,7 +694,7 @@ namespace targetshooter
             else if(isGameWon())
             {
 
-                spriteBatch.DrawString(gameOverFont, "Congratulations! You have won. ", new Vector2(Window.ClientBounds.Center.X/2, Window.ClientBounds.Center.Y), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+                spriteBatch.DrawString(gameOverFont, "Congratulations! You have won. \n Press 'C' to continue", new Vector2(Window.ClientBounds.Center.X/2, Window.ClientBounds.Center.Y), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
 
             
             }
@@ -665,7 +702,7 @@ namespace targetshooter
                 //int score = info.score;
 
 
-                spriteBatch.DrawString(gameOverFont, "Game Over!!!\n Your Score:" + info.score.ToString() + "\n\nPress 'P' to play again", new Vector2(Window.ClientBounds.Center.X / 2, Window.ClientBounds.Center.Y), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+                spriteBatch.DrawString(gameOverFont, "Game Over!!!\n Your Score:" + info.score.ToString() + "\n\nPress 'C' to Continue", new Vector2(Window.ClientBounds.Center.X / 2, Window.ClientBounds.Center.Y), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
             
             }
 
