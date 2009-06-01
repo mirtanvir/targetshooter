@@ -80,7 +80,7 @@ namespace targetshooter
         help helpScreen; 
         int enemyShotCountDown =500;
         List<NPCTankShell> enemyShellList = new List<NPCTankShell>();
-        
+        int enemyTankID = 0;
         infoBar info;
 
         public void Subscribe(playerTank tank)
@@ -101,7 +101,7 @@ namespace targetshooter
             Content.RootDirectory = "Content";
             this.graphics.PreferredBackBufferWidth = 1280;
             this.graphics.PreferredBackBufferHeight = 800;
-            this.graphics.IsFullScreen = true;
+            this.graphics.IsFullScreen = false;
 
 
         }
@@ -353,6 +353,8 @@ namespace targetshooter
                 //trying to make the player go up
                 if ((Keyboard.GetState().IsKeyDown(Keys.Up)))// && (pos.Y <= 0))
                 {
+                    if (!isEnemyPresent(stuckEnemyID))
+                        playerStuck = false;
 
                     if (playerStuck)
                     {
@@ -508,57 +510,11 @@ namespace targetshooter
                             bullListForOneTank = enShellList[i];
                             for (int j = 0; j < bullListForOneTank.Count; j++)
                             {
-                                //this portion of the code is taken from http://creators.xna.com/en-US/tutorial/collision2dperpixeltransformed. 
+                               
                                 
                                 NPCTankShell enemyShell = bullListForOneTank[j];
 
-               //                 Vector2 tankOrigin = new Vector2(GlobalClass.plWidth / 2, GlobalClass.plHeight / 2);
-                                
-               //                 Matrix playerTransform =
-               //                 Matrix.CreateTranslation(new Vector3(-tankOrigin, 0.0f)) *
-               //                     // Matrix.CreateScale(block.Scale) *  would go here
-               //                  Matrix.CreateRotationZ(player.getTankAngle()) *
-               //                  Matrix.CreateTranslation(new Vector3(player.Position, 0.0f));
-
-               //                 // Calculate the bounding rectangle of this block in world space
-               //                 Rectangle playerRectangle = CalculateBoundingRectangle(
-               //                          new Rectangle(0, 0, player.width, player.getHeight()),
-               //                          playerTransform);
-
-               //                 Rectangle bulletRectangle = new Rectangle((int)enemyShell.getShellPosition().X, (int)enemyShell.getShellPosition().Y,
-               // enemyShell.getBulletImage().Width, enemyShell.getBulletImage().Height);
-
-               //                 Color[] bulletTextureData;
-               //                 Color[] playerTextureData;
-
-               //                 playerTextureData =
-               //                   new Color[player.tankImage.Width * player.tankImage.Height];
-               //                 player.tankImage.GetData(playerTextureData);
-               //                 bulletTextureData =
-               //                     new Color[enemyShell.getBulletImage().Width * enemyShell.getBulletImage().Height];
-               //                 enemyShell.getBulletImage().GetData(bulletTextureData);
-
-
-               //                 Matrix bulletTransform =
-               //Matrix.CreateTranslation(new Vector3(enemyShell.getShellPosition(), 0.0f));
-                                
-                                
-               //                 if (bulletRectangle.Intersects(playerRectangle))
-               //                 {
-               //                     // Check collision with person
-               //                     if (IntersectPixels(bulletTransform, enemyShell.getBulletImage().Width,
-               //                                          enemyShell.getBulletImage().Height, bulletTextureData,
-               //                                         playerTransform, player.tankImage.Width,
-               //                                         player.tankImage.Height, playerTextureData))
-               //                     {
-               //                         enemy.remoteSheelFromListAt(j);
-
-               //                         player.getHit(10);
-               //                         player.notifyAboutHit();
-
-               //                     }
-               //                 }
-
+               
 
 
 
@@ -619,6 +575,7 @@ namespace targetshooter
                     //System.Console.WriteLine(hello);
                     enemy.setstop(true);
                     this.playerStuck = true;
+                    this.stuckEnemyID = enemy.getEnemyID();
                     this.enemyStuckPos= enemy.Position;
 
 
@@ -722,7 +679,7 @@ namespace targetshooter
 
             //    spriteBatch.Draw(myTexture, Vector2.Zero, Color.White);
 
-                debugString = "Tank Angle:" + MathHelper.ToDegrees(player.getTankAngle());
+                debugString = "Tank Angle:" + MathHelper.ToDegrees(player.getTankAngle()) + " Current Enemy ID: "+ enemyTankID.ToString() ;
                 spriteBatch.DrawString(debug, debugString, new Vector2(10, 40), Color.DarkBlue, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
                         
 

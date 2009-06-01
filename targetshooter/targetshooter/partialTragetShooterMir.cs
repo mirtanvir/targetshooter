@@ -281,6 +281,22 @@ Matrix.CreateTranslation(new Vector3(bulletPosition, 0.0f));
             return new Rectangle((int)min.X, (int)min.Y,
                                  (int)(max.X - min.X), (int)(max.Y - min.Y));
         }
+
+
+        bool isEnemyPresent(int enemyID)
+        {
+
+            foreach (NPCTank en in enemyList)
+            {
+
+                if (en.getEnemyID() == enemyID)
+                    return true;
+
+            }
+            return false;
+        
+        }
+
     }
 
 

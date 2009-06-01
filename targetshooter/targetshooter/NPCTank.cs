@@ -24,8 +24,9 @@ namespace targetshooter
         private float tankShellSpeed;
         private bool isBoss = false;
         private bool stop = false; //to stop npc tank after collision with player
+        private int tankID;
 
-        public NPCTank(Texture2D imgOfTank, Texture2D imgOfTankTurret, Texture2D imgOfTheShell, float shellSpeed,int numberOfLives, Vector2 firstPosition, Vector2 turretPos)
+        public NPCTank(Texture2D imgOfTank, Texture2D imgOfTankTurret, Texture2D imgOfTheShell, float shellSpeed,int numberOfLives, Vector2 firstPosition, Vector2 turretPos,int tankID)
             : base(imgOfTank, imgOfTankTurret, firstPosition, turretPos,0)
         {
             bulletImage = imgOfTheShell;
@@ -34,7 +35,7 @@ namespace targetshooter
             base.TankSpeed =1.5f;
             base.tankAngle = 180;
             base.turretAngle = 180;
-
+            this.tankID = tankID;
             tankShellSpeed = shellSpeed;
         }
 
@@ -44,7 +45,12 @@ namespace targetshooter
                 isBoss = value;
             
         }
+        public int getEnemyID()
+        {
 
+            return tankID;
+        
+        }
         public bool getIsBoss()
         {
             return isBoss;

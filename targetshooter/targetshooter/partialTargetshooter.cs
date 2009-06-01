@@ -31,6 +31,7 @@ namespace targetshooter
         bool level2FontFlag = false;
         bool playerStuck = false;
         Vector2 enemyStuckPos;
+        int stuckEnemyID;
         
         
         public void randomTank()
@@ -63,7 +64,8 @@ namespace targetshooter
                             x = 10;
                         else
                             x = Window.ClientBounds.Width - 10; //random.Next(0, graphics.GraphicsDevice.Viewport.Width);
-                         en = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(x, y), new Vector2(x, y) + new Vector2(60, 60));
+                        enemyTankID++;
+                        en = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(x, y), new Vector2(x, y) + new Vector2(60, 60), enemyTankID);
 
                         Rectangle nt = new Rectangle((int)en.Position.X, (int)en.Position.Y, en.tankImage.Width, en.tankImage.Height);
 
@@ -109,7 +111,8 @@ namespace targetshooter
                             x = 10;
                         else
                             x = Window.ClientBounds.Width - 10; //random.Next(0, graphics.GraphicsDevice.Viewport.Width);
-                         en = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(x, y), new Vector2(x, y) + new Vector2(60, 60));
+                        enemyTankID++;    
+                    en = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(x, y), new Vector2(x, y) + new Vector2(60, 60),enemyTankID);
 
                         Rectangle nt = new Rectangle((int)en.Position.X, (int)en.Position.Y, en.tankImage.Width, en.tankImage.Height);
 
@@ -158,7 +161,8 @@ namespace targetshooter
                             x = 10;
                         else
                             x = Window.ClientBounds.Width - 10; //random.Next(0, graphics.GraphicsDevice.Viewport.Width);
-                        en = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(x, y), new Vector2(x, y) + new Vector2(60, 60));
+                        enemyTankID++;
+                        en = new NPCTank(enemyTankTexture, enemyTurretTexture, enemyShellTexture, 3f, 1, new Vector2(x, y), new Vector2(x, y) + new Vector2(60, 60),enemyTankID);
 
                         Rectangle nt = new Rectangle((int)en.Position.X, (int)en.Position.Y, en.tankImage.Width, en.tankImage.Height);
 
