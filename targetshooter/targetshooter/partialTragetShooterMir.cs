@@ -23,7 +23,7 @@ namespace targetshooter
         { 
         
            if((info.level==2) && (enemyList.Count()==0))
-            return true;
+                return true;
             else return false;
 
         
@@ -32,7 +32,7 @@ namespace targetshooter
         bool isGameOver()
         {
 
-            if (info.getLives() <= 0)
+            if (info.getLives() <= 2)
                 return true;
             else return false;
 
