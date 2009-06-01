@@ -136,9 +136,7 @@ namespace targetshooter
             //soundEffect = Content.Load<SoundEffect>(@"Audio/Background");
             //SoundEffectInstance soundEffectInstance = soundEffect.Play();
             background = Content.Load<Song>(@"Audio/Background");
-            MediaPlayer.Play(background);
-            MediaPlayer.IsRepeating = true;
-
+           
 
             // Create a new SpriteBatch, which can be used to draw textures.
            // myTexture = CreateRectangle(640, 10);
@@ -277,6 +275,9 @@ namespace targetshooter
                 initScrnFlag = false;
                 level2FontFlag = false;
                 helpFlag = false;
+                MediaPlayer.Play(background);
+                MediaPlayer.IsRepeating = true;
+
                 
             }
 
