@@ -243,7 +243,7 @@ namespace targetshooter
 
                 //info = new infoBar(1, 0, infoBarFont, player.Position);
                 
-                totalNumOfEnemy = 3;
+                totalNumOfEnemy = 50;
                 createTank = 3;
                 randomTank();
                 //player.resetPlayer();
