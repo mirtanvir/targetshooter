@@ -22,7 +22,7 @@ namespace targetshooter
     {
         int x, y;
         Random random = new Random();
-        int totalNumOfEnemy = 3;
+        int totalNumOfEnemy = 50;
         bool counter ;
         NPCTank en;
         bool isBoss = false;
@@ -38,7 +38,7 @@ namespace targetshooter
             if ((info.level == 2) && (level2Flag))
             {
                 createTank = 5;
-                totalNumOfEnemy = 7;
+                totalNumOfEnemy = 70;
                 level2Flag = false;
                 level2FontFlag = true;
                 gameFlag = false;
