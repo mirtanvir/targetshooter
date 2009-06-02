@@ -61,8 +61,10 @@ namespace targetshooter
         Texture2D enemyTurretTexture;
         Texture2D enemyShellTexture;
         Texture2D backgroundTexture;
-        //SoundEffect soundEffect;
+        SoundEffect soundEffect;
+        SoundEffect hit;
         Song background;
+        Song intro;
         SpriteFont debug;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -133,10 +135,14 @@ namespace targetshooter
         protected override void LoadContent()
         {
             backgroundTexture = Content.Load<Texture2D>(@"images/sand");
-            //soundEffect = Content.Load<SoundEffect>(@"Audio/Background");
+            soundEffect = Content.Load<SoundEffect>(@"Audio/bomb");
             //SoundEffectInstance soundEffectInstance = soundEffect.Play();
+            //SoundEffectInstance hitInstance = hit.Play();
             background = Content.Load<Song>(@"Audio/Background");
-           
+            hit = Content.Load<SoundEffect>(@"Audio/Hit");
+            intro = Content.Load<Song>(@"Audio/Intro");
+            MediaPlayer.Play(intro);
+            MediaPlayer.IsRepeating = true;
 
             // Create a new SpriteBatch, which can be used to draw textures.
            // myTexture = CreateRectangle(640, 10);
@@ -219,6 +225,7 @@ namespace targetshooter
         protected override void Update(GameTime gameTime)
        
         {
+
 
             if ((Keyboard.GetState().IsKeyDown(Keys.Escape)))
                 this.Exit();
@@ -491,7 +498,7 @@ namespace targetshooter
 
                     if (enemy.isDead())
                     {
-
+                        SoundEffectInstance soundEffectInstance = soundEffect.Play();
                         if (enemyList.Count() >=k)
                         {
                             enemyList.RemoveAt(k);
@@ -524,7 +531,7 @@ namespace targetshooter
                                 if (collide(player.tankImage, player.Position, player.getTankAngle(), enemyShell.getBulletImage(), enemyShell.getShellPosition()))
                                 {
                                     enemy.remoteSheelFromListAt(j);
-
+                                    SoundEffectInstance hitInstance = hit.Play();
                                     player.getHit(10);
                                     player.notifyAboutHit();
 
