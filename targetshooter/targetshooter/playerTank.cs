@@ -64,6 +64,16 @@ namespace targetshooter
         {
 
             playerTankShell shell = new playerTankShell(bulletImage, this.calculateBulletFiringPos(base.TurretPosition), tankShellSpeed, base.turretAngle);
+            float tempSpd = shell.getSpeed();
+            shell.setBulletSpeed(25f);
+            for (int i = 0; i < 3; i++)
+            {
+
+                shell.updateBulletPosition();
+            
+            }
+            shell.setBulletSpeed(tempSpd);
+            
             shellList.Add(shell);
 
         }

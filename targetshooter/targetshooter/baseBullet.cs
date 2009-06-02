@@ -85,7 +85,7 @@ namespace targetshooter
          * 
         */
 
-        protected float getSpeed()
+        public float getSpeed()
         {
             return this.speed;
         }
