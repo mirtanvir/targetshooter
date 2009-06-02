@@ -48,6 +48,27 @@ namespace targetshooter
         }
 
 
+        bool isEnemyInTheSamePosition(int enemyID)
+        {
+
+            foreach (NPCTank en in enemyList)
+            {
+
+                if (en.getEnemyID() == enemyID)
+                {
+                    if (en.Position == enemyStuckPos)
+
+                        return true;
+                    else return false;
+                }
+            }
+            return false;
+        
+
+        
+        }
+
+
 
         bool tankCollide(Texture2D tankTexture, Vector2 tankPosition, float tankRotationInRadian, Texture2D tank2Texture, Vector2 tank2Position, float tank2RotationInRadian)//  Vector2 object1Pos, int object1Width, int object1Height, Vector2 object2Pos, int object2Width, int object2Height)
         {

@@ -362,7 +362,7 @@ namespace targetshooter
                 //trying to make the player go up
                 if ((Keyboard.GetState().IsKeyDown(Keys.Up)))// && (pos.Y <= 0))
                 {
-                    if (!isEnemyPresent(stuckEnemyID))
+                    if ((!(isEnemyInTheSamePosition(stuckEnemyID))) &&(!isEnemyPresent(stuckEnemyID)))
                         playerStuck = false;
 
                     if (playerStuck)
