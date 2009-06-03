@@ -78,6 +78,7 @@ namespace targetshooter
         private Texture2D imageOfTank;
         private Texture2D imageOfTankTurret;
         private int numberOfLives;
+        //private int tanksDead;//to  keep count of tanks dead
         private int healthPercentage;
         private float tankSpeed;
         private float tankAngleInDegree;
@@ -125,8 +126,6 @@ namespace targetshooter
                 numberOflives = numberOflives - 1;
                 healthPercentages = 100;
             }
-          
-
         }
 
         public bool isDead()
@@ -243,6 +242,20 @@ namespace targetshooter
 
 
         }
+
+        //to keep count of enemy tanks killed
+        public int tanksDead
+        {
+            get
+            {
+                return tanksDead;
+            }
+            set
+            {
+                tanksDead = value;
+            }
+        }
+
         public int numberOflives
         
         {

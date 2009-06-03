@@ -164,8 +164,16 @@ namespace targetshooter
             enemyShellTexture= Content.Load<Texture2D>(@"images/bullet");
             
             helpScreen = new help(Content.Load<SpriteFont>(@"fonts/help"), new Vector2(400, 200), 
-                " TARGET SHOOTER GAME \n (Keyboard info) \n Up and Down arrows to move front and back \n Left arrow to turn the player tank left \n Right arrow to turn the player tank right \n 'a' to move the turret Right \n 's' to move the turret Left\n\nPress 'P' to start game\nPress 'ESC' to exit");
-            info = new infoBar(1, 0, Content.Load<SpriteFont>(@"fonts/infoBar"), new Vector2(10, Window.ClientBounds.Bottom-50));
+                " TARGET SHOOTER GAME \n (Keyboard info) \n " + 
+                "Up and Down arrows to move front and back \n " + 
+                "Left arrow to turn the player tank left \n " +
+                "Right arrow to turn the player tank right \n " +
+                "'A' to move the turret Right \n " +
+                "'S' to move the turret Left\n " +
+                "Space bar to fire the bullets\n" +
+                "\nPress 'P' to start game\n" +
+                "Press 'ESC' to exit");
+            info = new infoBar(1, 0, Content.Load<SpriteFont>(@"fonts/infoBar"), new Vector2(10, graphics.GraphicsDevice.Viewport.Height-50));
 
             info.updateHealthAndLives(player.numberOflives, player.healthPercentages);
 
@@ -495,10 +503,18 @@ namespace targetshooter
                     
                     }
 
-
+                   
                     if (enemy.isDead())
                     {
+                       // player.tanksDead() += 1;
+                        
+                        /*string ct;
+                        ct = "deadcount = " + player.tanksDead();
+                        System.Console.WriteLine(ct);*/
+
+
                         SoundEffectInstance soundEffectInstance = soundEffect.Play();
+
                         if (enemyList.Count() >=k)
                         {
                             enemyList.RemoveAt(k);
@@ -647,13 +663,14 @@ namespace targetshooter
             if (initScrnFlag)
             {
 
-                spriteBatch.DrawString(initScreenFont, init.getMenu(), new Vector2(500, 500), Color.Honeydew);
+                spriteBatch.DrawString(initScreenFont, init.getMenu(), 
+                    new Vector2(GlobalClass.scrWidth/3, GlobalClass.scrHeight/3), Color.Black);
 
             }
             else if (helpFlag)
             {
 
-                spriteBatch.DrawString(helpScreen.helpSprite, helpScreen.HelpString, helpScreen.HelpPosition, Color.White);
+                spriteBatch.DrawString(helpScreen.helpSprite, helpScreen.HelpString, new Vector2(GlobalClass.scrWidth/4, GlobalClass.scrHeight/4), Color.Black);
 
             
             }

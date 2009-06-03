@@ -191,7 +191,7 @@ namespace targetshooter
                 base.tankAngle = 360 - tankAngle;
         }
 
-        public void movePlayerTankUp(float timeChangedSinceLastUpdate)
+        public void moveNPCTankUp(float timeChangedSinceLastUpdate)
         {
             
                 Vector2 newPos = updateClass.UpdateTankPositionUp(false, tankAngle, Position, TankSpeed, timeChangedSinceLastUpdate);
