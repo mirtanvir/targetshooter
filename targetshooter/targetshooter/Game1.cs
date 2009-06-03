@@ -61,6 +61,7 @@ namespace targetshooter
         Texture2D enemyTurretTexture;
         Texture2D enemyShellTexture;
         Texture2D backgroundTexture;
+        Texture2D initbackground; //background for initial screen
         SoundEffect soundEffect;
         SoundEffect hit;
         Song background;
@@ -134,7 +135,8 @@ namespace targetshooter
 
         protected override void LoadContent()
         {
-            backgroundTexture = Content.Load<Texture2D>(@"images/sand");
+            initbackground = Content.Load<Texture2D>(@"images/InitSand");
+            backgroundTexture = Content.Load<Texture2D>(@"images/Sand");
             soundEffect = Content.Load<SoundEffect>(@"Audio/bomb");
             //SoundEffectInstance soundEffectInstance = soundEffect.Play();
             //SoundEffectInstance hitInstance = hit.Play();
@@ -662,6 +664,7 @@ namespace targetshooter
             
             if (initScrnFlag)
             {
+                spriteBatch.Draw(initbackground, new Vector2(0, 0), Color.White);
 
                 spriteBatch.DrawString(initScreenFont, init.getMenu(), 
                     new Vector2(GlobalClass.scrWidth/3, GlobalClass.scrHeight/3), Color.Black);
@@ -669,6 +672,7 @@ namespace targetshooter
             }
             else if (helpFlag)
             {
+                spriteBatch.Draw(initbackground, new Vector2(0, 0), Color.White);
 
                 spriteBatch.DrawString(helpScreen.helpSprite, helpScreen.HelpString, new Vector2(GlobalClass.scrWidth/4, GlobalClass.scrHeight/4), Color.Black);
 
