@@ -104,7 +104,7 @@ namespace targetshooter
             Content.RootDirectory = "Content";
             this.graphics.PreferredBackBufferWidth = 1280;
             this.graphics.PreferredBackBufferHeight = 800;
-            this.graphics.IsFullScreen = false;
+            this.graphics.IsFullScreen = true;
 
 
         }
@@ -258,7 +258,7 @@ namespace targetshooter
 
                 //info = new infoBar(1, 0, infoBarFont, player.Position);
                 
-                totalNumOfEnemy = 50;
+                totalNumOfEnemy = 4;
                 createTank = 3;
                 randomTank();
                 //player.resetPlayer();
@@ -709,8 +709,8 @@ namespace targetshooter
 
             //    spriteBatch.Draw(myTexture, Vector2.Zero, Color.White);
 
-                debugString = "Tank Angle:" + MathHelper.ToDegrees(player.getTankAngle()) + " Current Enemy ID: "+ enemyTankID.ToString() ;
-                spriteBatch.DrawString(debug, debugString, new Vector2(10, 40), Color.DarkBlue, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
+                //debugString = "Tank Angle:" + MathHelper.ToDegrees(player.getTankAngle()) + " Current Enemy ID: "+ enemyTankID.ToString() ;
+                //spriteBatch.DrawString(debug, debugString, new Vector2(10, 40), Color.DarkBlue, 0, Vector2.Zero, 1, SpriteEffects.None, 1);
                         
 
 
