@@ -17,16 +17,16 @@ using System.Threading;
 
 namespace targetshooter
 {
-   public class baseBullet
+    public class baseBullet
     {
-        private Vector2 position;
-        private float speed;
+        private Vector2 position;// the current position of the bullet in the screen
+        private float speed;// How far the bullet will go on each update
         private float angleInDegree;
         private Texture2D bulletImage;
         private int height;
         private int width;
         private bool dead = false;
-        
+
         /*
          *  move the bullet
          * 
@@ -35,10 +35,21 @@ namespace targetshooter
         */
 
         public bool isBulletInScreen(Vector2 maxWindowPosition)
-        {
+        {/* This method determines whether the bullet is inside the game screen or not. If it is not
+          * inside the game screen,than we will delete the bullet from bullet list to save
+          * memory.
+          * maxWindowPosition variable holds the maximum co-ordinates of the game screen.
+          * 
+          */
 
             if ((position.X < 0) || (position.X > maxWindowPosition.X) || (position.Y < 0) || (position.Y > maxWindowPosition.Y))
+            {/* if the position of the bullet is less than zero for both X and Y co-ordinates, than we know
+              * that that bullet is ouside the screen.
+              * 
+              */
+
                 return false;
+            }
             else return true;
             //return true;
 
@@ -49,21 +60,24 @@ namespace targetshooter
         //{
 
         //    this.dead = true;
-        
+
         //}
 
 
-       public bool Dead{
-   
-       get {
-   return this.dead;
-   }
-           set {
+        public bool Dead
+        {
 
-               this.dead = value;
-           }
-   
-   }
+            get
+            {
+                return this.dead;
+            }
+            set
+            {
+
+                this.dead = value;
+            }
+
+        }
 
         protected void move(Vector2 bulletPositon)
         {
@@ -71,10 +85,13 @@ namespace targetshooter
         }
 
         protected void update()
-        {
+        {/*This is the bullet update class. It needs to be called from the main update() method from the TargetShooter class.
+          * This method is necessary to move the bullet across the screen
+          * 
+          */
 
-             position= updateClass.updateBulletPosition(angleInDegree ,position , speed );
-        
+            position = updateClass.updateBulletPosition(angleInDegree, position, speed);
+
         }
 
         /*
@@ -113,7 +130,7 @@ namespace targetshooter
         {
 
             return position;
-        
+
         }
 
         /*
@@ -127,22 +144,22 @@ namespace targetshooter
         {
 
             return bulletImage;
-            
+
         }
 
         protected void setBulletImage(Texture2D bulletImg)
         {
-        
-            this.bulletImage=bulletImg;
-        
+
+            this.bulletImage = bulletImg;
+
         }
         protected void setBulletPosition(Vector2 pos)
         {
 
             position = pos;
-        
+
         }
-       
+
         // Constructor
         public baseBullet(Texture2D bulletimg, Vector2 pos, float spd, float rotationAngleInDegree)
         {
@@ -169,39 +186,22 @@ namespace targetshooter
 
         }
 
-        /*
-         * return the bullet's position, speed, angle, and image
-         * 
-         * @param position -- Vector2
-         * @param speed -- float
-         * @param angleInDegree -- int
-         * @param image -- Textture2D
-         * @return 
-         * 
-        */
-        protected void update(Vector2 position, float speed, int angleIndegree, Texture2D image)
+
+
+        public int getHeight()
         {
-            this.position = position;
-            this.speed = speed;
-            this.angleInDegree = angleIndegree;
-            this.bulletImage = image;
+
+            return height;
 
         }
 
-       public int getHeight()
-       {
-       
-           return height;
-       
-       }
+        public int getWidth()
+        {
 
-       public int getWidth()
-       {
+            return width;
 
-           return width;
 
-       
-       }
+        }
 
 
     }
