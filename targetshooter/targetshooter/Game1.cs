@@ -548,7 +548,7 @@ namespace targetshooter
 
                                 if (collide(player.tankImage, player.Position, player.getTankAngle(), enemyShell.getBulletImage(), enemyShell.getShellPosition()))
                                 {
-                                    enemy.remoteSheelFromListAt(j);
+                                    enemy.removeShellFromListAt(j);
                                     SoundEffectInstance hitInstance = hit.Play();
                                     player.getHit(10);
                                     player.notifyAboutHit();

@@ -85,8 +85,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AI.cs" />
-    <Compile Include="backupGame.cs" />
     <Compile Include="baseBullet.cs" />
     <Compile Include="BaseTank.cs" />
     <Compile Include="environment.cs" />
